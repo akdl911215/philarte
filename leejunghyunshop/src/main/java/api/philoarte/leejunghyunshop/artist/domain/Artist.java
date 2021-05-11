@@ -23,10 +23,14 @@ public class Artist {
     private String password;
     @Column(unique = true, nullable = false)
     private String name;
-    @Column(name = "artist_email")
-    private String artistEmail;
-    @Column(name = "artist_phone_number")
-    private String artistPhoneNumber;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "affiliation")
+    private String affiliation;
     @ElementCollection(fetch = FetchType.EAGER)
     List<Role> roles;
 }

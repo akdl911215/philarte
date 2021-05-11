@@ -3,6 +3,7 @@ package api.philoarte.leejunghyunshop.artist.domain;
 import api.philoarte.leejunghyunshop.user.domain.Role;
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.util.List;
 
 @Data
@@ -20,7 +21,11 @@ public class ArtistDto {
     //    @ApiModelProperty(position = 5)
     private String artistPhoneNumber;
     //    @ApiModelProperty(position = 6)
+    private String address;
+    //    @ApiModelProperty(position = 7)
+    private String affiliation;
+    //    @ApiModelProperty(position = 8)
     private String token;
-    //    @ApiModelProperty(position = 7w)
+    //    @ApiModelProperty(position = 9)
     private List<Role> roles;
 }

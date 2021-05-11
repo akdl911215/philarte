@@ -35,7 +35,7 @@ public class ArtistController {
             (@ApiParam("Signup Artist") @RequestBody ArtistDto artist) throws IOException{
         log.info("회원가입 시작 +++++++++++++++++++++++++");
 //        return ResponseEntity.ok(service.signup(modelMapper.map(artist, Artist.class)));
-        return ResponseEntity.ok(artist.getArtistname());
+        return ResponseEntity.ok(artist.getName());
     }
 
     @PostMapping("/signin")
