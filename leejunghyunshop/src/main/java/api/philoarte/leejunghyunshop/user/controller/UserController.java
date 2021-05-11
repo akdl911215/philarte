@@ -5,7 +5,7 @@ import java.util.List;
 
 import api.philoarte.leejunghyunshop.common.domain.Home;
 import api.philoarte.leejunghyunshop.user.domain.UserDto;
-import api.philoarte.leejunghyunshop.user.domain.UserVo;
+import api.philoarte.leejunghyunshop.user.domain.User;
 import api.philoarte.leejunghyunshop.user.service.UserServiceImpl;
 import io.swagger.annotations.*;
 import lombok.extern.java.Log;
@@ -35,7 +35,7 @@ public class UserController {
     public ResponseEntity<String> signup
             (@ApiParam("Signup User") @RequestBody UserDto user) throws IOException {
         log.info("회원가입 시작 ++++++++++++++++++++++");
-        return ResponseEntity.ok(service.signup(modelMapper.map(user, UserVo.class))); // 컴파일 된! 후에 작동.
+        return ResponseEntity.ok(service.signup(modelMapper.map(user, User.class))); // 컴파일 된! 후에 작동.
     }
 
     @PostMapping("/signin")
@@ -45,11 +45,11 @@ public class UserController {
     public ResponseEntity<UserDto> signin
             (@RequestBody UserDto user) throws IOException {
         log.info("++++++++++++++user = " + user);
-        return ResponseEntity.ok(service.signin(modelMapper.map(user, UserVo.class)));
+        return ResponseEntity.ok(service.signin(modelMapper.map(user, User.class)));
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<UserVo>> findAll() {
+    public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 

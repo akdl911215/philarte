@@ -22,13 +22,13 @@ const HomeMainNavi = () => {
                     <div className="collapse navbar-collapse" id="myNavbar">
                         <ul className="nav navbar-nav navbar-right">
                             <li>
-                                <Link to={'user/component/user-list'}>유저리스트</Link>
+                                <Link to={'./webapp/user/component/user-list'}>유저리스트</Link>
                             </li>
                             <li>
-                                <Link to={'user/component/login'}>로그인</Link>
+                                <Link to={'./webapp/user/component/login'}>로그인</Link>
                             </li>
                             <li>
-                                <Link to={'/user/component/sign-up'}>회원가입</Link>
+                                <Link to={'./webapp/user/component/sign-up'}>회원가입</Link>
                             </li>
                             <li>
                                 <Link to={'#'}>장바구니</Link>

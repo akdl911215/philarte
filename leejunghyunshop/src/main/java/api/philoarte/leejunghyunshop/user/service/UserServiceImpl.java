@@ -5,7 +5,7 @@ import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
 import api.philoarte.leejunghyunshop.user.domain.Role;
 import api.philoarte.leejunghyunshop.user.domain.UserDto;
-import api.philoarte.leejunghyunshop.user.domain.UserVo;
+import api.philoarte.leejunghyunshop.user.domain.User;
 import api.philoarte.leejunghyunshop.user.repository.UserRepository;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class UserServiceImpl  implements UserService {
     private final ModelMapper modelMapper;
 
     @Override
-    public String signup(UserVo user) {
+    public String signup(User user) {
         if(!userRepository.existsByUsername(user.getUsername())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             List<Role> list = new ArrayList<>();
@@ -46,13 +46,27 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
-    public UserDto signin(UserVo user) {
+    public UserDto signin(User user) {
         try {
-            UserVo loginedUser = userRepository.signin(user.getUsername(), user.getPassword());
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            System.out.println(":::::::::::::::암호화된 비밀번호::::::::::::::: " + user.getPassword());
+
+//            boolean flag = passwordEncoder.matches(user.getPassword(), userRepository.findByUsername(user.getUsername()).get().getPassword());
+//            System.out.println("비밀번호 매칭 여부::::::::::::::: " + flag);
+            //UserVo loginedUser = userRepository.signin(user.getUsername(), user.getPassword());
+
             UserDto userDto = modelMapper.map(user, UserDto.class);
-            String token = provider.createToken(user.getUsername(), userRepository.findByUsername(user.getUsername()).getRoles());
-            log.info("::::::::::: ISSUED TOKEN ::::::::::::: " + token);
-            userDto.setToken(token);
+
+            userDto.setToken(
+                    (passwordEncoder.matches(user.getPassword(), userRepository.findByUsername(user.getUsername()).get().getPassword())
+            ) ?
+            provider.createToken(user.getUsername(), userRepository.findByUsername(user.getUsername()).get().getRoles())
+            : "WRONG_PASSWORD");
+
+
+//            log.info("::::::::::: ISSUED TOKEN ::::::::::::: " + token);
+//            userDto.setToken(token);
+
             return userDto;
         } catch (Exception e){
             throw new SecurityRuntimeException("Invalid Username / Password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -60,7 +74,7 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
-    public List<UserVo> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 }
