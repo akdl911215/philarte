@@ -19,7 +19,7 @@ public class Artist {
     private long artistId;
     @Column(unique = true, nullable = false)
     private String username;
-    @Size(min=8, message = "Minimum Passsword Length: 8 characters")
+    @Size(min = 8, message = "Minimum Password Length: 8 characters")
     private String password;
     @Column(unique = true, nullable = false)
     private String name;
@@ -31,6 +31,6 @@ public class Artist {
     private String address;
     @Column(name = "affiliation")
     private String affiliation;
-    @ElementCollection(fetch = FetchType.EAGER)
-    List<Role> roles;
+    // @ElementCollection(fetch = FetchType.EAGER)
+    // List<Role> roles;
 }

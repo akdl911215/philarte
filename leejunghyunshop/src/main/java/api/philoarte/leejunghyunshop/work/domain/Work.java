@@ -2,6 +2,7 @@ package api.philoarte.leejunghyunshop.work.domain;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.category.domain.Category;
+import api.philoarte.leejunghyunshop.resume.domain.Resume;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,11 +10,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Data
-@NoArgsConstructor
-@Table(name = "workss")
+@Table(name = "works")
 public class Work {
-
     @Id
     @GeneratedValue
     @Column(name = "work_id")
@@ -33,5 +31,9 @@ public class Work {
     Artist artist;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    Category category;
+    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
 }

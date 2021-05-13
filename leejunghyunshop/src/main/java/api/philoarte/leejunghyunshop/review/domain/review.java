@@ -1,5 +1,8 @@
 package api.philoarte.leejunghyunshop.review.domain;
 
+import api.philoarte.leejunghyunshop.artist.domain.Artist;
+import api.philoarte.leejunghyunshop.item.domain.Item;
+import api.philoarte.leejunghyunshop.supporter.domain.Supporter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,20 +10,20 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "reviews")
 @Data
 @NoArgsConstructor
-public class review {
+@Table(name = "reviews")
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long reviewId;
-    @Column(name = "parent_item") //리뷰를 달 게시글 번호
+    @Column(name = "parent_item") // 리뷰를 달 게시글 번호(부모글)
     private int parentItem;
-    @Column(name = "writer")
-    private String writer;
-    @Column(name = "parent_review")
+    @Column(name = "parent_review") // 대댓글 댓글의 부모글
     private String parentReview;
+    @Column(name = "writer") // creatorId
+    private String writer;
     @Column(name = "content")
     private String content;
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,5 +38,11 @@ public class review {
     private int dislikeCnt;
     @Column(name = "like_check")
     private int likeCheck;
-    //foreign key 유저 번호, 보드 번호
+    // foreign key 유저 번호, 보드 번호
+    @ManyToOne
+    private Artist artist; // 댓글 or 대댓글 작성자, 좋아요 연결
+    @ManyToOne
+    private Supporter supporter; // 댓글 or 대댓글 작성자, 좋아요 연결
+    @ManyToOne
+    private Item item; // 댓글이 있을 아이템 연결
 }

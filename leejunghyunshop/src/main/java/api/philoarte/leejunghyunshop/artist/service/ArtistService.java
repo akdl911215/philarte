@@ -5,8 +5,8 @@ import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import java.util.List;
 
 public interface ArtistService {
-    String signup(Artist artist);
-    Artist signin(Artist artist);
+//    String signup(Artist artist);
 //    Artist signin(Artist artist);
-    List<Artist> findAll();
+////    Artist signin(Artist artist);
+//    List<Artist> findAll();
 }

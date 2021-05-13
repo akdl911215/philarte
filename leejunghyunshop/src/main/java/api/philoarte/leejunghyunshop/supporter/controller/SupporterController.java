@@ -51,7 +51,9 @@ public class SupporterController {
 
     @GetMapping("/findAll")
     public ResponseEntity<List<Supporter>> findAll() {
-        return ResponseEntity.ok(service.findALl());
+
+//        return ResponseEntity.ok(service.findALl());
+        return null;
     }
 
     @PutMapping("")

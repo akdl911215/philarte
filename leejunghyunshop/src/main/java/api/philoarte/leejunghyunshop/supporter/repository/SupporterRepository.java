@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface SupporterRepository extends JpaRepository<Supporter, Long> {
-    boolean existsBySupportername(String supporter);
-    Optional<Supporter> findBySupportername(String supportername);
-    @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
-    Supporter signin(@Param("username") String username, @Param("password")String password);
-    List<Supporter> findAll();
+//    boolean existsBySupportername(String supporter);
+//    Optional<Supporter> findBySupportername(String supportername);
+//    @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
+//    Supporter signin(@Param("username") String username, @Param("password")String password);
+//    List<Supporter> findAll();
 }

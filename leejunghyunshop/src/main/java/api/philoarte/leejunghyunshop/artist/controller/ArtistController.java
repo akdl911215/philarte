@@ -35,8 +35,10 @@ public class ArtistController {
             (@ApiParam("Signup Artist") @RequestBody ArtistDto artist) throws IOException{
         log.info("회원가입 시작 +++++++++++++++++++++++++");
 //        return ResponseEntity.ok(service.signup(modelMapper.map(artist, Artist.class)));
-        return ResponseEntity.ok(artist.getName());
+//        return ResponseEntity.ok(artist.getName());
+        return null;
     }
+
 
     @PostMapping("/signin")
     @ApiOperation(value = "${ArtistController.signin}")
@@ -51,7 +53,8 @@ public class ArtistController {
 
     @GetMapping("/findAll")
     public ResponseEntity<List<Artist>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+//        return ResponseEntity.ok(service.findAll());
+        return null;
     }
 
     @PutMapping("")

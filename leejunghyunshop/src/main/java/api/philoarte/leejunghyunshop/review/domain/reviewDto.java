@@ -8,15 +8,6 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Data
-public class reviewDto {
-    private Long reviewId;
-    private int parentItem;
-    private String writer;
-    private String parentReview;
-    private String content;
-    private Date regDate;
-    private Date editDate;
-    private int likeCnt;
-    private int dislikeCnt;
-    private int likeCheck;
+public class ReviewDto {
+
 }

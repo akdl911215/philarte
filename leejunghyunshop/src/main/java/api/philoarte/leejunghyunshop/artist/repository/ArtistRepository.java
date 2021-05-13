@@ -12,11 +12,11 @@ import java.util.Optional;
 
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
-    boolean existsByArtistname(String artistname);
-    Optional<Artist> findByArtistname(String artistname);
-    @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
-    Artist signin(@Param("username") String username, @Param("password")String password);
-
-    List<Artist> findAll();
+//    boolean existsByArtistname(String artistname);
+//    Optional<Artist> findByArtistname(String artistname);
+//    @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
+//    Artist signin(@Param("username") String username, @Param("password")String password);
+//
+//    List<Artist> findAll();
 
 }

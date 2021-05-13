@@ -1,20 +1,16 @@
 spring:
   datasource:
-    url: jdbc:mariadb://bit911215.cebga7nnwvvl.ap-northeast-2.rds.amazonaws.com:3306/bit911215
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: bit911215
-    password: Wjdgus2580
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/root?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 456123
   jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
     open-in-view: false
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: update
-
-security:
+      ddl-auto: create-drop
   jwt:
-    secret: secret-value
-
-UserController:
-  signup: Creates user and returns its JWT token
-  signin: Authenticates user and returns its JWT token
+    secret: jwtSecret
