@@ -31,6 +31,6 @@ public class Artist {
     private String address;
     @Column(name = "affiliation")
     private String affiliation;
-    // @ElementCollection(fetch = FetchType.EAGER)
-    // List<Role> roles;
+     @ElementCollection(fetch = FetchType.EAGER)
+     List<Role> roles;
 }

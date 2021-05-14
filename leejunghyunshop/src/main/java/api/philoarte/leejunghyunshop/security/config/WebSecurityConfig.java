@@ -42,9 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable(); // csrf 기능 비활성화
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
-                .antMatchers("/users/signin").permitAll()
-                .antMatchers("/users/signup").permitAll()
-                .antMatchers("/users/findAll").permitAll()
+                .antMatchers("/artists/signin").permitAll()
+                .antMatchers("/artists/signup").permitAll()
+                .antMatchers("/artists/findAll").permitAll()
                 .antMatchers("/h2-console/**/**").permitAll()
                 .anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/login");

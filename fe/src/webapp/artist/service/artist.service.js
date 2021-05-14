@@ -1,5 +1,8 @@
 import axios from 'axios';
 
-const findAll = () => axios.get(`http://localhost:8080/artists/findAll`);
+const findAll = () => {
+    alert('여긴? ::::::::A');
+    axios.get(`/artist.json`);
+};
 
 export default { findAll };

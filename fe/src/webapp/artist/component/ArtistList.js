@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import getArtistList from '../reducer/artist.reducer';
+import { getArtistList } from '../reducer/artist.reducer';
 
 const ArtistList = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        alert('1. useEffect > dispatch');
-        // dispatch(getArtistList());
+        // alert('1. useEffect > dispatch');
+        dispatch(getArtistList());
     }, []);
 
     const artists = useSelector((state) => {
+        console.log('state::::::::::::::: ' + JSON.stringify(state));
+        // alert(`state/artosts ::::: ${state.artists}`);
         return state.artists;
     });
     return (
@@ -28,30 +30,32 @@ const ArtistList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {artists.map((artist, id) => {
+                    {artists.map((artist, id) => {
                         return (
-                            <tr key={id}>
-                                <td>{artist.artistId}</td>
-                                <td>{artist.username}</td>
-                                <td>{artist.password}</td>
-                                <td>{artist.name}</td>
-                                <td>{artist.email}</td>
-                                <td>{artist.address}</td>
-                                <td>{artist.affiliation}</td>
-                                <td>
-                                    <Link to={`/artist/artist-read/${artist.artistId}`} className="linkto-uss">
-                                        <button
-                                            onClick={() => {
-                                                localStorage.setItem('select, `${artist.artistId');
-                                            }}
-                                        >
-                                            자세히보기
-                                        </button>
-                                    </Link>
-                                </td>
-                            </tr>
+                            <>
+                                <tr key={id}>
+                                    <td>{artist.artistId}</td>
+                                    <td>{artist.username}</td>
+                                    <td>{artist.password}</td>
+                                    <td>{artist.name}</td>
+                                    <td>{artist.email}</td>
+                                    <td>{artist.address}</td>
+                                    <td>{artist.affiliation}</td>
+                                    <td>
+                                        <Link to={`/artist/artist-read/${artist.artistId}`} className="linkto-uss">
+                                            <button
+                                                onClick={() => {
+                                                    localStorage.setItem('select, `${artist.artistId');
+                                                }}
+                                            >
+                                                자세히보기
+                                            </button>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </>
                         );
-                    })} */}
+                    })}
                 </tbody>
             </table>
         </>

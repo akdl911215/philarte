@@ -2,7 +2,6 @@ package api.philoarte.leejunghyunshop.review.domain;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.item.domain.Item;
-import api.philoarte.leejunghyunshop.supporter.domain.Supporter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -41,8 +40,6 @@ public class Review {
     // foreign key 유저 번호, 보드 번호
     @ManyToOne
     private Artist artist; // 댓글 or 대댓글 작성자, 좋아요 연결
-    @ManyToOne
-    private Supporter supporter; // 댓글 or 대댓글 작성자, 좋아요 연결
     @ManyToOne
     private Item item; // 댓글이 있을 아이템 연결
 }

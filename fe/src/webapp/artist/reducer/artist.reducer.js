@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import ArtistService from '../service/artist.service';
 
-export const getArtistList = createAsyncThunk('artist/findAll', async () => {
+export const getArtistList = createAsyncThunk('artists/findAll', async () => {
+    alert('이건뜨나?');
+    alert('ArtistService.findAll :::::::::' + ArtistService.findAll);
     const response = await ArtistService.findAll();
+    alert(`JSON.stringify(response) :::::::::: ${JSON.stringify(response)}`);
     return response.data;
 });
 
 const isRejectedAction = (action) => action.type.endsWith('rejected');
 const artistSlice = createSlice({
-    name: 'artist',
+    name: 'artists',
     initialState: [],
     reducers: {},
     extraReducers: (builder) => {

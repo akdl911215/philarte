@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -6,11 +8,17 @@ spring:
     password: 456123
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
+
+security:
   jwt:
-    secret: jwtSecret
+    secret: secret-value
+
+UserController:
+  signup: Creates user and returns its JWT token
+  signin: Authenticates user and returns its JWT token

@@ -4,7 +4,6 @@ import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
 import api.philoarte.leejunghyunshop.common.domain.Home;
-import api.philoarte.leejunghyunshop.user.domain.UserDto;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -24,7 +23,7 @@ import java.util.List;
 public class ArtistController {
 
     private final ArtistServiceImpl service;
-//    private final ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @PostMapping("/signup")
     @ApiOperation(value = "${ArtistController.signup}")
@@ -34,9 +33,8 @@ public class ArtistController {
     public ResponseEntity<String> signup
             (@ApiParam("Signup Artist") @RequestBody ArtistDto artist) throws IOException{
         log.info("회원가입 시작 +++++++++++++++++++++++++");
-//        return ResponseEntity.ok(service.signup(modelMapper.map(artist, Artist.class)));
-//        return ResponseEntity.ok(artist.getName());
-        return null;
+        return ResponseEntity.ok(service.signup(modelMapper.map(artist, Artist.class)));
+
     }
 
 
@@ -47,14 +45,12 @@ public class ArtistController {
     public ResponseEntity<ArtistDto> signin
             (@RequestBody ArtistDto artist) throws IOException {
         log.info("Artist Signin start :::::::::: " + artist);
-//        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
-        return ResponseEntity.ok(artist);
+        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
     }
 
     @GetMapping("/findAll")
     public ResponseEntity<List<Artist>> findAll() {
-//        return ResponseEntity.ok(service.findAll());
-        return null;
+        return ResponseEntity.ok(service.findAll());
     }
 
     @PutMapping("")
@@ -71,7 +67,7 @@ public class ArtistController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<UserDto>> all() {
+    public ResponseEntity<List<ArtistDto>> all() {
         log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
         return ResponseEntity.ok(null);
     }
