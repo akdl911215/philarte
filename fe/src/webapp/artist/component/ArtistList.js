@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArtistList } from '../reducer/artist.reducer';
 import axios from 'axios';
-import '../style/ARtistList.css';
+import '../style/ArtistList.css';
+import ArtistsDelete from 'webapp/artist/component/ArtistDelete';
 
 const ArtistList = () => {
+    const history = useHistory();
+
     const [artistsList, setArtistsList] = useState([]);
 
     const fetchList = () => {
@@ -20,31 +23,27 @@ const ArtistList = () => {
             });
     };
 
+    const deleteButton = () => {
+        alert(`삭제됩니다`);
+        axios
+            .delete(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
+            .then((res) => {
+                console.log(res);
+                alert('삭제되나?');
+                history.push('/');
+            })
+            .catch((err) => console.log(err));
+    };
+
     useEffect(() => {
         console.log('렌더링중..');
+
         fetchList();
-        alert(fetchList());
+        // alert(fetchList());
     }, []);
 
     const homeButton = () => {
         window.location = '/';
-    };
-
-    //.delete(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
-    const deleteButton = () => {
-        alert(`artistsList.artistId :::::::: ${artistsList.artistId}`);
-        alert(`artistsList.username :::::::: ${artistsList.username}`);
-        alert(`artistsList.password :::::::: ${artistsList.password}`);
-        alert(`artistsList.name :::::::: ${artistsList.name}`);
-        alert(`artistsList.address :::::::: ${artistsList.address}`);
-        alert(`삭제됩니다`);
-
-        axios
-            .delete(`http://localhost:8080/artists/${localStorage.getItem('id')}`)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => console.log(err));
     };
 
     // const dispatch = useDispatch();
@@ -63,13 +62,13 @@ const ArtistList = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>유저 넘버</th>
-                        <th>아이디</th>
-                        <th>비밀번호</th>
-                        <th>이름</th>
-                        <th>E-mail</th>
-                        <th>주소</th>
-                        <th>소속</th>
+                        <th>유저넘버 </th>
+                        <th>아이디 </th>
+                        <th>비밀번호 </th>
+                        <th>이름 </th>
+                        <th>E-mail </th>
+                        <th>주소 </th>
+                        <th>소속 </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,7 +88,7 @@ const ArtistList = () => {
                                             <button
                                                 className="buttonSelectList1"
                                                 onClick={() => {
-                                                    `http://localhost:8080/artists/${localStorage.getItem('select', id)}`;
+                                                    localStorage.setItem('select', `${artist.artistId}`);
                                                 }}
                                             >
                                                 자세히보기

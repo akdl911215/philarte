@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -51,6 +52,13 @@ public class ArtistController {
     @GetMapping("/findAll")
     public ResponseEntity<List<Artist>> findAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/{artistId}")
+    public Optional<Artist> findById
+            (@PathVariable("artistId") Long artistId) {
+        System.out.println("회원정보 1개를 불러옵니다 ::::::::::");
+        return service.findById(artistId);
     }
 
     @PutMapping("")

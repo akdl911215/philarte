@@ -1,7 +1,6 @@
 package api.philoarte.leejunghyunshop.artist.repository;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
-import api.philoarte.leejunghyunshop.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +18,6 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
     List<Artist> findAll();
     void deleteById(Long artist);
+
+    public Optional<Artist> findById(@Param("artistId") Long artistId);
 }

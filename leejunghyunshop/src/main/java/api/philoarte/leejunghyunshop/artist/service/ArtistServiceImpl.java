@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class ArtistServiceImpl implements ArtistService {
@@ -63,7 +65,12 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public void deleteById(Long artist) {
-        repository.deleteById(artist);
+    public void deleteById(Long artistId) {
+        repository.deleteById(artistId);
+    }
+
+    @Override
+    public Optional<Artist> findById(Long artistId) {
+        return repository.findById(artistId);
     }
 }
