@@ -59,10 +59,16 @@ public class ArtistController {
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<List<Home>> delete
-            (@RequestBody Home home) {
-        return ResponseEntity.ok(null);
+    @DeleteMapping("/{artistId}")
+    @ApiOperation(value = "${ArtistController.delete}")
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 403, message = "Access Denied"),
+            @ApiResponse(code = 422, message = "Username is alredy in use")})
+    public void deleteById
+            (@PathVariable("artistId") Long artistId) {
+        System.out.println("삭제를 시작합니다 :::: ");
+        System.out.println("artistId :::::::: " + artistId);
+        service.deleteById(artistId);
     }
 
 

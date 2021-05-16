@@ -8,6 +8,6 @@ import java.util.List;
 public interface ArtistService {
     String signup(Artist artist);
     ArtistDto signin(Artist artist);
-//    Artist signin(Artist artist);
     List<Artist> findAll();
+    void deleteById(Long artist);
 }

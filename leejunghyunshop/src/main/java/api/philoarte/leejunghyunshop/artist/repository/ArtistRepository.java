@@ -18,5 +18,5 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     Artist signin(@Param("username") String username, @Param("password")String password);
 
     List<Artist> findAll();
-
+    void deleteById(Long artist);
 }

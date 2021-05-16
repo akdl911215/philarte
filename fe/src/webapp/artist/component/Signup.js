@@ -1,7 +1,61 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import '../style/ArtistSignup.css';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const Signup = () => {
+    const [inputs, setInputs] = useState({
+        username: '',
+        password: '',
+        name: '',
+        phoneNumber: '',
+        address: '',
+        affiliation: '',
+    });
+
+    const { username, password, name, phoneNumber, address, affiliation } = inputs;
+
+    const handleChange = useCallback(
+        (e) => {
+            const { name, value } = e.target;
+            setInputs({
+                ...inputs,
+                [name]: e.target.value,
+            });
+        },
+        [inputs]
+    );
+
+    const dispatch = useDispatch();
+
+    const handleSubmit = useCallback((e) => {
+        alert(`회원가입에 성공하셨습니다.`);
+
+        e.preventDefault();
+        console.log(`회원가입 작동`);
+        dispatch(inputs);
+
+        axios
+            .post(`http://localhost:8080/artists/sinup`, {
+                username,
+                password,
+                name,
+                phoneNumber,
+                address,
+                affiliation,
+            })
+            .then((res) => {
+                console.log(res);
+                window.location = '/';
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    const cancelButton = (e) => {
+        e.preventDefault();
+        window.location = 'http://localhost:3000/artist/artist-signin';
+    };
+
     return (
         <>
             <form action="/action_page.php" className="ArtistSignupHead">
@@ -45,23 +99,18 @@ const Signup = () => {
                     </label>
                     <input type="text" placeholder="Enter Affiliation" name="affiliation" required />
 
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" className="ArtistSignupCheckbox" /> Remember me
-                    </label>
-
                     <p>
-                        By creating an account you agree to our{' '}
+                        By creating an account you agree to our{'PHILO-ARTE'}
                         <a href="#" className="ArtistSignupTermsPrivacy">
                             Terms & Privacy
                         </a>
-                        .
                     </p>
 
                     <div class="clearfix">
-                        <button type="button" class="cancelbtn">
+                        <button type="button" className="cancelbtn" onClick={cancelButton}>
                             Cancel
                         </button>
-                        <button type="submit" class="signupbtn">
+                        <button type="submit" className="signupbtn" onClick={handleSubmit}>
                             Sign Up
                         </button>
                     </div>

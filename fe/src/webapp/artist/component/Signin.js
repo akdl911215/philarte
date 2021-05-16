@@ -7,6 +7,11 @@ const Signin = () => {
         e.preventDefault();
     };
 
+    const cancelButton = (e) => {
+        e.preventDefault();
+        window.location = '/';
+    };
+
     return (
         <>
             <div className="headerLoginFrom">
@@ -30,7 +35,7 @@ const Signin = () => {
                 </div>
 
                 <div className="container ArtistSigninCancel">
-                    <button type="button" className="cancelbtn">
+                    <button type="button" className="cancelbtn" onClick={cancelButton}>
                         Cancel
                     </button>
                     <span className="psw">

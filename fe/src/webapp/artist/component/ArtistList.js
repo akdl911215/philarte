@@ -1,20 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArtistList } from '../reducer/artist.reducer';
+import axios from 'axios';
+import '../style/ARtistList.css';
 
 const ArtistList = () => {
-    const dispatch = useDispatch();
+    const [artistsList, setArtistsList] = useState([]);
+
+    const fetchList = () => {
+        axios
+            .get(`http://localhost:8080/artists/findAll`)
+            .then((res) => {
+                console.log(res);
+                setArtistsList(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     useEffect(() => {
-        // alert('1. useEffect > dispatch');
-        dispatch(getArtistList());
+        console.log('렌더링중..');
+        fetchList();
+        alert(fetchList());
     }, []);
 
-    const artists = useSelector((state) => {
-        console.log('state::::::::::::::: ' + JSON.stringify(state));
-        // alert(`state/artosts ::::: ${state.artists}`);
-        return state.artists;
-    });
+    const homeButton = () => {
+        window.location = '/';
+    };
+
+    //.delete(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
+    const deleteButton = () => {
+        alert(`artistsList.artistId :::::::: ${artistsList.artistId}`);
+        alert(`artistsList.username :::::::: ${artistsList.username}`);
+        alert(`artistsList.password :::::::: ${artistsList.password}`);
+        alert(`artistsList.name :::::::: ${artistsList.name}`);
+        alert(`artistsList.address :::::::: ${artistsList.address}`);
+        alert(`삭제됩니다`);
+
+        axios
+            .delete(`http://localhost:8080/artists/${localStorage.getItem('id')}`)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    // const dispatch = useDispatch();
+    useEffect(() => {
+        // alert('1. useEffect > dispatch');
+        // dispatch(getArtistList());
+    }, []);
+
+    // const artists = useSelector((state) => {
+    //     console.log('state::::::::::::::: ' + JSON.stringify(state));
+    //     alert(`state/artosts ::::: ${state.artists}`);
+    //     return state.artists;
+    // });
     return (
         <>
             <table>
@@ -30,7 +73,7 @@ const ArtistList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {artists.map((artist, id) => {
+                    {artistsList.map((artist, id) => {
                         return (
                             <>
                                 <tr key={id}>
@@ -44,13 +87,20 @@ const ArtistList = () => {
                                     <td>
                                         <Link to={`/artist/artist-read/${artist.artistId}`} className="linkto-uss">
                                             <button
+                                                className="buttonSelectList1"
                                                 onClick={() => {
-                                                    localStorage.setItem('select, `${artist.artistId');
+                                                    `http://localhost:8080/artists/${localStorage.getItem('select', id)}`;
                                                 }}
                                             >
                                                 자세히보기
                                             </button>
                                         </Link>
+                                        <button className="buttonSelectList2" onClick={deleteButton}>
+                                            삭제하기
+                                        </button>
+                                        <button className="buttonSelectList3" onClick={homeButton}>
+                                            홈으로
+                                        </button>
                                     </td>
                                 </tr>
                             </>

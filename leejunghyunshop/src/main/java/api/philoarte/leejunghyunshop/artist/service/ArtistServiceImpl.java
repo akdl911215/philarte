@@ -61,4 +61,9 @@ public class ArtistServiceImpl implements ArtistService {
     public List<Artist> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public void deleteById(Long artist) {
+        repository.deleteById(artist);
+    }
 }
