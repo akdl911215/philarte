@@ -1,7 +1,7 @@
 package api.philoarte.leejunghyunshop.security.domain;
 
-import api.philoarte.leejunghyunshop.user.domain.Role;
-import api.philoarte.leejunghyunshop.user.service.UserDetailsServiceImpl;
+import api.philoarte.leejunghyunshop.artist.domain.Role;
+import api.philoarte.leejunghyunshop.artist.service.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

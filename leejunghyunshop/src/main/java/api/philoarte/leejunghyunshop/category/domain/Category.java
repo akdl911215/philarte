@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
-@Data
-@NoArgsConstructor
 @Entity
 @Table(name = "categories")
 public class Category {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private long categoryId;
-    @Column
-    private String name;
+
+    @Column(name = "category_name")
+    private String categoryName;
 }

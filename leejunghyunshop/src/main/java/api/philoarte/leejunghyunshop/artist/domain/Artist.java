@@ -1,6 +1,5 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
-import api.philoarte.leejunghyunshop.user.domain.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -47,4 +46,6 @@ public class Artist {
 
      @ElementCollection(fetch = FetchType.EAGER)
      List<Role> roles;
+
+
 }

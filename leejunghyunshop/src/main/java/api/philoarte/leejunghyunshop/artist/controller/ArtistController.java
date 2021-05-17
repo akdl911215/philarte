@@ -60,10 +60,14 @@ public class ArtistController {
         return service.findById(artistId);
     }
 
-    @PostMapping("/update/{artistId}")
-    public ResponseEntity<Artist> updateById
-            (@PathVariable("artistId") Artist artist){
+    @PutMapping("/update/{artistId}")
+    public ResponseEntity<ArtistDto> updateById
+            (@PathVariable("artistId") Long artistId,
+             @RequestBody ArtistDto artist
+             ){
         System.out.println("회원정보 1개를 수정합니다 :::::::::::");
+
+        artist.setArtistId(artistId);
         return ResponseEntity.ok(service.updateById(artist));
     }
 

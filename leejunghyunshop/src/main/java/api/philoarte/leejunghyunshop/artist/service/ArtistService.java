@@ -12,5 +12,5 @@ public interface ArtistService {
 //    List<Artist> findAll();
     void deleteById(Long artistId);
 //    Optional<Artist> findById(Long artistId);
-    Artist updateById(Artist artist);
+    ArtistDto updateById(ArtistDto artistDto);
 }

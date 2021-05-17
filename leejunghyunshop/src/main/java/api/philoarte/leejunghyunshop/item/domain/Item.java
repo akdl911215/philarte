@@ -2,7 +2,7 @@ package api.philoarte.leejunghyunshop.item.domain;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.category.domain.Category;
-import api.philoarte.leejunghyunshop.file.domain.File;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

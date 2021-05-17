@@ -4,10 +4,12 @@ import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import api.philoarte.leejunghyunshop.common.service.AbstractService;
+import api.philoarte.leejunghyunshop.common.util.ModelMapperUtils;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
-import api.philoarte.leejunghyunshop.user.domain.Role;
+import api.philoarte.leejunghyunshop.artist.domain.Role;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Log
 @RequiredArgsConstructor
 @Service
 public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService {
@@ -104,7 +107,29 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         return repository.findAll();
     }
     @Override
-    public Artist updateById(Artist artist) {
-        return repository.updateById(artist);
+    public ArtistDto updateById(ArtistDto artistDto) {
+
+        System.out.println("===================================");
+        System.out.println("===================================");
+        System.out.println(artistDto);
+        System.out.println("===================================");
+        System.out.println("===================================");
+
+
+        Artist updateArtist = repository.updateById(artistDto.getUsername(), artistDto.getPassword());
+        log.info("::::::::::: 변환 ::::::::::::: " );
+        String token = provider.createToken(updateArtist.getUsername(), repository.findByName(updateArtist.getUsername()).get().getRoles());
+        log.info("::::::::::: ISSUED TOKEN ::::::::::::: " + token);
+        artistDto.setToken(token);
+
+        return artistDto;
+
+
+//        Artist artist = ModelMapperUtils.getModelMapper().map()
+//        return null;
     }
+
+
+
 }
+

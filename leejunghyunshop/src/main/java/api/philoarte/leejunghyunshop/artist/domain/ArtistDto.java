@@ -1,13 +1,8 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
-import api.philoarte.leejunghyunshop.user.domain.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 

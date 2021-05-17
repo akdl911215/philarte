@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.user.domain;
+package api.philoarte.leejunghyunshop.artist.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

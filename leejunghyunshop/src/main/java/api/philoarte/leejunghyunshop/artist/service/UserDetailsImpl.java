@@ -1,6 +1,6 @@
-package api.philoarte.leejunghyunshop.user.service;
+package api.philoarte.leejunghyunshop.artist.service;
 
-import api.philoarte.leejunghyunshop.user.domain.User;
+import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,16 @@ import java.util.stream.Collectors;
 @Getter
 public class UserDetailsImpl implements UserDetails { // UserDetails 은 security 내장형
 
-    private final long userid;
+    private final long artistid;
     private final String username;
-    private final String userEmail;
-    private final String name;
     @JsonIgnore
     private final String password;
+    private final String name;
+    private final String email;
+    private final String phoneNumber;
+    private final String address;
+    private final String school;
+    private final String department;
     private final Collection<? extends  GrantedAuthority> authorities;
 
     @Override
@@ -49,10 +53,11 @@ public class UserDetailsImpl implements UserDetails { // UserDetails 은 securit
         return true;
     }
 
-    public static UserDetailsImpl build(User user){
-        List<GrantedAuthority> authories = user.getRoles().stream()
+    public static UserDetailsImpl build(Artist artist){
+        List<GrantedAuthority> authories = artist.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());
-        return new UserDetailsImpl(user.getUserId(), user.getUsername(), user.getPassword(), user.getUsername(), user.getUserEmail(),authories);
+        return new UserDetailsImpl(artist.getArtistId(), artist.getUsername(), artist.getPassword(), artist.getEmail(), artist.getEmail(),
+                artist.getPhoneNumber(), artist.getAddress(), artist.getSchool(), artist.getDepartment(), authories);
     }
 }

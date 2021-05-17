@@ -23,7 +23,9 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     void deleteById(Long artist);
 
     public Optional<Artist> findById(@Param("artistId") Long artistId);
-    @Query(value = "update artists set artistId set password=#{password}, email=#{email}, phoneNumber=#{phoneNumber}, address=#{address}, " +
-                            "affiliation=#{affiliation} where artistId", nativeQuery = true)
-    public Artist updateById(@Param("ArtistId") Artist artist);
+    @Query(value = "update artists set password=#{password}, email=#{email}, phoneNumber=#{phoneNumber}, address=#{address}, " +
+                            "school=#{school}, department=#{department} where artistId = #{artistId} ", nativeQuery = true)
+    public Artist updateById(@Param("ArtistId") String username, String password);
+
+
 }

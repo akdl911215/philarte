@@ -1,5 +1,6 @@
 package api.philoarte.leejunghyunshop.review.domain;
 
+import api.philoarte.leejunghyunshop.art.domain.Art;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.item.domain.Item;
 import lombok.Data;
@@ -17,29 +18,21 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long reviewId;
-    @Column(name = "parent_item") // 리뷰를 달 게시글 번호(부모글)
-    private int parentItem;
-    @Column(name = "parent_review") // 대댓글 댓글의 부모글
-    private String parentReview;
-    @Column(name = "writer") // creatorId
-    private String writer;
     @Column(name = "content")
     private String content;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "reg_date")
-    private Date regDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "edit_date")
-    private Date editDate;
-    @Column(name = "like_Cnt")
-    private int likeCnt;
-    @Column(name = "dislike_Cnt")
-    private int dislikeCnt;
-    @Column(name = "like_check")
-    private int likeCheck;
-    // foreign key 유저 번호, 보드 번호
+    @Column(name = "comment")
+    private String comment;
+
+    // @ManyToOne
+    // @JoinColumn(name = "funding_id")
+    // private Funding funding;
+
     @ManyToOne
-    private Artist artist; // 댓글 or 대댓글 작성자, 좋아요 연결
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
+
     @ManyToOne
-    private Item item; // 댓글이 있을 아이템 연결
+    @JoinColumn(name = "art_id")
+    private Art art;
+
 }

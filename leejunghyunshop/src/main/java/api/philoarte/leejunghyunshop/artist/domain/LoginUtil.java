@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.user.domain;
+package api.philoarte.leejunghyunshop.artist.domain;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

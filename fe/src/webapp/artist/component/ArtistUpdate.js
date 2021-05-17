@@ -41,7 +41,7 @@ const ArtistUpdate = () => {
             e.preventDefault();
             console.log('업데이트 진행중');
             axios
-                .post(`http://localhost:8080/artists/update/${localStorage.getItem('select')}`, {
+                .put(`http://localhost:8080/artists/update/${localStorage.getItem('select')}`, {
                     username,
                     password,
                     name,
@@ -57,7 +57,7 @@ const ArtistUpdate = () => {
                 })
                 .catch((err) => console.log(err));
         },
-        [username, password, name, email, address, school, department]
+        [username, password, name, email, phoneNumber, address, school, department]
     );
 
     const handleChange = useCallback(
@@ -102,10 +102,6 @@ const ArtistUpdate = () => {
                     <b>핸드폰번호</b>
                 </label>
                 <input type="text" placeholder="Enter PhoneNumber" name="phoneNumber" id="phoneNumber" onChange={handleChange} required />
-                <label htmlFor="email">
-                    <b>E-Mail</b>
-                </label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" onChange={handleChange} required />
 
                 <label htmlFor="address">
                     <b>주소</b>
