@@ -5,7 +5,7 @@ import '../style/ArtistUpdate.css';
 
 const ArtistUpdate = () => {
     const [details, setDetails] = useState({});
-    const { username, password, name, email, address, affiliation } = details;
+    const { username, password, name, email, phoneNumber, address, affiliation } = details;
 
     const fetchOne = () => {
         alert('정보를 가져옵니다');
@@ -20,6 +20,7 @@ const ArtistUpdate = () => {
                     password: res.data.password,
                     name: res.data.name,
                     email: res.data.email,
+                    phoneNumber: res.data.phoneNumber,
                     address: res.data.address,
                     affiliaton: res.data.affiliation,
                 });
@@ -39,11 +40,12 @@ const ArtistUpdate = () => {
             e.preventDefault();
             console.log('업데이트 진행중');
             axios
-                .put(`http://localhost:8080/artists/${localStorage.getITem('se;ect')}`, {
+                .put(`http://localhost:8080/artists/${localStorage.getItem('select')}`, {
                     username,
                     password,
                     name,
                     email,
+                    phoneNumber,
                     address,
                     affiliation,
                 })
@@ -51,7 +53,7 @@ const ArtistUpdate = () => {
                     console.log(res);
                     window.location = '/';
                 })
-                .cathch((err) => console.log(err));
+                .catch((err) => console.log(err));
         },
         [username, password, name, email, address, affiliation]
     );
@@ -78,8 +80,7 @@ const ArtistUpdate = () => {
                 <label htmlFor="username">
                     <b>아이디</b>
                 </label>
-                <input type="text" placeholder="Enter ID" name="username" id="username" onChange={handleChange} required />
-
+                <td>{details.username}</td>
                 <label htmlFor="password">
                     <b>비밀번호</b>
                 </label>
@@ -88,8 +89,17 @@ const ArtistUpdate = () => {
                 <label htmlFor="name">
                     <b>이름</b>
                 </label>
-                <input type="text" placeholder="Enter Name" name="name" id="Name" onChange={handleChange} required />
+                <td>{details.name}</td>
 
+                <label htmlFor="email">
+                    <b>E-Mail</b>
+                </label>
+                <input type="text" placeholder="Enter Email" name="email" id="email" onChange={handleChange} required />
+
+                <label htmlFor="phoneNumber">
+                    <b>핸드폰번호</b>
+                </label>
+                <input type="text" placeholder="Enter PhoneNumber" name="phoneNumber" id="phoneNumber" onChange={handleChange} required />
                 <label htmlFor="email">
                     <b>E-Mail</b>
                 </label>

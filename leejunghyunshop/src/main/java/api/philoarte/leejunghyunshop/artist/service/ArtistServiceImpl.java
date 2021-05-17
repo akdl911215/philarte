@@ -3,6 +3,7 @@ package api.philoarte.leejunghyunshop.artist.service;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
+import api.philoarte.leejunghyunshop.common.service.AbstractService;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
 import api.philoarte.leejunghyunshop.user.domain.Role;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ArtistServiceImpl implements ArtistService {
+public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService {
 
     private final ArtistRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -60,17 +61,50 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public List<Artist> findAll() {
-        return repository.findAll();
+    public void deleteById(Long artistId) {
+        repository.deleteById(artistId);
+    }
+
+
+    @Override
+    public Long count() {
+        return repository.count();
     }
 
     @Override
-    public void deleteById(Long artistId) {
-        repository.deleteById(artistId);
+    public Optional<Artist> getOne(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Long delete(Artist artist) {
+        repository.delete(artist);
+        return null;
+    }
+
+
+    @Override
+    public Boolean existsById(long id) {
+        return repository.existsById(id);
+    }
+
+
+    @Override
+    public Long save(Artist artist) {
+        return null;
     }
 
     @Override
     public Optional<Artist> findById(Long artistId) {
         return repository.findById(artistId);
+    }
+
+    @Override
+    public List<Artist> findAll() {
+        return repository.findAll();
+    }
+    @Override
+    public Artist updateById(Long artistId, String password, String name, String email, String phoneNumber, String address, String affiliation) {
+        return repository.updateById(artist);
     }
 }

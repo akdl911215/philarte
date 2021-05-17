@@ -3,7 +3,6 @@ package api.philoarte.leejunghyunshop.artist.controller;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
-import api.philoarte.leejunghyunshop.common.domain.Home;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -61,10 +60,11 @@ public class ArtistController {
         return service.findById(artistId);
     }
 
-    @PutMapping("")
-    public ResponseEntity<Long> update
-            (@RequestBody Home home) {
-        return ResponseEntity.ok(null);
+    @PutMapping("/{artistId}")
+    public ResponseEntity<Artist> updateById
+            (@PathVariable("artistId") Artist artist){
+        System.out.println("회원정보 1개를 수정합니다 :::::::::::");
+        return ResponseEntity.ok(service.updateById(artist));
     }
 
     @DeleteMapping("/{artistId}")

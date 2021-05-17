@@ -3,9 +3,10 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/root?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: 456123
+    url: jdbc:mysql://192.168.0.199/arte?allowPublicKeyRetrieval=true
+    username: arte
+    password: Arte1234
+
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

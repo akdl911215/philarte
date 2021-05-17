@@ -16,8 +16,11 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
     Artist signin(@Param("username") String username, @Param("password")String password);
 
-    List<Artist> findAll();
+//    List<Artist> findAll();
     void deleteById(Long artist);
 
     public Optional<Artist> findById(@Param("artistId") Long artistId);
+    @Query(value = "update artists set artistId set password=?, email=?, phoneNumber=?, address=?, affiliation=? where artistId", nativeQuery = true)
+    public Artist updateById(@Param("artistId") Long artistId, @Param("password") String password, @Param("email") String email,
+                             @Param("phoneNumber") String phoneNumber, @Param("address") String address, @Param("affiliation") String affiliation);
 }
