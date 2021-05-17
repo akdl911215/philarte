@@ -27,12 +27,8 @@ public class ArtistDto {
     @ApiModelProperty(position = 8)
     private String department;
     @ApiModelProperty(position = 9)
-    private LocalDateTime regData;
-    @ApiModelProperty(position = 10)
-    private LocalDateTime modDate;
-    @ApiModelProperty(position = 11)
     private List<Role> roles;
-    @ApiModelProperty(position = 12)
+    @ApiModelProperty(position = 10)
     private String token;
 
 }

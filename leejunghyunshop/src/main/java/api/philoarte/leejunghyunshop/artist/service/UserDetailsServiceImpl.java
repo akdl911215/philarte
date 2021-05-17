@@ -20,9 +20,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String artistname) throws UsernameNotFoundException {
         // Optional의 객체로 감싼다.
-        Optional<Artist> user = Optional.ofNullable(repository.findByName(artistname)
+        Optional<Artist> artist = Optional.ofNullable(repository.findByName(artistname)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username : " + artistname)));
 
-        return UserDetailsImpl.build(user.get()); // .get은 Optional 객체에서 끄집어 낸다.
+        return UserDetailsImpl.build(artist.get()); // .get은 Optional 객체에서 끄집어 낸다.
     }
 }

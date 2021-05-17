@@ -20,12 +20,12 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     Artist signin(@Param("username") String username, @Param("password")String password);
 
 //    List<Artist> findAll();
-    void deleteById(Long artist);
-
-    public Optional<Artist> findById(@Param("artistId") Long artistId);
-    @Query(value = "update artists set password=#{password}, email=#{email}, phoneNumber=#{phoneNumber}, address=#{address}, " +
-                            "school=#{school}, department=#{department} where artistId = #{artistId} ", nativeQuery = true)
-    public Artist updateById(@Param("ArtistId") String username, String password);
+//    void deleteById(Long artist);
+//
+//    public Optional<Artist> findById(@Param("artistId") Long artistId);
+//    @Query(value = "update artists set password=#{password}, email=#{email}, phoneNumber=#{phoneNumber}, address=#{address}, " +
+//                            "school=#{school}, department=#{department} where artistId = #{artistId} ", nativeQuery = true)
+//    public Artist updateById(@Param("ArtistId") String username, String password);
 
 
 }

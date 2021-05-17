@@ -51,9 +51,9 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         try {
             ArtistDto artistDto  = modelMapper.map(artist, ArtistDto.class);
             artistDto.setToken(
-                    (passwordEncoder.matches(artist.getPassword(), repository.findByName(artist.getUsername()).get().getPassword())
+                    (passwordEncoder.matches(artist.getPassword(), repository.findById(artist.getArtistId()).get().getPassword())
             ) ?
-            provider.createToken(artist.getUsername(), repository.findByName(artist.getUsername()).get().getRoles())
+            provider.createToken(artist.getUsername(), repository.findById(artist.getArtistId()).get().getRoles())
             : "WRONG_PASSWORD");
 
             return artistDto;
@@ -106,6 +106,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     public List<Artist> findAll() {
         return repository.findAll();
     }
+
     @Override
     public ArtistDto updateById(ArtistDto artistDto) {
 
@@ -115,18 +116,18 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         System.out.println("===================================");
         System.out.println("===================================");
 
+        Artist artist = modelMapper.map(artistDto, Artist.class);
+        repository.save(artist);
 
-        Artist updateArtist = repository.updateById(artistDto.getUsername(), artistDto.getPassword());
         log.info("::::::::::: 변환 ::::::::::::: " );
-        String token = provider.createToken(updateArtist.getUsername(), repository.findByName(updateArtist.getUsername()).get().getRoles());
+        ArtistDto artistDtoUpdate = modelMapper.map(artist, ArtistDto.class);
+        String token = provider.createToken(artistDtoUpdate.getUsername(), repository.findById(artistDto.getArtistId()).get().getRoles());
         log.info("::::::::::: ISSUED TOKEN ::::::::::::: " + token);
+
         artistDto.setToken(token);
 
         return artistDto;
 
-
-//        Artist artist = ModelMapperUtils.getModelMapper().map()
-//        return null;
     }
 
 

@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "artists")
 @Data
 @NoArgsConstructor
-public class Artist {
+public class Artist extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "artist_id")
@@ -37,12 +37,6 @@ public class Artist {
     private String school;
     @Column(name = "department")
     private String department;
-    @CreatedDate
-    @Column(name = "regdate", updatable = false)
-    private LocalDateTime regDate;
-    @LastModifiedDate
-    @Column(name = "moddate")
-    private LocalDateTime moDate;
 
      @ElementCollection(fetch = FetchType.EAGER)
      List<Role> roles;
