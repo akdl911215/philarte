@@ -12,7 +12,7 @@ const ArtistUpdate = () => {
         alert(`${localStorage.getItem('select')}`);
 
         axios
-            .get(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
+            .get(`http://localhost:8080/artists/fetchOne/${localStorage.getItem('select')}`)
             .then((res) => {
                 console.log(res);
                 setDetails({

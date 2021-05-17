@@ -76,13 +76,13 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public Optional<Artist> getOne(Long id) {
-        return Optional.empty();
+        return Optional.ofNullable(repository.getOne(id));
     }
 
     @Override
     public Long delete(Artist artist) {
         repository.delete(artist);
-        return null;
+        return repository.findById(artist.getArtistId()).orElse(null) == null ? 1L : 0L;
     }
 
 
@@ -94,7 +94,8 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public Long save(Artist artist) {
-        return null;
+
+        return (repository.save(artist) != null)? 1L : 0L;
     }
 
     @Override

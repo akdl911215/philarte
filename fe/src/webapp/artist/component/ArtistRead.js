@@ -12,7 +12,7 @@ const ArtistRead = () => {
         alert(`삭제됩니다`);
 
         axios
-            .delete(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
+            .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('select')}`)
             .then((res) => {
                 console.log(res);
                 history.push('/artist/artist-list');
@@ -22,7 +22,7 @@ const ArtistRead = () => {
 
     const fetchOne = () => {
         axios
-            .get(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
+            .get(`http://localhost:8080/artists/fetchOne/${localStorage.getItem('select')}`)
             .then((res) => {
                 console.log(res);
                 setDetail(res.data);

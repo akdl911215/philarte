@@ -44,8 +44,13 @@ public class ArtistController {
         @ApiResponse(code = 422, message = "Invalid Artist-Username / Password supplied")})
     public ResponseEntity<ArtistDto> signin
             (@RequestBody ArtistDto artist) throws IOException {
-        log.info("Artist Signin start :::::::::: " + artist);
-        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
+        log.info("==============================================");
+        log.info("==============================================");
+        log.info("Artist Signin(로그인) start :::::::::: " + artist);
+        log.info("==============================================");
+        log.info("==============================================");
+//        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
+        return null;
     }
 
     @GetMapping("/findAll")
@@ -53,7 +58,7 @@ public class ArtistController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/{artistId}")
+    @GetMapping("/fetchOne/{artistId}")
     public Optional<Artist> findById
             (@PathVariable("artistId") Long artistId) {
         System.out.println("회원정보 1개를 불러옵니다 ::::::::::");
@@ -71,7 +76,7 @@ public class ArtistController {
         return ResponseEntity.ok(service.updateById(artist));
     }
 
-    @DeleteMapping("/{artistId}")
+    @DeleteMapping("/delete/{artistId}")
     @ApiOperation(value = "${ArtistController.delete}")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 403, message = "Access Denied"),

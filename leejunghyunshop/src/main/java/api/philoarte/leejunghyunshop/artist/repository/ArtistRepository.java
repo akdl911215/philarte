@@ -19,6 +19,11 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
     Artist signin(@Param("username") String username, @Param("password")String password);
 
+    @Query("select u from UserVO u where u.username= :username and u.password= :password")
+    ArtistDto login(@Param("username") String username, @Param("password") String password);
+}
+
+
 //    List<Artist> findAll();
 //    void deleteById(Long artist);
 //

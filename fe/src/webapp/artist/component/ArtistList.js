@@ -26,7 +26,7 @@ const ArtistList = () => {
     const deleteButton = () => {
         alert(`삭제됩니다`);
         axios
-            .delete(`http://localhost:8080/artists/${localStorage.getItem('select')}`)
+            .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('select')}`)
             .then((res) => {
                 console.log(res);
                 alert('삭제되나?');

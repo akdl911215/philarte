@@ -3,6 +3,15 @@ import '../style/ArtistSignin.css';
 import { Link } from 'react-router-dom';
 
 const Signin = () => {
+    const login = () => {
+        axios
+            .get(`http://localhost:8080/atists/signin`)
+            .then(() => {
+                console.log(res);
+            })
+            .catch((err) => console.log(err));
+    };
+
     const login = (e) => {
         e.preventDefault();
     };
