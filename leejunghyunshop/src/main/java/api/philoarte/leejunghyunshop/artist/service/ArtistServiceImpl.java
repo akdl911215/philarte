@@ -33,7 +33,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         if(!repository.existsByName(artist.getUsername())){
             artist.setPassword(passwordEncoder.encode(artist.getPassword()));
             List<Role> list = new ArrayList<>();
-            list.add(Role.USER);
+            list.add(Role.USER_ROLES);
             artist.setRoles(list);
             repository.save(artist);
             return provider.createToken(artist.getUsername(), artist.getRoles());
@@ -104,7 +104,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         return repository.findAll();
     }
     @Override
-    public Artist updateById(Long artistId, String password, String name, String email, String phoneNumber, String address, String affiliation) {
+    public Artist updateById(Artist artist) {
         return repository.updateById(artist);
     }
 }

@@ -12,5 +12,5 @@ public interface ArtistService {
 //    List<Artist> findAll();
     void deleteById(Long artistId);
 //    Optional<Artist> findById(Long artistId);
-    Artist updateById(Long artistId, String password, String name, String email, String phoneNumber, String address, String affiliation);
+    Artist updateById(Artist artist);
 }

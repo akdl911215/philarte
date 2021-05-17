@@ -36,7 +36,7 @@ public class UserServiceImpl  implements UserService {
         if(!userRepository.existsByUsername(user.getUsername())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             List<Role> list = new ArrayList<>();
-            list.add(Role.USER);
+            list.add(Role.USER_ROLES);
             user.setRoles(list);
             userRepository.save(user);
             return provider.createToken(user.getUsername(), user.getRoles());

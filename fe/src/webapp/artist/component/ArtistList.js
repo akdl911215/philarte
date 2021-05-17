@@ -68,7 +68,8 @@ const ArtistList = () => {
                         <th>이름 </th>
                         <th>E-mail </th>
                         <th>주소 </th>
-                        <th>소속 </th>
+                        <th>학교 </th>
+                        <th>학과 </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +83,8 @@ const ArtistList = () => {
                                     <td>{artist.name}</td>
                                     <td>{artist.email}</td>
                                     <td>{artist.address}</td>
-                                    <td>{artist.affiliation}</td>
+                                    <td>{artist.school}</td>
+                                    <td>{artist.department}</td>
                                     <td>
                                         <Link to={`/artist/artist-read/${artist.artistId}`} className="linkto-uss">
                                             <button

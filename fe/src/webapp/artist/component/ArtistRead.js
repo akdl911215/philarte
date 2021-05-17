@@ -49,7 +49,8 @@ const ArtistRead = () => {
                         <th>이름 </th>
                         <th>E-mail </th>
                         <th>주소 </th>
-                        <th>소속 </th>
+                        <th>학교 </th>
+                        <th>학과 </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +61,8 @@ const ArtistRead = () => {
                         <td>{detail.name}</td>
                         <td>{detail.email}</td>
                         <td>{detail.address}</td>
-                        <td>{detail.affiliation}</td>
+                        <td>{detail.school}</td>
+                        <td>{detail.department}</td>
                     </tr>
                 </tbody>
             </table>

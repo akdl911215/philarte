@@ -3,11 +3,16 @@ package api.philoarte.leejunghyunshop.artist.domain;
 import api.philoarte.leejunghyunshop.user.domain.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@EntityListeners(value = {AuditingEntityListener.class})
 @Entity
 @Table(name = "artists")
 @Data
@@ -29,8 +34,17 @@ public class Artist {
     private String phoneNumber;
     @Column(name = "address")
     private String address;
-    @Column(name = "affiliation")
-    private String affiliation;
+    @Column(name = "school")
+    private String school;
+    @Column(name = "department")
+    private String department;
+    @CreatedDate
+    @Column(name = "regdate", updatable = false)
+    private LocalDateTime regDate;
+    @LastModifiedDate
+    @Column(name = "moddate")
+    private LocalDateTime moDate;
+
      @ElementCollection(fetch = FetchType.EAGER)
      List<Role> roles;
 }

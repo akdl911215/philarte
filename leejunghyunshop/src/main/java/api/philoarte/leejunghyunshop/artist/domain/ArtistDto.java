@@ -3,9 +3,12 @@ package api.philoarte.leejunghyunshop.artist.domain;
 import api.philoarte.leejunghyunshop.user.domain.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -25,9 +28,16 @@ public class ArtistDto {
     @ApiModelProperty(position = 6)
     private String address;
     @ApiModelProperty(position = 7)
-    private String affiliation;
+    private String school;
     @ApiModelProperty(position = 8)
-    private String token;
+    private String department;
     @ApiModelProperty(position = 9)
+    private LocalDateTime regData;
+    @ApiModelProperty(position = 10)
+    private LocalDateTime modDate;
+    @ApiModelProperty(position = 11)
     private List<Role> roles;
+    @ApiModelProperty(position = 12)
+    private String token;
+
 }

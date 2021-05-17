@@ -5,7 +5,7 @@ import '../style/ArtistUpdate.css';
 
 const ArtistUpdate = () => {
     const [details, setDetails] = useState({});
-    const { username, password, name, email, phoneNumber, address, affiliation } = details;
+    const { username, password, name, email, phoneNumber, address, school, department } = details;
 
     const fetchOne = () => {
         alert('정보를 가져옵니다');
@@ -22,7 +22,8 @@ const ArtistUpdate = () => {
                     email: res.data.email,
                     phoneNumber: res.data.phoneNumber,
                     address: res.data.address,
-                    affiliaton: res.data.affiliation,
+                    school: res.data.school,
+                    department: res.data.department,
                 });
             })
             .catch((err) => console.log(err));
@@ -40,14 +41,15 @@ const ArtistUpdate = () => {
             e.preventDefault();
             console.log('업데이트 진행중');
             axios
-                .put(`http://localhost:8080/artists/${localStorage.getItem('select')}`, {
+                .post(`http://localhost:8080/artists/update/${localStorage.getItem('select')}`, {
                     username,
                     password,
                     name,
                     email,
                     phoneNumber,
                     address,
-                    affiliation,
+                    school,
+                    department,
                 })
                 .then((res) => {
                     console.log(res);
@@ -55,7 +57,7 @@ const ArtistUpdate = () => {
                 })
                 .catch((err) => console.log(err));
         },
-        [username, password, name, email, address, affiliation]
+        [username, password, name, email, address, school, department]
     );
 
     const handleChange = useCallback(
@@ -110,10 +112,15 @@ const ArtistUpdate = () => {
                 </label>
                 <input type="text" placeholder="Enter Address" name="address" id="address" required onChange={handleChange} />
 
-                <label htmlFor="affiliation">
-                    <b>소속</b>
+                <label htmlFor="school">
+                    <b>학교</b>
                 </label>
-                <input type="text" placeholder="Enter Affiliation" name="affiliation" id="affiliation" required onChange={handleChange} />
+                <input type="text" placeholder="Enter School" name="school" id="school" required onChange={handleChange} />
+
+                <label htmlFor="department">
+                    <b>학과</b>
+                </label>
+                <input type="text" placeholder="Enter Department" name="department" id="department" required onChange={handleChange} />
 
                 <button type="submit" className="ArtistUpdateButton">
                     수정하기
