@@ -15,11 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Log
 @RequiredArgsConstructor
 @Service
@@ -32,35 +34,69 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     private final ModelMapper modelMapper;
 
     @Override
-    public String signup(Artist artist) {
-        if(!repository.existsByName(artist.getUsername())){
-            artist.setPassword(passwordEncoder.encode(artist.getPassword()));
+    public String signup(ArtistDto artistDto) {
+        // 서비스에 디폴트메소드로 정의
+        if(!repository.existsByName(artistDto.getUsername())){
+//            빌더를 가지고온걸로 추측됨 하지만 동작됨.
+            Artist artistUpdate = new Artist();
+            artistUpdate.saveAll(artistDto);
+
+//            ModelMapperUtils.getModelMapper().map(artistDto, Artist.class); // DTO의 값을 artist로 변환
+//            Artist artistUpdate = Artist.builder().artistId().username().
+//            Artist artistUpdate = new Artist();
+
+
+            log.info("service artistDto ::::::::::::::::: " + artistDto);
+            log.info("artistUpdate ::::::::: " + artistUpdate);
+            log.info("::::::::::: 변환1 ::::::::::::: " );
+            repository.save(artistUpdate);
+            log.info("::::::::::: 변환2 ::::::::::::: " );
+            ArtistDto artistDtoUpdate = modelMapper.map(artistUpdate, ArtistDto.class);
+            log.info("::::::::::: 변환3 ::::::::::::: " );
+            artistDtoUpdate.setPassword(passwordEncoder.encode(artistDtoUpdate.getPassword()));
+            log.info("::::::::::: 변환4 ::::::::::::: " );
             List<Role> list = new ArrayList<>();
+            log.info("::::::::::: 변환5 ::::::::::::: " );
             list.add(Role.USER_ROLES);
-            artist.setRoles(list);
-            repository.save(artist);
-            return provider.createToken(artist.getUsername(), artist.getRoles());
+            log.info("::::::::::: 변환6 ::::::::::::: " );
+            artistDto.setRoles(list);
+            log.info("::::::::::: 변환7 ::::::::::::: " );
+            return provider.createToken(artistDto.getUsername(), artistDtoUpdate.getRoles());
+
         } else {
             throw new SecurityRuntimeException("Artist Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
     @Override
-    public ArtistDto signin(Artist artist) {
+    public ArtistDto signin(ArtistDto artistDto) {
 
         try {
-            ArtistDto artistDto  = modelMapper.map(artist, ArtistDto.class);
+            Artist artist = modelMapper.map(artistDto, Artist.class);
+            log.info("::::::::::: 변환 ::::::::::::: " );
             artistDto.setToken(
                     (passwordEncoder.matches(artist.getPassword(), repository.findById(artist.getArtistId()).get().getPassword())
             ) ?
             provider.createToken(artist.getUsername(), repository.findById(artist.getArtistId()).get().getRoles())
             : "WRONG_PASSWORD");
 
-            return artistDto;
+            ArtistDto artistDtoUpdate = modelMapper.map(artist, ArtistDto.class);
+            log.info("=====================================");
+            log.info("=====================================");
+            log.info("artistDtoUpdate ::::: " + artistDtoUpdate);
+            log.info("=====================================");
+            log.info("=====================================");
+
+            return artistDtoUpdate;
         } catch (Exception e){
             throw new SecurityRuntimeException("Invalid Artist-Username / Password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
+    }
+
+    @Override
+    public List<Artist> getAllData() {
+        return repository.getAllData();
     }
 
     @Override
@@ -95,7 +131,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     @Override
     public Long save(Artist artist) {
 
-        return (repository.save(artist) != null)? 1L : 0L;
+        return (repository.save(artist) != null) ? 1L : 0L ;
     }
 
     @Override

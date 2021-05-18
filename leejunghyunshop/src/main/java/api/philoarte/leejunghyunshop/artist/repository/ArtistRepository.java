@@ -17,7 +17,9 @@ import java.util.Optional;
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
     boolean existsByName(String name);
-    Optional<Artist> findByName(String name);
+    Optional<ArtistDto> findByName(String name);
+
+//    Optional<Artist> finByusername(String username);
 
     @EntityGraph(attributePaths = {"roles"}, type = EntityGraph.EntityGraphType.FETCH)
     @Query("select a from Artist a order by a.artistId desc")

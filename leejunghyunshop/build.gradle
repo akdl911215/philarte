@@ -57,6 +57,9 @@ dependencies {
 	testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.14'
 
+	implementation group: 'org.wso2.orbit.org.mapstruct', name: 'mapstruct', version: '1.4.1.wso2v1'
+	implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.4.2.Final'
+
 }
 
 test {

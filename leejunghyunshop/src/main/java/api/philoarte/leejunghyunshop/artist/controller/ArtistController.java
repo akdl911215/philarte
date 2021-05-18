@@ -31,10 +31,16 @@ public class ArtistController {
         @ApiResponse(code = 403, message = "Access Denied"),
         @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
     public ResponseEntity<String> signup
-            (@ApiParam("Signup Artist") @RequestBody ArtistDto artist) throws IOException{
+            (@ApiParam("Signup Artist") @RequestBody ArtistDto artistDto) throws IOException{
+        artistDto.setArtistId(artistDto.getArtistId());
+        log.info("artistDto :::::::::::: " + artistDto);
         log.info("회원가입 시작 +++++++++++++++++++++++++");
-        return ResponseEntity.ok(service.signup(modelMapper.map(artist, Artist.class)));
-
+        log.info("회원가입 시작 +++++++++++++++++++++++++");
+        log.info("회원가입 시작 +++++++++++++++++++++++++");
+        log.info("회원가입 시작 +++++++++++++++++++++++++");
+        log.info("회원가입 시작 +++++++++++++++++++++++++");
+        return ResponseEntity.ok(service.signup(modelMapper.map(artistDto, ArtistDto.class)));
+//        return null;
     }
 
 
@@ -43,19 +49,19 @@ public class ArtistController {
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Somthing went wrong"),
         @ApiResponse(code = 422, message = "Invalid Artist-Username / Password supplied")})
     public ResponseEntity<ArtistDto> signin
-            (@RequestBody ArtistDto artist) throws IOException {
+            (@ApiParam("Signin Artist") @RequestBody ArtistDto artistDto) throws IOException {
         log.info("==============================================");
         log.info("==============================================");
-        log.info("Artist Signin(로그인) start :::::::::: " + artist);
+        log.info("Artist Signin(로그인) start :::::::::: " + artistDto);
         log.info("==============================================");
         log.info("==============================================");
-        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
-//        return null;
+//        return ResponseEntity.ok(service.signin(artistDto));
+        return null;
     }
 
     @GetMapping("/findAll")
     public ResponseEntity<List<Artist>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(service.getAllData());
     }
 
     @GetMapping("/fetchOne/{artistId}")

@@ -1,15 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/ArtistSignin.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Signin = () => {
-    const login = () => {
+    const [login, setLogin] = useState({
+        username: '',
+        password: '',
+    });
+
+    const handleClick = (e) => {
+        e.preventDefault();
         axios
-            .get(`http://localhost:8080/atists/signin`)
-            .then(() => {})
+            .post(`http://localhost:8080/artists/signin`)
+            .then((res) => {
+                console.log(res);
+            })
             .catch((err) => console.log(err));
     };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setLogin({
+            ...login,
+            [name]: value,
+        });
+    };
+
+    // const login = () => {
+    //     axios
+    //         .get(`http://localhost:8080/atists/signin`)
+    //         .then(() => {})
+    //         .catch((err) => console.log(err));
+    // };
 
     const cancelButton = (e) => {
         e.preventDefault();
@@ -27,15 +50,19 @@ const Signin = () => {
                     <img src="https://i.pinimg.com/originals/32/99/86/329986c043a5829916d2eb0c3b7fed8c.png" alt="Avatar" className="avatar" />
                 </div>
                 <div className="container">
-                    <label htmlFor="username">
+                    <label htmlFor="username" name="username" value="login.username" onClick="handleChange">
                         <b>ID</b>
                     </label>
-                    <input type="text" placeholder="Enter Username" name="username" required />
-                    <label htmlFor="psw">
+                    <input type="text" placeholder="Enter Username" required />
+
+                    <label htmlFor="password" name="password" value="login.password" onClick="handleChange">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="psw" required />
-                    <button type="submit">Login</button>
+                    <input type="password" placeholder="Enter Password" equired />
+
+                    <button type="submit" onClick={handleClick}>
+                        Login
+                    </button>
                 </div>
 
                 <div className="container ArtistSigninCancel">

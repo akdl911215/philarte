@@ -1,6 +1,7 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
+import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +54,7 @@ public class UserDetailsImpl implements UserDetails { // UserDetails 은 securit
         return true;
     }
 
-    public static UserDetailsImpl build(Artist artist){
+    public static UserDetailsImpl build(ArtistDto artist){
         List<GrantedAuthority> authories = artist.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());

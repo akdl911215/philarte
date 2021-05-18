@@ -49,7 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/artists/delete/{artistId}").permitAll()
                 .antMatchers("/artists/update/{artistId}").permitAll()
                 .antMatchers("/artists/fetchOne/{artistId}").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                    .formLogin()
+                        .loginPage("/artists/signin")
+                        .defaultSuccessUrl("/");
         http.exceptionHandling().accessDeniedPage("/login");
         http.apply(new SecurityConfig(provider));
 

@@ -10,10 +10,11 @@ const Signup = () => {
         name: '',
         phoneNumber: '',
         address: '',
-        affiliation: '',
+        schooe: '',
+        department: '',
     });
 
-    const { username, password, name, phoneNumber, address, affiliation } = inputs;
+    const { username, password, name, phoneNumber, address, school, department } = inputs;
 
     const handleChange = useCallback(
         (e) => {
@@ -26,14 +27,14 @@ const Signup = () => {
         [inputs]
     );
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const handleSubmit = useCallback((e) => {
         alert(`회원가입에 성공하셨습니다.`);
 
         e.preventDefault();
         console.log(`회원가입 작동`);
-        dispatch(inputs);
+        // dispatch(inputs);
 
         axios
             .post(`http://localhost:8080/artists/sinup`, {
@@ -42,7 +43,8 @@ const Signup = () => {
                 name,
                 phoneNumber,
                 address,
-                affiliation,
+                school,
+                department,
             })
             .then((res) => {
                 console.log(res);
@@ -69,15 +71,10 @@ const Signup = () => {
                     </label>
                     <input type="text" placeholder="Enter Username" name="username" required />
 
-                    <label htmlFor="psw">
+                    <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="psw" required />
-
-                    <label htmlFor="psw-repeat">
-                        <b>비밀번호 확인</b>
-                    </label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required />
+                    <input type="password" placeholder="Enter Password" name="password" required />
 
                     <label htmlFor="name">
                         <b>이름</b>
@@ -94,10 +91,15 @@ const Signup = () => {
                     </label>
                     <input type="text" placeholder="Enter PhoneNumber" name="phoneNumber" required />
 
-                    <label htmlFor="affiliation">
+                    <label htmlFor="school">
+                        <b>학교</b>
+                    </label>
+                    <input type="text" placeholder="Enter School" name="school" required />
+
+                    <label htmlFor="department">
                         <b>소속</b>
                     </label>
-                    <input type="text" placeholder="Enter Affiliation" name="affiliation" required />
+                    <input type="text" placeholder="Enter Department" name="department" required />
 
                     <p>
                         By creating an account you agree to our{'PHILO-ARTE'}

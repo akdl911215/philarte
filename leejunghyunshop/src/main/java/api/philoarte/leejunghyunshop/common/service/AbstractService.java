@@ -5,6 +5,7 @@ import java.util.Optional;
 
 public abstract class AbstractService<T> {
     public abstract Long save(T t);
+//    public abstract String save(T t);
     public abstract Optional<T> findById(Long id);
     public abstract List<T> findAll();
     public abstract Long count();

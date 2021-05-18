@@ -1,6 +1,7 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
+import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String artistname) throws UsernameNotFoundException {
         // Optional의 객체로 감싼다.
-        Optional<Artist> artist = Optional.ofNullable(repository.findByName(artistname)
+        Optional<ArtistDto> artist = Optional.ofNullable(repository.findByName(artistname)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username : " + artistname)));
 
         return UserDetailsImpl.build(artist.get()); // .get은 Optional 객체에서 끄집어 낸다.

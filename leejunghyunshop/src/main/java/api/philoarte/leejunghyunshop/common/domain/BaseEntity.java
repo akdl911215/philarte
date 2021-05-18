@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.domain;
+package api.philoarte.leejunghyunshop.common.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(value = { AuditingEntityListener.class })
 @Getter
-abstract class BaseEntity {
+public abstract class BaseEntity {
 
     @CreatedDate
     @Column(name = "regdate", updatable = false)
