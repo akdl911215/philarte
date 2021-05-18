@@ -49,8 +49,8 @@ public class ArtistController {
         log.info("Artist Signin(로그인) start :::::::::: " + artist);
         log.info("==============================================");
         log.info("==============================================");
-//        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
-        return null;
+        return ResponseEntity.ok(service.signin(modelMapper.map(artist, Artist.class)));
+//        return null;
     }
 
     @GetMapping("/findAll")

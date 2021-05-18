@@ -26,8 +26,8 @@ public class Funding {
     @Column(name = "hashtag")
     private String hashtag;
 
-    @ManyToOne
-    @JoinColumn(name = "artist_id")
-    private Artist artist;
+//    @ManyToOne
+//    @JoinColumn(name = "artist_id")
+//    private Artist artist;
 
 }

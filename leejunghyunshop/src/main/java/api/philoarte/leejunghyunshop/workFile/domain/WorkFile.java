@@ -25,8 +25,8 @@ public class WorkFile {
     @Column(name = "rep_img")
     private String repImg;
 
-    @ManyToOne
-    @JoinColumn(name = "art_id")
-    private Art art;
+//    @ManyToOne
+//    @JoinColumn(name = "art_id")
+//    private Art art;
 
 }

@@ -9,7 +9,9 @@ import java.util.Optional;
 public interface ArtistService {
     String signup(Artist artist);
     ArtistDto signin(Artist artist);
-//    List<Artist> findAll();
+
+
+    List<Artist> findAll();
     void deleteById(Long artistId);
 //    Optional<Artist> findById(Long artistId);
     ArtistDto updateById(ArtistDto artistDto);

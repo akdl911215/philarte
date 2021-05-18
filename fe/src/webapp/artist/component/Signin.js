@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
 import '../style/ArtistSignin.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Signin = () => {
     const login = () => {
         axios
             .get(`http://localhost:8080/atists/signin`)
-            .then(() => {
-                console.log(res);
-            })
+            .then(() => {})
             .catch((err) => console.log(err));
-    };
-
-    const login = (e) => {
-        e.preventDefault();
     };
 
     const cancelButton = (e) => {

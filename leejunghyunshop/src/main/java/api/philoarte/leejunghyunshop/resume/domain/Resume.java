@@ -28,9 +28,9 @@ public class Resume {
     @Column(name = "main_pic_title")
     private String mainPicTitle;
 
-    @ManyToOne
-    @JoinColumn(name = "artist_id")
-    private Artist artist;
+//    @ManyToOne
+//    @JoinColumn(name = "artist_id")
+//    private Artist artist;
 
     public static Resume of(ResumeDto resumeDto) {
         Resume resume = ModelMapperUtils.getModelMapper().map(resumeDto, Resume.class);

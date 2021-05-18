@@ -9,6 +9,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 @Getter
 public enum Role implements GrantedAuthority {
+
     ADMIN("ROLE_ADMIN","관리자권한"),
     USER_ROLES("ROLE_USER","API권한"),
     ARTIST("ROLE_ARTIST","아티스트권한"),

@@ -103,9 +103,19 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         return repository.findById(artistId);
     }
 
+
+
     @Override
     public List<Artist> findAll() {
-        return repository.findAll();
+
+
+        //List<Artist> result = repository.findAll();
+
+        System.out.println("-------------------------------");
+        //System.out.println(result);
+        //return repository.findAll();
+
+        return repository.getAllData();
     }
 
     @Override

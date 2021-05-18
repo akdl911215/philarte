@@ -27,12 +27,12 @@ public class Review {
     // @JoinColumn(name = "funding_id")
     // private Funding funding;
 
-    @ManyToOne
-    @JoinColumn(name = "artist_id")
-    private Artist artist;
-
-    @ManyToOne
-    @JoinColumn(name = "art_id")
-    private Art art;
+//    @ManyToOne
+//    @JoinColumn(name = "artist_id")
+//    private Artist artist;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "art_id")
+//    private Art art;
 
 }

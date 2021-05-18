@@ -1,14 +1,13 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.ToString;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @EntityListeners(value = {AuditingEntityListener.class})
@@ -16,6 +15,7 @@ import java.util.List;
 @Table(name = "artists")
 @Data
 @NoArgsConstructor
+@ToString(exclude = "roles")
 public class Artist extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
