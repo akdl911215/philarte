@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails { // UserDetails 은 securit
     private final String username;
     @JsonIgnore
     private final String password;
-    private final String name;
+    private final String artistName;
     private final String email;
     private final String phoneNumber;
     private final String address;
@@ -54,7 +54,7 @@ public class UserDetailsImpl implements UserDetails { // UserDetails 은 securit
         return true;
     }
 
-    public static UserDetailsImpl build(ArtistDto artist){
+    public static UserDetailsImpl build(Artist artist){
         List<GrantedAuthority> authories = artist.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());

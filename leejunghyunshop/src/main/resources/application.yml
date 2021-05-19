@@ -3,19 +3,19 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.0.199/arte?zeroDateTimeBehavior=convertToNull
-    username: arte
-    password: Arte1234
-
+    url: jdbc:mysql://localhost:3306/root
+    username: root
+    password: 456123
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    open-in-view: false
     generate-ddl: true
     show-sql: true
     hibernate:
       ddl-auto: update
-
+    properties:
+      hibernate:
+        format_sql: true
 security:
   jwt:
     secret: secret-value

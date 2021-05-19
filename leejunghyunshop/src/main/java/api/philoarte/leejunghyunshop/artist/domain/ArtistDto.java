@@ -1,12 +1,20 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@Component
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ArtistDto {
     @ApiModelProperty(position = 0)
     private long artistId;
@@ -15,7 +23,7 @@ public class ArtistDto {
     @ApiModelProperty(position = 2)
     private String password;
     @ApiModelProperty(position = 3)
-    private String name;
+    private String artistName;
     @ApiModelProperty(position = 4)
     private String email;
     @ApiModelProperty(position = 5)

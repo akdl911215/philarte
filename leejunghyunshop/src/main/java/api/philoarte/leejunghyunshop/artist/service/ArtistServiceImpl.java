@@ -1,15 +1,15 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
+
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.Role;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import api.philoarte.leejunghyunshop.common.service.AbstractService;
-import api.philoarte.leejunghyunshop.common.util.ModelMapperUtils;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
-import api.philoarte.leejunghyunshop.artist.domain.Role;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional
-@Log
+@Log4j2
 @RequiredArgsConstructor
 @Service
 public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService {
@@ -35,38 +35,23 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public String signup(ArtistDto artistDto) {
-        // 서비스에 디폴트메소드로 정의
-        if(!repository.existsByName(artistDto.getUsername())){
-//            빌더를 가지고온걸로 추측됨 하지만 동작됨.
-            Artist artistUpdate = new Artist();
-            artistUpdate.saveAll(artistDto);
 
-//            ModelMapperUtils.getModelMapper().map(artistDto, Artist.class); // DTO의 값을 artist로 변환
-//            Artist artistUpdate = Artist.builder().artistId().username().
-//            Artist artistUpdate = new Artist();
-
-
-            log.info("service artistDto ::::::::::::::::: " + artistDto);
-            log.info("artistUpdate ::::::::: " + artistUpdate);
-            log.info("::::::::::: 변환1 ::::::::::::: " );
-            repository.save(artistUpdate);
-            log.info("::::::::::: 변환2 ::::::::::::: " );
-            ArtistDto artistDtoUpdate = modelMapper.map(artistUpdate, ArtistDto.class);
-            log.info("::::::::::: 변환3 ::::::::::::: " );
-            artistDtoUpdate.setPassword(passwordEncoder.encode(artistDtoUpdate.getPassword()));
-            log.info("::::::::::: 변환4 ::::::::::::: " );
+        if(!repository.existsByUsername(artistDto.getUsername())){
+            Artist entity = dtoEntity(artistDto);
+            repository.saveAndFlush(entity);
+            ArtistDto entityDto = entityDto(entity);
+            entityDto.setPassword(passwordEncoder.encode(entityDto.getPassword()));
             List<Role> list = new ArrayList<>();
-            log.info("::::::::::: 변환5 ::::::::::::: " );
             list.add(Role.USER_ROLES);
-            log.info("::::::::::: 변환6 ::::::::::::: " );
-            artistDto.setRoles(list);
-            log.info("::::::::::: 변환7 ::::::::::::: " );
-            return provider.createToken(artistDto.getUsername(), artistDtoUpdate.getRoles());
-
+            entity.changeRoles(list);
+            return provider.createToken(entityDto.getUsername(), entity.getRoles());
         } else {
             throw new SecurityRuntimeException("Artist Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
+
     }
+
+
 
     @Override
     public ArtistDto signin(ArtistDto artistDto) {
@@ -178,6 +163,27 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     }
 
 
+
+//    @Override
+//    public Long register2(Artist artist) {
+//        return null;
+//    }
+
+    @Override
+    public Long register(ArtistDto artistDto) {
+
+        log.info("DTO ===============");
+        log.info(artistDto);
+
+        Artist entity = dtoEntity(artistDto);
+        log.info("entity ::::::::::::::");
+        log.info(entity);
+
+        repository.save(entity);
+
+        return null;
+
+    }
 
 }
 

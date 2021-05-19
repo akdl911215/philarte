@@ -59,6 +59,7 @@ dependencies {
 
 	implementation group: 'org.wso2.orbit.org.mapstruct', name: 'mapstruct', version: '1.4.1.wso2v1'
 	implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.4.2.Final'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
 
 }
 

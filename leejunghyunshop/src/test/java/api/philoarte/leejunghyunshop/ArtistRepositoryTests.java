@@ -25,43 +25,43 @@ public class ArtistRepositoryTests {
         log.info("-----------------------");
     }
 
-    @Transactional
-    @Commit
-    @Test
-    public void testUpdatePw() {
+//    @Transactional
+//    @Commit
+//    @Test
+//    public void testUpdatePw() {
+//
+//        repository.updatePassword(8L, "87654321");
+//
+//
+//    }
+//
+//    @Transactional
+//    @Commit
+//    @Test
+//    public void testUpdate2() {
+//
+//        Artist artist =  repository.findById(8L).get();
+//
+//        artist.setPassword("11111");
+//        artist.setEmail("aaa@naver.com");
+//
+//        repository.save(artist);
+//
+//    }
+//
+//
+//    @Test
+//    public void testFindAllOld() {
+//
+//        Pageable pageable = PageRequest.of(0,10);
+//
+//        repository.getAllDataPaging(pageable).get().forEach(artist -> {
+//            log.info(artist);
+//            log.info(artist.getRoles());
+//            log.info("--------------------");
+//        });
 
-        repository.updatePassword(8L, "87654321");
-
-
-    }
-
-    @Transactional
-    @Commit
-    @Test
-    public void testUpdate2() {
-
-        Artist artist =  repository.findById(8L).get();
-
-        artist.setPassword("11111");
-        artist.setEmail("aaa@naver.com");
-
-        repository.save(artist);
-
-    }
-
-
-    @Test
-    public void testFindAllOld() {
-
-        Pageable pageable = PageRequest.of(0,10);
-
-        repository.getAllDataPaging(pageable).get().forEach(artist -> {
-            log.info(artist);
-            log.info(artist.getRoles());
-            log.info("--------------------");
-        });
-
-    }
+//    }
 
 
     @Test
