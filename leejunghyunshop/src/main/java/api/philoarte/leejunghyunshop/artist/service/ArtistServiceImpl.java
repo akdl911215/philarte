@@ -1,6 +1,5 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
-
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.Role;
@@ -10,7 +9,6 @@ import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +29,6 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     private final PasswordEncoder passwordEncoder;
     private final SecurityProvider provider;
     private final AuthenticationManager manager;
-    private final ModelMapper modelMapper;
 
     @Override
     public String signup(ArtistDto artistDto) {
@@ -48,34 +45,42 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         } else {
             throw new SecurityRuntimeException("Artist Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
-
     }
-
 
 
     @Override
     public ArtistDto signin(ArtistDto artistDto) {
-
+        log.info("이건?2222222222222");
         try {
             Artist entity = dtoEntity(artistDto);
             log.info("::::::::::: 변환 ::::::::::::: " );
             log.info("entity.getUsername() :::::: " + entity.getUsername());
             log.info("entity.getPassword() :::::: " + entity.getPassword());
+
+            repository.signin(entity.getUsername(), entity.getPassword());
+            log.info("entity.getUsername() ::::::::::::: " + entity.getUsername());
+            log.info("entity.getPassword() ::::::::::::: " + entity.getPassword());
+
+
             ArtistDto entityDto = entityDto(entity);
             log.info("entityDto :::::::::::: " + entityDto);
-            entityDto.setToken(
-                    (passwordEncoder.matches(entityDto.getPassword(), repository.findById(entityDto.getArtistId()).get().getPassword())
+            // 인코더 수정하기
+            String Token = (
+                    (passwordEncoder.matches(entity.getPassword(), repository.findByUsername(entity.getUsername()).get().getPassword())
             ) ?
-            provider.createToken(entityDto.getUsername(), repository.findById(entityDto.getArtistId()).get().getRoles())
+            provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles())
             : "WRONG_PASSWORD");
 
+            entityDto.setToken(Token);
             log.info("=====================================");
             log.info("=====================================");
-            log.info("entityDto ::::: " + entityDto);
+            log.info("entityDto 인코더 변환?::::: " + entityDto);
+            log.info("Token 인코더 변환?::::: " + Token);
             log.info("=====================================");
             log.info("=====================================");
-
+            log.info("다왔나?");
             return entityDto;
+//            return null;
         } catch (Exception e){
             throw new SecurityRuntimeException("Invalid Artist-Username / Password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }

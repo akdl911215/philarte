@@ -13,18 +13,19 @@ const Signin = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log('username ::::::::: ' + username);
-        console.log('password ::::::::::: ' + password);
+        console.log('login username ::::::::: ' + login.username);
+        console.log('login password ::::::::::: ' + login.password);
 
         axios
             .post(`http://localhost:8080/artists/signin`, {
-                username: setLogin.username,
-                password: setLogin.password,
+                username: login.username,
+                password: login.password,
             })
             .then((res) => {
                 alert(`로그인성공`);
                 console.log(res);
                 setLogin(res.data);
+                window.location = '/';
             })
             .catch((err) => console.log(err));
     };
@@ -36,13 +37,6 @@ const Signin = () => {
             [name]: value,
         });
     };
-
-    // const login = () => {
-    //     axios
-    //         .get(`http://localhost:8080/atists/signin`)
-    //         .then(() => {})
-    //         .catch((err) => console.log(err));
-    // };
 
     const cancelButton = (e) => {
         e.preventDefault();
@@ -63,12 +57,12 @@ const Signin = () => {
                     <label htmlFor="username">
                         <b>ID</b>
                     </label>
-                    <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleChange} />
+                    <input type="text" placeholder="Enter Username" name="username" value={login.username || ''} onChange={handleChange} />
 
                     <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleChange} />
+                    <input type="password" placeholder="Enter Password" name="password" value={login.password} onChange={handleChange} />
 
                     <button type="submit" onClick={handleClick}>
                         Login

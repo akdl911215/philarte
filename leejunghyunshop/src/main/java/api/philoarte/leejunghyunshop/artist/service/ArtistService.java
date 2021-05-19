@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface ArtistService {
 
-//    String signup(ArtistDto artistDto);
     ArtistDto signin(ArtistDto artistDto);
 //    Optional<Artist> finByusername(String username);
     List<Artist> getAllData();
