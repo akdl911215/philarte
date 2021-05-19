@@ -24,6 +24,7 @@ const ArtistList = () => {
     };
 
     const deleteButton = () => {
+        // 리스트의 삭제가 1번만지워짐.
         alert(`삭제됩니다`);
         axios
             .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('select')}`)

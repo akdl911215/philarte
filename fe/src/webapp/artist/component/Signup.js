@@ -7,21 +7,22 @@ const Signup = () => {
     const [inputs, setInputs] = useState({
         username: '',
         password: '',
-        name: '',
+        artistName: '',
         phoneNumber: '',
+        email: '',
         address: '',
         schooe: '',
         department: '',
     });
 
-    const { username, password, name, phoneNumber, address, school, department } = inputs;
+    const { username, password, artistName, phoneNumber, email, address, school, department } = inputs;
 
     const handleChange = useCallback(
         (e) => {
             const { name, value } = e.target;
             setInputs({
                 ...inputs,
-                [name]: e.target.value,
+                [name]: value,
             });
         },
         [inputs]
@@ -29,29 +30,38 @@ const Signup = () => {
 
     // const dispatch = useDispatch();
 
-    const handleSubmit = useCallback((e) => {
-        alert(`회원가입에 성공하셨습니다.`);
+    const handleSubmit = useCallback(
+        (e) => {
+            alert(`회원가입에 성공하셨습니다.`);
 
-        e.preventDefault();
-        console.log(`회원가입 작동`);
-        // dispatch(inputs);
+            e.preventDefault();
+            console.log(`회원가입 작동`);
+            // dispatch(inputs);
+            alert('ID : ' + username);
+            console.log('username ::::::::' + username);
+            console.log('email:::::::::::::::' + email);
+            console.log('department :::::::::::::: ' + department);
 
-        axios
-            .post(`http://localhost:8080/artists/sinup`, {
-                username,
-                password,
-                name,
-                phoneNumber,
-                address,
-                school,
-                department,
-            })
-            .then((res) => {
-                console.log(res);
-                window.location = '/';
-            })
-            .catch((err) => console.log(err));
-    }, []);
+            axios
+                .post(`http://localhost:8080/artists/signup`, {
+                    username: username,
+                    password: password,
+                    artistName: artistName,
+                    phoneNumber: phoneNumber,
+                    email: email,
+                    address: address,
+                    school: school,
+                    department: department,
+                })
+                .then((res) => {
+                    console.log(res);
+                    setInputs(res.data);
+                    window.location = '/';
+                })
+                .catch((err) => console.log(err));
+        },
+        [username, password, artistName, phoneNumber, email, address, school, department]
+    );
 
     const cancelButton = (e) => {
         e.preventDefault();
@@ -69,37 +79,37 @@ const Signup = () => {
                     <label htmlFor="username">
                         <b>아이디</b>
                     </label>
-                    <input type="text" placeholder="Enter Username" name="username" required />
+                    <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleChange} />
 
                     <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="password" required />
+                    <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleChange} />
 
-                    <label htmlFor="name">
+                    <label htmlFor="artistName">
                         <b>이름</b>
                     </label>
-                    <input type="text" placeholder="Enter Name" name="name" required />
+                    <input type="text" placeholder="Enter artistName" name="artistName" value={artistName} onChange={handleChange} />
 
                     <label htmlFor="email">
                         <b>E-Mail</b>
                     </label>
-                    <input type="text" placeholder="Enter Email" name="email" required />
+                    <input type="text" placeholder="Enter Email" name="email" value={email} onChange={handleChange} />
 
                     <label htmlFor="phoneNumber">
                         <b>핸드폰 번호</b>
                     </label>
-                    <input type="text" placeholder="Enter PhoneNumber" name="phoneNumber" required />
+                    <input type="text" placeholder="Enter PhoneNumber" name="phoneNumber" value={phoneNumber} onChange={handleChange} />
 
                     <label htmlFor="school">
                         <b>학교</b>
                     </label>
-                    <input type="text" placeholder="Enter School" name="school" required />
+                    <input type="text" placeholder="Enter School" name="school" value={school} onChange={handleChange} />
 
                     <label htmlFor="department">
                         <b>소속</b>
                     </label>
-                    <input type="text" placeholder="Enter Department" name="department" required />
+                    <input type="text" placeholder="Enter Department" name="department" value={department} onChange={handleChange} />
 
                     <p>
                         By creating an account you agree to our{'PHILO-ARTE'}

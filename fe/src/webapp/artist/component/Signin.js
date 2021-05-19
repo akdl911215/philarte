@@ -9,12 +9,22 @@ const Signin = () => {
         password: '',
     });
 
+    const { username, password } = login;
+
     const handleClick = (e) => {
         e.preventDefault();
+        console.log('username ::::::::: ' + username);
+        console.log('password ::::::::::: ' + password);
+
         axios
-            .post(`http://localhost:8080/artists/signin`)
+            .post(`http://localhost:8080/artists/signin`, {
+                username: setLogin.username,
+                password: setLogin.password,
+            })
             .then((res) => {
+                alert(`로그인성공`);
                 console.log(res);
+                setLogin(res.data);
             })
             .catch((err) => console.log(err));
     };
@@ -50,15 +60,15 @@ const Signin = () => {
                     <img src="https://i.pinimg.com/originals/32/99/86/329986c043a5829916d2eb0c3b7fed8c.png" alt="Avatar" className="avatar" />
                 </div>
                 <div className="container">
-                    <label htmlFor="username" name="username" value="login.username" onClick="handleChange">
+                    <label htmlFor="username">
                         <b>ID</b>
                     </label>
-                    <input type="text" placeholder="Enter Username" required />
+                    <input type="text" placeholder="Enter Username" name="username" value={username} onChange={handleChange} />
 
-                    <label htmlFor="password" name="password" value="login.password" onClick="handleChange">
+                    <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" equired />
+                    <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleChange} />
 
                     <button type="submit" onClick={handleClick}>
                         Login

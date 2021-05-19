@@ -32,15 +32,7 @@ public class ArtistController {
         @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
     public ResponseEntity<String> signup
             (@ApiParam("Signup Artist") @RequestBody ArtistDto artistDto) throws IOException{
-        artistDto.setArtistId(artistDto.getArtistId());
-        log.info("artistDto :::::::::::: " + artistDto);
-        log.info("회원가입 시작 +++++++++++++++++++++++++");
-        log.info("회원가입 시작 +++++++++++++++++++++++++");
-        log.info("회원가입 시작 +++++++++++++++++++++++++");
-        log.info("회원가입 시작 +++++++++++++++++++++++++");
-        log.info("회원가입 시작 +++++++++++++++++++++++++");
-        return ResponseEntity.ok(service.signup(modelMapper.map(artistDto, ArtistDto.class)));
-//        return null;
+        return ResponseEntity.ok(service.signup(artistDto));
     }
 
 

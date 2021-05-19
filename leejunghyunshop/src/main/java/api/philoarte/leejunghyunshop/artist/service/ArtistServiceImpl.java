@@ -57,22 +57,25 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     public ArtistDto signin(ArtistDto artistDto) {
 
         try {
-            Artist artist = modelMapper.map(artistDto, Artist.class);
+            Artist entity = dtoEntity(artistDto);
             log.info("::::::::::: 변환 ::::::::::::: " );
-            artistDto.setToken(
-                    (passwordEncoder.matches(artist.getPassword(), repository.findById(artist.getArtistId()).get().getPassword())
+            log.info("entity.getUsername() :::::: " + entity.getUsername());
+            log.info("entity.getPassword() :::::: " + entity.getPassword());
+            ArtistDto entityDto = entityDto(entity);
+            log.info("entityDto :::::::::::: " + entityDto);
+            entityDto.setToken(
+                    (passwordEncoder.matches(entityDto.getPassword(), repository.findById(entityDto.getArtistId()).get().getPassword())
             ) ?
-            provider.createToken(artist.getUsername(), repository.findById(artist.getArtistId()).get().getRoles())
+            provider.createToken(entityDto.getUsername(), repository.findById(entityDto.getArtistId()).get().getRoles())
             : "WRONG_PASSWORD");
 
-            ArtistDto artistDtoUpdate = modelMapper.map(artist, ArtistDto.class);
             log.info("=====================================");
             log.info("=====================================");
-            log.info("artistDtoUpdate ::::: " + artistDtoUpdate);
+            log.info("entityDto ::::: " + entityDto);
             log.info("=====================================");
             log.info("=====================================");
 
-            return artistDtoUpdate;
+            return entityDto;
         } catch (Exception e){
             throw new SecurityRuntimeException("Invalid Artist-Username / Password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -128,46 +131,16 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public List<Artist> findAll() {
-
-
-        //List<Artist> result = repository.findAll();
-
-        System.out.println("-------------------------------");
-        //System.out.println(result);
-        //return repository.findAll();
-
         return repository.getAllData();
     }
 
     @Override
     public ArtistDto updateById(ArtistDto artistDto) {
-
-        System.out.println("===================================");
-        System.out.println("===================================");
-        System.out.println(artistDto);
-        System.out.println("===================================");
-        System.out.println("===================================");
-
-        Artist artist = modelMapper.map(artistDto, Artist.class);
-        repository.save(artist);
-
-        log.info("::::::::::: 변환 ::::::::::::: " );
-        ArtistDto artistDtoUpdate = modelMapper.map(artist, ArtistDto.class);
-        String token = provider.createToken(artistDtoUpdate.getUsername(), repository.findById(artistDto.getArtistId()).get().getRoles());
-        log.info("::::::::::: ISSUED TOKEN ::::::::::::: " + token);
-
-        artistDto.setToken(token);
-
-        return artistDto;
-
+        Artist entity = dtoEntity(artistDto);
+        repository.save(entity);
+        ArtistDto dtoEntity = entityDto(entity);
+        return dtoEntity;
     }
-
-
-
-//    @Override
-//    public Long register2(Artist artist) {
-//        return null;
-//    }
 
     @Override
     public Long register(ArtistDto artistDto) {
