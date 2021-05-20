@@ -3,7 +3,7 @@ import '../style/ArtistSignin.css';
 import { Link, Router, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-const Signin = ({ history, props }) => {
+const Signin = ({ history }) => {
     const [login, setLogin] = useState({
         username: '',
         password: '',
@@ -24,18 +24,12 @@ const Signin = ({ history, props }) => {
             .then((res) => {
                 alert(`로그인성공`);
                 console.log(res);
-                setLogin(res.data);
+                console.log(history);
                 console.log('username ::::::::::: ' + username);
                 console.log('password ::::::::::: ' + password);
-
+                setLogin(res.data);
                 localStorage.setItem('loginInfo', JSON.stringify(res.data));
-                //localStorage.getItem('selectUsername')
-                //localStorage.getItem('selectPassword')
-
-                console.log(history);
                 history.push('/');
-
-                // window.location = '/';
             })
             .catch((err) => console.log(err));
     };
@@ -101,7 +95,6 @@ const Signin = ({ history, props }) => {
                     </label>
                 </div>
             </form>
-            {/* <Redirect to="http://localhost:3000/artist/artist-signup" /> */}
         </>
     );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import ScrollIntoView from './webapp/common/helpers/ScrollIntoView';
 import ScrollToTop from './webapp/common/helpers/ScrollToTop';
 
@@ -10,7 +10,7 @@ import { ReviewList, ReviewModify, ReviewRead, ReviewRegister } from 'webapp/rev
 import { WorkList, WorkModify, WorkRead, WorkRegister } from 'webapp/work/index';
 import { HomeVideoBg } from 'webapp/common/index';
 
-import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate } from 'webapp/artist/index';
+import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate, Logout, MyPage } from 'webapp/artist/index';
 // import ArtistRead from 'webapp/artist/component/ArtistRead';
 // import ArtistUpdate from 'webapp/artist/component/ArtistUpdate';
 // import ArtistList from 'webapp/artist/component/ArtistList';
@@ -60,6 +60,13 @@ const App = () => {
                         <Route exact path="/artist/artist-list" component={ArtistList} />
                         <Route exact path="/artist/artist-read/:id" component={ArtistRead} />
                         <Route exact path="/artist/artist-update/:id" component={ArtistUpdate} />
+
+                        <Switch>
+                            <privateRoute exact path="/" component={HomeVideoBg} />
+                            <Route exact path="/artist/artist-logout" component={Logout} />
+                            <Route exact path="/artist/artist-mypage" component={MyPage} />
+                            <Redirect path="*" to="/" />
+                        </Switch>
                     </Switch>
                 </ScrollToTop>
             </ScrollIntoView>

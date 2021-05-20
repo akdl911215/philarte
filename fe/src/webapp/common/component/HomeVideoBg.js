@@ -48,7 +48,7 @@ const HomeVideoBg = () => {
         <Loader>
             <HeaderOneMain />
 
-            <HeroHomeVideo tagline="Welcome Anno" title={loginInfo.username} />
+            <HeroHomeVideo tagline="Welcome Anno" title="${loginInfo.username} " />
 
             <WhatWeOfferEleven
                 data={dataServices}

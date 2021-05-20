@@ -3,7 +3,7 @@ import '../style/ArtistSignup.css';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-const Signup = () => {
+const Signup = ({ history }) => {
     const [inputs, setInputs] = useState({
         username: '',
         password: '',
@@ -11,7 +11,7 @@ const Signup = () => {
         phoneNumber: '',
         email: '',
         address: '',
-        schooe: '',
+        school: '',
         department: '',
     });
 
@@ -56,7 +56,8 @@ const Signup = () => {
                 .then((res) => {
                     console.log(res);
                     setInputs(res.data);
-                    window.location = '/';
+                    history.push('/');
+                    // window.location = '/';
                 })
                 .catch((err) => console.log(err));
         },
