@@ -25,7 +25,9 @@ const Signin = () => {
                 alert(`로그인성공`);
                 console.log(res);
                 setLogin(res.data);
-                window.location = '/';
+                console.log('username ::::::::::: ' + username);
+                console.log('password ::::::::::: ' + password);
+                // window.location = '/';
             })
             .catch((err) => console.log(err));
     };
@@ -62,7 +64,7 @@ const Signin = () => {
                     <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="password" value={login.password} onChange={handleChange} />
+                    <input type="password" placeholder="Enter Password" name="password" value={login.password || ''} onChange={handleChange} />
 
                     <button type="submit" onClick={handleClick}>
                         Login

@@ -17,14 +17,8 @@ import java.util.Optional;
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
-//    @Query("SELECT COUNT(o.id) > 0 " +
-//            "FROM Order o " +
-//            "WHERE o.username =:username")
     boolean existsByUsername(@Param("username")String username);
-
     Optional<Artist> findByUsername(String username);
-
-//    Optional<Artist> finByusername(String username);
 
     @EntityGraph(attributePaths = {"roles"}, type = EntityGraph.EntityGraphType.FETCH)
     @Query("select a from Artist a order by a.artistId desc")
@@ -33,7 +27,6 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 //    @EntityGraph(attributePaths = {"roles"}, type = EntityGraph.EntityGraphType.FETCH)
 //    @Query("select a from Artist a group by a  order by a.artistId desc")
 //    Page<Artist> getAllDataPaging(Pageable pageable);
-
 
     @Query(value = "select * from artists where username=:username and password=:password", nativeQuery = true)
     Artist signin(@Param("username") String username, @Param("password")String password);
@@ -48,11 +41,8 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 //    @Query("Update FROM Artist a set a.password = :pw where a.artistId = :artistId")
 //    int updatePassword(@Param("artistId") Long artistId, @Param("pw") String pw);
 
-
-
 //    @Query("select u from UserVO u where u.username= :username and u.password= :password")
 //    ArtistDto login(@Param("username") String username, @Param("password") String password);
-
 
 
 //    List<Artist> findAll();

@@ -7,7 +7,7 @@ const Signup = () => {
     const [inputs, setInputs] = useState({
         username: '',
         password: '',
-        artistName: '',
+        name: '',
         phoneNumber: '',
         email: '',
         address: '',
@@ -15,7 +15,7 @@ const Signup = () => {
         department: '',
     });
 
-    const { username, password, artistName, phoneNumber, email, address, school, department } = inputs;
+    const { username, password, name, phoneNumber, email, address, school, department } = inputs;
 
     const handleChange = useCallback(
         (e) => {
@@ -46,7 +46,7 @@ const Signup = () => {
                 .post(`http://localhost:8080/artists/signup`, {
                     username: username,
                     password: password,
-                    artistName: artistName,
+                    name: name,
                     phoneNumber: phoneNumber,
                     email: email,
                     address: address,
@@ -60,7 +60,7 @@ const Signup = () => {
                 })
                 .catch((err) => console.log(err));
         },
-        [username, password, artistName, phoneNumber, email, address, school, department]
+        [username, password, name, phoneNumber, email, address, school, department]
     );
 
     const cancelButton = (e) => {
@@ -86,10 +86,10 @@ const Signup = () => {
                     </label>
                     <input type="password" placeholder="Enter Password" name="password" value={password} onChange={handleChange} />
 
-                    <label htmlFor="artistName">
+                    <label htmlFor="name">
                         <b>이름</b>
                     </label>
-                    <input type="text" placeholder="Enter artistName" name="artistName" value={artistName} onChange={handleChange} />
+                    <input type="text" placeholder="Enter Name" name="name" value={name} onChange={handleChange} />
 
                     <label htmlFor="email">
                         <b>E-Mail</b>

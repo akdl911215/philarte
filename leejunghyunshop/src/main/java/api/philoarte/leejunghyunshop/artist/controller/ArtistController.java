@@ -49,7 +49,6 @@ public class ArtistController {
         log.info("==============================================");
         service.signin(artistDto);
         return ResponseEntity.ok(service.signin(artistDto));
-//        return null;
     }
 
     @GetMapping("/findAll")

@@ -26,18 +26,16 @@ public class Artist extends BaseEntity {
     @JoinColumn(name = "artist_id")
     private long artistId;
 
-    //, unique = true, nullable = false
-    @Column(name = "username")
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-//    @Size(min = 8, message = "Minimum Password Length: 8 characters")
-    //, columnDefinition="Number(10) default '12345678'"
-    @Column(name = "password")
+    @Size(min = 8, message = "Minimum Password Length: 8 characters")
+    @Column(name = "password", columnDefinition="Number(10) default '12345678'")
     private String password;
 
 //    @Embedded
-    @Column(name = "artist_name")
-    private String artistName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "email")
     private String email;
@@ -60,40 +58,4 @@ public class Artist extends BaseEntity {
      public void changeRoles(List<Role> roles){
          this.roles = roles;
      }
-//
-//     public void changePassword(String password){
-//         this.password = password;
-//     }
-
-//     @Builder
-//    public Artist(long artistId, String username, String password, String name, String email,
-//                  String phoneNumber, String address, String school, String department) {
-//         super();
-//         this.artistId = artistId;
-//         this.username = username;
-//         this.password = password;
-//         this.name = name;
-//         this.email = email;
-//         this.phoneNumber = phoneNumber;
-//         this.address = address;
-//         this.school = school;
-//         this.department = department;
-//
-//     }
-//     public void saveAll(ArtistDto artistDto){
-//         this.artistId = artistDto.getArtistId();
-//         this.username = artistDto.getUsername();
-//         this.password = artistDto.getPassword();
-//         this.name = artistDto.getName();
-//         this.email = artistDto.getEmail();
-//         this.phoneNumber = artistDto.getPhoneNumber();
-//         this.address = artistDto.getAddress();
-//         this.school = artistDto.getSchool();
-//         this.department = artistDto.getDepartment();
-//     }
-//     public static Artist of(ArtistDto artistDto){
-//         Artist artist = ModelMapperUtils.getModelMapper().map(artistDto,Artist.class);
-//         return artist;
-//     }
-
 }

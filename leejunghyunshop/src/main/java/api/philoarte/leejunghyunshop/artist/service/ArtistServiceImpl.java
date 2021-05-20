@@ -56,6 +56,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             ArtistDto entityDto = entityDto(entity);
             String Token = provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles());
             entityDto.setToken(Token);
+            log.info("Token; ::::::::: " + Token);
 //            entityDto.setToken(
 //                    (passwordEncoder.matches(entityDto.getPassword(), repository.findByUsername(entity.getUsername()).get().getPassword())
 //            ) ?
@@ -107,8 +108,6 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     public Optional<Artist> findById(Long artistId) {
         return repository.findById(artistId);
     }
-
-
 
     @Override
     public List<Artist> findAll() {

@@ -28,9 +28,9 @@ const ArtistList = () => {
         console.log('artistsList :::::::: ' + artistsList);
         JSON.stringify('artistsList :::' + artistsList);
         console.log('deleteButton :::::::: ' + deleteButton);
-        console.log(`${localStorage.getItem('select')}`);
+        console.log(`${localStorage.getItem('selectDel')}`);
         axios
-            .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('select')}`)
+            .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('selectDel')}`)
             .then((res) => {
                 console.log(res);
                 alert('삭제되나?');
@@ -98,6 +98,7 @@ const ArtistList = () => {
                                         <button
                                             className="buttonSelectList2"
                                             onClick={() => {
+                                                localStorage.setItem('selectDel', `${artist.artistId}`);
                                                 deleteButton();
                                             }}
                                         >
