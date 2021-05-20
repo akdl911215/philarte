@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../style/ArtistSignin.css';
-import { Link } from 'react-router-dom';
+import { Link, Router, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-const Signin = () => {
+const Signin = ({ history, props }) => {
     const [login, setLogin] = useState({
         username: '',
         password: '',
@@ -27,6 +27,14 @@ const Signin = () => {
                 setLogin(res.data);
                 console.log('username ::::::::::: ' + username);
                 console.log('password ::::::::::: ' + password);
+
+                localStorage.setItem('loginInfo', JSON.stringify(res.data));
+                //localStorage.getItem('selectUsername')
+                //localStorage.getItem('selectPassword')
+
+                console.log(history);
+                history.push('/');
+
                 // window.location = '/';
             })
             .catch((err) => console.log(err));
@@ -93,6 +101,7 @@ const Signin = () => {
                     </label>
                 </div>
             </form>
+            {/* <Redirect to="http://localhost:3000/artist/artist-signup" /> */}
         </>
     );
 };

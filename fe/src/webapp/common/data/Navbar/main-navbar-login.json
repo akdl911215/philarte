@@ -93,13 +93,13 @@
   },
   {
     "id": 7,
-    "title": "로그인",
-    "path": "/artist/artist-signin"
+    "title": "로그아웃",
+    "path": "/artist/artist-logout"
   },
   {
     "id": 8,
-    "title": "회원가입",
-    "path": "/artist/artist-signup"
+    "title": "마이페이지",
+    "path": "/artist/artist-mypage"
   },
   {
     "id": 9,
