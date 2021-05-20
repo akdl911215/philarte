@@ -24,8 +24,11 @@ const ArtistList = () => {
     };
 
     const deleteButton = () => {
-        // 리스트의 삭제가 1번만지워짐.
         alert(`삭제됩니다`);
+        console.log('artistsList :::::::: ' + artistsList);
+        JSON.stringify('artistsList :::' + artistsList);
+        console.log('deleteButton :::::::: ' + deleteButton);
+        console.log(`${localStorage.getItem('select')}`);
         axios
             .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('select')}`)
             .then((res) => {
@@ -53,11 +56,6 @@ const ArtistList = () => {
         // dispatch(getArtistList());
     }, []);
 
-    // const artists = useSelector((state) => {
-    //     console.log('state::::::::::::::: ' + JSON.stringify(state));
-    //     alert(`state/artosts ::::: ${state.artists}`);
-    //     return state.artists;
-    // });
     return (
         <>
             <table>
@@ -97,7 +95,12 @@ const ArtistList = () => {
                                                 자세히보기
                                             </button>
                                         </Link>
-                                        <button className="buttonSelectList2" onClick={deleteButton}>
+                                        <button
+                                            className="buttonSelectList2"
+                                            onClick={() => {
+                                                deleteButton();
+                                            }}
+                                        >
                                             삭제하기
                                         </button>
                                         <button className="buttonSelectList3" onClick={homeButton}>

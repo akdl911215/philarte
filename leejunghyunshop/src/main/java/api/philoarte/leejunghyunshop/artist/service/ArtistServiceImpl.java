@@ -50,41 +50,21 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public ArtistDto signin(ArtistDto artistDto) {
-        log.info("이건?2222222222222");
         try {
             Artist entity = dtoEntity(artistDto);
-            log.info("::::::::::: 변환 ::::::::::::: " );
-            log.info("entity.getUsername() :::::: " + entity.getUsername());
-            log.info("entity.getPassword() :::::: " + entity.getPassword());
-
             repository.signin(entity.getUsername(), entity.getPassword());
-            log.info("entity.getUsername() ::::::::::::: " + entity.getUsername());
-            log.info("entity.getPassword() ::::::::::::: " + entity.getPassword());
-
-
             ArtistDto entityDto = entityDto(entity);
-            log.info("entityDto :::::::::::: " + entityDto);
-            // 인코더 수정하기
-            String Token = (
-                    (passwordEncoder.matches(entity.getPassword(), repository.findByUsername(entity.getUsername()).get().getPassword())
-            ) ?
-            provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles())
-            : "WRONG_PASSWORD");
-
+            String Token = provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles());
             entityDto.setToken(Token);
-            log.info("=====================================");
-            log.info("=====================================");
-            log.info("entityDto 인코더 변환?::::: " + entityDto);
-            log.info("Token 인코더 변환?::::: " + Token);
-            log.info("=====================================");
-            log.info("=====================================");
-            log.info("다왔나?");
+//            entityDto.setToken(
+//                    (passwordEncoder.matches(entityDto.getPassword(), repository.findByUsername(entity.getUsername()).get().getPassword())
+//            ) ?
+//            provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles())
+//            : "WRONG_PASSWORD");
             return entityDto;
-//            return null;
         } catch (Exception e){
             throw new SecurityRuntimeException("Invalid Artist-Username / Password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
-
     }
 
     @Override
@@ -96,7 +76,6 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     public void deleteById(Long artistId) {
         repository.deleteById(artistId);
     }
-
 
     @Override
     public Long count() {
@@ -114,16 +93,13 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         return repository.findById(artist.getArtistId()).orElse(null) == null ? 1L : 0L;
     }
 
-
     @Override
     public Boolean existsById(long id) {
         return repository.existsById(id);
     }
 
-
     @Override
     public Long save(Artist artist) {
-
         return (repository.save(artist) != null) ? 1L : 0L ;
     }
 
@@ -149,19 +125,13 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public Long register(ArtistDto artistDto) {
-
         log.info("DTO ===============");
         log.info(artistDto);
-
         Artist entity = dtoEntity(artistDto);
         log.info("entity ::::::::::::::");
         log.info(entity);
-
         repository.save(entity);
-
         return null;
-
     }
-
 }
 

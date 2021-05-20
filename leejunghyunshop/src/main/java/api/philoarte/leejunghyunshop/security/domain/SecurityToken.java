@@ -27,7 +27,8 @@ public class SecurityToken {
             Map<String, Object> payloads = new HashMap<>();
             payloads.put("data", "my First JWT"); // 현재는 더미값
 
-            long exirationTime = 1000 * 60L * 60L * 2L; // 토큰 유효시간 2시간
+            //long exirationTime = 1000 * 60L * 60L * 2L; // 토큰 유효시간 2시간
+            long exirationTime = 1000 * 60L * 60L * 2000L; // 토큰 유효시간 2000시간
             Date ext = new Date();
             ext.setTime(ext.getTime() + exirationTime);
             return Jwts

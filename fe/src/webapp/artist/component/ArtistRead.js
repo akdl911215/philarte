@@ -10,7 +10,7 @@ const ArtistRead = () => {
 
     const deleteButton = () => {
         alert(`삭제됩니다`);
-
+        console.log(`${localStorage.getItem('select')}`);
         axios
             .delete(`http://localhost:8080/artists/delete/${localStorage.getItem('select')}`)
             .then((res) => {
