@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ArtistRepository extends JpaRepository<Artist, Long> {
+public interface ArtistRepository extends JpaRepository<Artist, Long>,
+                                            QuerydslPredicateExecutor<Artist> {
 
     boolean existsByUsername(@Param("username")String username);
     Optional<Artist> findByUsername(String username);

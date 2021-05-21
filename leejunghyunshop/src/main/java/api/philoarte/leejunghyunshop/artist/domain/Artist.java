@@ -29,8 +29,9 @@ public class Artist extends BaseEntity {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
+    //, columnDefinition="Number(10) default '12345678'"
     @Size(min = 8, message = "Minimum Password Length: 8 characters")
-    @Column(name = "password", columnDefinition="Number(10) default '12345678'")
+    @Column(name = "password")
     private String password;
 
 //    @Embedded
@@ -57,5 +58,13 @@ public class Artist extends BaseEntity {
 
      public void changeRoles(List<Role> roles){
          this.roles = roles;
+     }
+
+     public void changeSchool(String school){
+         this.school = school;
+     }
+
+     public void changeDepartment(String department){
+         this.department = department;
      }
 }
