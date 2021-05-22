@@ -1,14 +1,12 @@
 package api.philoarte.leejunghyunshop;
 
-import api.philoarte.leejunghyunshop.art.domain.Art;
+
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.QArtist;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import com.querydsl.core.BooleanBuilder;
-
 import com.querydsl.core.types.dsl.BooleanExpression;
-
-
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +17,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Log4j2
@@ -30,6 +32,10 @@ public class ArtistRepositoryTests {
 
     @Autowired
     private ArtistRepository repository;
+
+    // 영속성 컨텍스트(Persistence Context) - Entity를 영구 저장하는 환경
+    @PersistenceContext // 영속성 객체를 자동으로 삽입
+    private EntityManager entityManager; // EntityManager 실제 Transaction 단위를 수행할 때마다 생성
 
     @Test
     public void test() {
@@ -149,28 +155,108 @@ public class ArtistRepositoryTests {
     @Transactional
     @Commit
     public void testQueryMultySuch() {
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("artistId").descending());
-
+        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("artistId").descending());
         QArtist qArtist = QArtist.artist;
-
-        String keyword = "1";
-
+        String keyword = "서울 2q";
         BooleanBuilder builder = new BooleanBuilder();
-
         BooleanExpression exUsername = qArtist.username.contains(keyword);
-
         BooleanExpression exSchool = qArtist.school.contains(keyword);
-
         BooleanExpression exAll = exUsername.or(exSchool); // 두 Predicate중 1개만 true return 시 true
-
         builder.and(exAll); // .and는 BooleanBuilder에 추가
-
         builder.and(qArtist.artistId.gt(0L)); // gt(0L) = artistID는 0보다 크다
-
         Page<Artist> result = repository.findAll(builder, pageable);
-
         result.stream().forEach(artist -> {
             System.out.println(artist);
         });
+    }
+
+
+    @Test
+    @Transactional
+    @Commit
+    public void artistAllList() throws Exception {
+        List<Artist> artistList = repository.findAll();
+        assertThat(artistList.size()).isEqualTo(10);
+    }
+
+
+
+    @Test
+    @Transactional
+    @Commit
+    public void testQueryArtistMultySearch() throws Exception{
+
+
+
+        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+
+        QArtist qArtist = QArtist.artist;
+
+//        String name = "수잔";
+//
+//        JPAQuery<Artist> query = queryFactory.selectFrom(qArtist);
+//
+//        if (name.equals("수잔")){
+//            query = query.where(qArtist.name.eq("수잔"));
+//        } else {
+//            query = query.where(qArtist.name.eq("김아영"));
+//        }
+
+        long result = queryFactory.selectFrom(qArtist)
+                        .where(qArtist.username.eq("2q4od"))
+                        .fetchCount();
+                        // username 이 4o인사람 찾기
+
+        List<Artist> result2 = queryFactory.selectFrom(qArtist)
+                                .where(qArtist.name.eq("김"),
+                                        qArtist.email.like("%.com")).fetch();
+                                // name = 김 이고 메일 뒤가 com으로 끝나는 사람
+
+//        QueryResult<Artist> result3 = queryFactory.selectFrom(qArtist)
+//                                        .where(qArtist.username.eq("김"),
+//                                        qArtist.name.between("20","40")).fetchResults();
+
+//          assertThat("2q4").isNotEmpty()
+//                  .contains("0d")
+//                  .isEqualTo("2q40d");
+        System.out.println("==============================================");
+        assertThat(result).isEqualTo(3);
+//        assertThat(result).as("check %s's username").isEqualTo("rya");
+//        assertThat(result2.get(0).getName()).isEqualTo("아영");
+//        assertThat(result3.getTotal)
+
+//        assertThat("Hello, world! Nice to meet you.") // 주어진 "Hello, world! Nice to meet you."라는 문자열은
+//                .isNotEmpty() // 비어있지 않고
+//                .contains("Nice") // "Nice"를 포함하고
+//                .contains("world") // "world"도 포함하고
+//                .doesNotContain("ZZZ") // "ZZZ"는 포함하지 않으며
+//                .startsWith("Hell") // "Hell"로 시작하고
+//                .endsWith("u.") // "u."로 끝나며
+//                .isEqualTo("Hello, world! Nice to meet you."); // "Hello, world! Nice to
+
+//        assertThat(3.14d) // 주어진 3.14라는 숫자는
+//                .isPositive() // 양수이고
+//                .isGreaterThan(3) // 3보다 크며
+//                .isLessThan(4) // 4보다 작습니다
+//                .isEqualTo(3, offset(1d)) // 오프셋 1 기준으로 3과 같고
+//                .isEqualTo(3.1, offset(0.1d)) // 오프셋 0.1 기준으로 3.1과 같으며
+//                .isEqualTo(3.14); // 오프셋 없이는 3.14와 같습니다
+
+
+//        Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE, Sort.by("artistId").descending());
+//        QArtist qArtist = QArtist.artist;
+//        String keyword = "서울 2q";
+//        BooleanBuilder builder = new BooleanBuilder();
+//
+//
+//        BooleanExpression exUsername = qArtist.username.contains(keyword);
+//        BooleanExpression exSchool = qArtist.school.contains(keyword);
+//        BooleanExpression exAll = exUsername.or(exSchool); // 두 Predicate중 1개만 true return 시 true
+//        builder.and(exAll); // .and는 BooleanBuilder에 추가
+//        builder.and(qArtist.artistId.gt(0L)); // gt(0L) = artistID는 0보다 크다
+//        Page<Artist> result = repository.findAll(builder, pageable);
+//        result.stream().forEach(artist -> {
+//            System.out.println(artist);
+//        });
     }
 }

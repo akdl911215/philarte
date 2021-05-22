@@ -1,7 +1,7 @@
-package api.philoarte.leejunghyunshop.crawl.common;
+package api.philoarte.leejunghyunshop.crawling.common;
 
-import api.philoarte.leejunghyunshop.crawl.common.controller.Crawler;
-import api.philoarte.leejunghyunshop.crawl.picture.domain.Picture;
+import api.philoarte.leejunghyunshop.crawling.common.controller.Crawler;
+import api.philoarte.leejunghyunshop.crawling.picture.domain.Picture;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.crawl.common.controller;
+package api.philoarte.leejunghyunshop.crawling.common.controller;
 
 public class Crawler {
     private String url;

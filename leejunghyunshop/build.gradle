@@ -67,6 +67,7 @@ dependencies {
 
 	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '4.4.0'
 	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
 
 }
 

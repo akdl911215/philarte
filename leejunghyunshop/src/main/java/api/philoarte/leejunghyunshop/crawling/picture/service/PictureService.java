@@ -1,7 +1,7 @@
-package api.philoarte.leejunghyunshop.crawl.picture.service;
+package api.philoarte.leejunghyunshop.crawling.picture.service;
 
-import api.philoarte.leejunghyunshop.crawl.common.controller.Crawler;
-import api.philoarte.leejunghyunshop.crawl.picture.domain.Picture;
+import api.philoarte.leejunghyunshop.crawling.common.controller.Crawler;
+import api.philoarte.leejunghyunshop.crawling.picture.domain.Picture;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

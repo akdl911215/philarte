@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.crawl.common;
+package api.philoarte.leejunghyunshop.crawling.common;
 
 import lombok.extern.java.Log;
 import org.jsoup.Connection;

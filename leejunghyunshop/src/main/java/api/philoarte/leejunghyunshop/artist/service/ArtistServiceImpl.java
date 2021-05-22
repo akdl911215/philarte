@@ -1,29 +1,39 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
-import api.philoarte.leejunghyunshop.artist.domain.Artist;
-import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
-import api.philoarte.leejunghyunshop.artist.domain.Role;
+import api.philoarte.leejunghyunshop.artist.domain.*;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
 import api.philoarte.leejunghyunshop.common.service.AbstractService;
+import api.philoarte.leejunghyunshop.artist.service.pageService.PageRequestService;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+
 
 @Transactional
 @Log4j2
 @RequiredArgsConstructor
 @Service
-public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService {
+public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService, PageRequestService {
 
     private final ArtistRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -131,6 +141,59 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         log.info(entity);
         repository.save(entity);
         return null;
+    }
+
+    private BooleanBuilder getSearch(PageRequestDto requestDto) {
+        String type = requestDto.getType();
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        QArtist qArtist = QArtist.artist;
+        String keyword = requestDto.getKeyword();
+        BooleanExpression expression = qArtist.artistId.gt(0L); // artist > 0 조건만 생성
+        booleanBuilder.and(expression);
+
+        if(type == null || type.trim().length() == 0){ // 검색 조건이 없는 경우
+            return booleanBuilder;
+        }
+
+        // 검색 조건 작성
+        BooleanBuilder conditionBuilder = new BooleanBuilder();
+
+        if(type.contains("u")){
+            conditionBuilder.or(qArtist.username.contains(keyword));
+        }
+        if (type.contains("n")){
+            conditionBuilder.or(qArtist.name.contains(keyword));
+        }
+        if (type.contains("e")){
+            conditionBuilder.or(qArtist.email.contains(keyword));
+        }
+        if (type.contains("p")){
+            conditionBuilder.or(qArtist.phoneNumber.contains(keyword));
+        }
+        if (type.contains("a")){
+            conditionBuilder.or(qArtist.address.contains(keyword));
+        }
+        if (type.contains("d")){
+            conditionBuilder.or(qArtist.department.contains(keyword));
+        }
+
+        // 모든 조건 통합
+        booleanBuilder.and(conditionBuilder);
+
+        return booleanBuilder;
+    }
+
+    @Override
+    public PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto) {
+        Pageable pageable = requestDto.getPageable(Sort.by("artistId").descending());
+
+        BooleanBuilder booleanBuilder = getSearch(requestDto); // 검색 조건 처리
+
+        Page<Artist> result = repository.findAll(booleanBuilder, pageable); //Querydsl 사용
+
+        Function<Artist, ArtistDto> fn = (entity -> entityDto(entity));
+
+        return new PageResultDto<>(result, fn);
     }
 }
 

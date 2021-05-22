@@ -1,16 +1,24 @@
 package api.philoarte.leejunghyunshop;
 
+import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistService;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
+import api.philoarte.leejunghyunshop.artist.service.pageService.PageRequestService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+
+import javax.transaction.Transactional;
 
 @SpringBootTest
 public class ArtistServiceTests {
 
     @Autowired
     private ArtistService sv;
+    private PageRequestService pageRequestService;
 
     @Test
     public void testRegister() {
@@ -46,5 +54,22 @@ public class ArtistServiceTests {
         System.out.println("=======================");
         System.out.println("변환작업 ===============");
         System.out.println("::::::::::::::" + sv.register(artistDto));
+    }
+
+    @Transactional
+    @Commit
+    @Test
+    public void testList(){
+        PageRequestDto pageRequestDto = PageRequestDto
+                                        .builder()
+                                        .page(1)
+                                        .size(10)
+                                        .build();
+
+        PageResultDto<ArtistDto, Artist> resultDto = pageRequestService.getPageList(pageRequestDto);
+
+        for (ArtistDto artistDto : resultDto.getDtoList()) {
+            System.out.println(artistDto);
+        }
     }
 }

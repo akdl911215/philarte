@@ -1,6 +1,6 @@
-package api.philoarte.leejunghyunshop.crawl.picture.repository;
+package api.philoarte.leejunghyunshop.crawling.picture.repository;
 
-import api.philoarte.leejunghyunshop.crawl.picture.domain.Picture;
+import api.philoarte.leejunghyunshop.crawling.picture.domain.Picture;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

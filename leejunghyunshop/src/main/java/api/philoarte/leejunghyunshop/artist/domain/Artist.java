@@ -1,9 +1,9 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
 
-import api.philoarte.leejunghyunshop.art.domain.Art;
 import api.philoarte.leejunghyunshop.common.domain.BaseEntity;
-import api.philoarte.leejunghyunshop.common.util.ModelMapperUtils;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -56,7 +56,7 @@ public class Artist extends BaseEntity {
      @ElementCollection(fetch = FetchType.EAGER)
      List<Role> roles;
 
-     public void changeRoles(List<Role> roles){
+    public void changeRoles(List<Role> roles){
          this.roles = roles;
      }
 
@@ -67,4 +67,13 @@ public class Artist extends BaseEntity {
      public void changeDepartment(String department){
          this.department = department;
      }
+
+//    public Artist(String username, String name, String email) {
+//        super();
+//        this.username = username;
+//        this.name = name;
+//        this.email = email;
+//    }
+
+
 }

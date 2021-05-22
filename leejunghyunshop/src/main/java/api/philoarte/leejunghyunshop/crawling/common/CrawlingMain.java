@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.crawl.common;
+package api.philoarte.leejunghyunshop.crawling.common;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

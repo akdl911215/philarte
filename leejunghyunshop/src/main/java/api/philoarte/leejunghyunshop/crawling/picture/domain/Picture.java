@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.crawl.picture.domain;
+package api.philoarte.leejunghyunshop.crawling.picture.domain;
 
 import lombok.Builder;
 import lombok.Data;
