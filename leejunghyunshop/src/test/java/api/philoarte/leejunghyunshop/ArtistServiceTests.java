@@ -66,7 +66,7 @@ public class ArtistServiceTests {
                                         .size(10)
                                         .build();
 
-        PageResultDto<ArtistDto, Artist> resultDto = pageRequestService.getPageList(pageRequestDto);
+        PageResultDto<ArtistDto, Artist> resultDto = sv.getPageList(pageRequestDto);
 
         for (ArtistDto artistDto : resultDto.getDtoList()) {
             System.out.println(artistDto);

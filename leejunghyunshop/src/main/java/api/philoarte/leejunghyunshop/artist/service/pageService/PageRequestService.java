@@ -7,6 +7,6 @@ import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
 
 public interface PageRequestService {
 //    ArtistDto<ArtistDto, Artist> getArtistList(PageRequestDto requestDto);
-    PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
+//    PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
 
 }
