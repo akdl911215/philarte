@@ -84,7 +84,7 @@
   {
     "id": 5,
     "title": "작품 등록하기",
-    "path": "/work/work-list"
+    "path": "/artist/artist-page-list"
   },
   {
     "id": 6,
@@ -106,4 +106,5 @@
     "title": "유저리스트",
     "path": "/artist/artist-list"
   }
+
 ]

@@ -2,12 +2,14 @@ package api.philoarte.leejunghyunshop.artist.controller;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -56,6 +58,12 @@ public class ArtistController {
         return ResponseEntity.ok(service.getAllData());
     }
 
+//    @GetMapping("/list")
+//    public void list(PageRequestDto pageRequestDto, Model model) {
+//        log.info("list................." + pageRequestDto);
+//        model.addAttribute("result", service.getPageList(pageRequestDto));
+//    }
+
     @GetMapping("/fetchOne/{artistId}")
     public Optional<Artist> findById
             (@PathVariable("artistId") Long artistId) {
@@ -86,12 +94,13 @@ public class ArtistController {
         service.deleteById(artistId);
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<ArtistDto>> all() {
         log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
         return ResponseEntity.ok(null);
     }
+
+
 
     @PostMapping("/{username}")
     public ResponseEntity<?> auth(@PathVariable String username) {

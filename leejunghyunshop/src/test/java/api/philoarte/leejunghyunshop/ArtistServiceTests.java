@@ -68,8 +68,14 @@ public class ArtistServiceTests {
 
         PageResultDto<ArtistDto, Artist> resultDto = sv.getPageList(pageRequestDto);
 
+        System.out.println("PREV : " + resultDto.isPrev());
+        System.out.println("NEXT : " + resultDto.isNext());
+        System.out.println("TOTAL : " + resultDto.getTotalPage());
+        System.out.println("=====================================");
         for (ArtistDto artistDto : resultDto.getDtoList()) {
             System.out.println(artistDto);
         }
+        System.out.println("======================================");
+        resultDto.getPageList().forEach(i -> System.out.println(i));
     }
 }
