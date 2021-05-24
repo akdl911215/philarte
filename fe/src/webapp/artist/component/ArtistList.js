@@ -13,7 +13,7 @@ const ArtistList = () => {
 
     const fetchList = () => {
         axios
-            .get(`http://localhost:8080/artists/findAll`)
+            .get(`http://localhost:8080/artists/findAll `)
             .then((res) => {
                 console.log(res);
                 setArtistsList(res.data);

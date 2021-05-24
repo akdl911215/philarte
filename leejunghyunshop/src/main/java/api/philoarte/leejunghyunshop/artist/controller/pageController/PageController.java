@@ -3,11 +3,13 @@ package api.philoarte.leejunghyunshop.artist.controller.pageController;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistService;
 import com.amazonaws.services.s3.transfer.AbortableTransfer;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,17 +40,14 @@ public class PageController {
 //        model.addAttribute("result", service.getPageList(pageRequestDto));
 //    }
 
-    @GetMapping("/list")
-    public ResponseEntity<ArtistDto> list(
-            @ApiParam("PageList Artist") PageRequestDto pageRequestDto, Model model) {
+    @GetMapping("/list/{page}")
+    public ResponseEntity<PageResultDto<ArtistDto, Artist>> list(PageRequestDto page) {
         log.info("=======================================");
         log.info("=======================================");
-        log.info("list................." + pageRequestDto);
-        log.info("model............ :::: " + model);
-        model.addAttribute("result", service.getPageList(pageRequestDto));
+        log.info("page................." + page);
 
-        return null;
-//        return ResponseEntity.ok(service.getPageList(PageRequestDto<ArtistDto, Artist >));
+//        return null;
+        return new ResponseEntity<>(service.getPageList(page), HttpStatus.OK);
     }
 
 //    @PostMapping("/signup")

@@ -7,7 +7,11 @@ export { default as ArtistUpdate } from 'webapp/artist/component/ArtistUpdate';
 export { default as Logout } from 'webapp/artist/component/Logout';
 export { default as MyPage } from 'webapp/artist/component/MyPage';
 export { default as ArtistPageList } from 'webapp/artist/component/ArtistPageList';
+export { default as ArtistPageList2 } from 'webapp/artist/component/pageComponent/ArtistPageList2';
+
 export { default as PageList } from 'webapp/artist/component/pageComponent/PageList';
+// export { default as Pagination } from './component/pageComponent/Pagination';
+export { default as Posts } from 'webapp/artist/component/pageComponent/Posts';
 
 // service
 export { default as artistService } from 'webapp/artist/service/artist.service';

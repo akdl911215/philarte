@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Posts from 'webapp/artist/component/pageComponent/Posts';
+import '../../style/PageList.css';
 
-const PageList = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(10);
-
-    useEffect(async () => {
-        setLoading(true);
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
-        setPosts(response.data);
-        setLoading(false);
-    }, []);
-
-    console.log(posts);
+const PageList = ({ pageList = [], prev, next, page, start, end, movePage }) => {
+    const list = pageList.map((i) => (
+        <button key={i} onClick={() => movePage(i)} className="PageListBtn">
+            {i}
+        </button>
+    ));
 
     return (
-        <>
-            <div className="PageList">
-                <Posts posts={posts} loading={loading}></Posts>
-            </div>
-        </>
+        <div>
+            {prev ? (
+                <button className="PageListBtn" onClick={() => movePage(start - 1)}>
+                    prev
+                </button>
+            ) : (
+                <></>
+            )}
+            {list}
+            {next ? (
+                <button className="PageListBtn" onClick={() => movePage(end + 1)}>
+                    next
+                </button>
+            ) : (
+                <></>
+            )}
+        </div>
     );
 };
 export default PageList;
