@@ -19,6 +19,13 @@ dependencies {
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.4.5'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.4.5'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.4.5'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.5'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jdbc', version: '2.4.5'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.5'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.5.0'
+	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.5.3'
+	implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.12.RELEASE'
+
 
 //	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.2'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
@@ -29,11 +36,6 @@ dependencies {
 
 	testCompileOnly 'org.projectlombok:lombok:1.18.10'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
-
-
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.5'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jdbc', version: '2.4.5'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.5'
 
 
 	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
@@ -68,6 +70,7 @@ dependencies {
 	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '4.4.0'
 	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+
 
 }
 

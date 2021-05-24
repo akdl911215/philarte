@@ -10,7 +10,7 @@ import { ReviewList, ReviewModify, ReviewRead, ReviewRegister } from 'webapp/rev
 import { WorkList, WorkModify, WorkRead, WorkRegister } from 'webapp/work/index';
 import { HomeVideoBg } from 'webapp/common/index';
 
-import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate, Logout, MyPage, ArtistPageList } from 'webapp/artist/index';
+import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate, Logout, MyPage, ArtistPageList, PageList } from 'webapp/artist/index';
 // import ArtistRead from 'webapp/artist/component/ArtistRead';
 // import ArtistUpdate from 'webapp/artist/component/ArtistUpdate';
 // import ArtistList from 'webapp/artist/component/ArtistList';
@@ -61,6 +61,7 @@ const App = () => {
                         <Route exact path="/artist/artist-page-list" component={ArtistPageList} />
                         <Route exact path="/artist/artist-read/:id" component={ArtistRead} />
                         <Route exact path="/artist/artist-update/:id" component={ArtistUpdate} />
+                        <Route exact path="/page-list" component={PageList} />
 
                         <Switch>
                             <privateRoute exact path="/" component={HomeVideoBg} />

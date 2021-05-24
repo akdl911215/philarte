@@ -23,6 +23,7 @@
             </thead>
             <tbody>
 
+            <!-- th:each = "변수 : ${목록}" -->
             <tr th:each="dto : ${result.dtoList}" >
                 <th scope="row">[[$dto.ArtistId}]]</th>
                 <td>[[${dto.username}]]</td>
