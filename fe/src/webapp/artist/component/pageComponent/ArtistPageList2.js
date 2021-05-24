@@ -19,6 +19,24 @@ const ArtistPageList2 = ({ num }) => {
             .catch((err) => console.log(err));
     };
 
+    const getTotalArtistSearchList = () => {
+        axios
+            .get('http://localhost:8080/page/list/pages?page=', {
+                artistId: '',
+                username: '',
+                name: '',
+                email: '',
+                address: '',
+                school: '',
+                department: '',
+            })
+            .then((res) => {
+                setPageReulst(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => console.log(err));
+    };
+
     useEffect(() => {
         getTotalArtistList();
     }, [page]);
@@ -38,8 +56,8 @@ const ArtistPageList2 = ({ num }) => {
     // ));
 
     const handleChange = useCallback((e) => {
-        console.log('JSON.stringify(getTotalArtistList()) ::::::: ' + JSON.stringify(getTotalArtistList()));
-        getTotalArtistList();
+        console.log('JSON.stringify(getTotalArtistSearchList()) ::::::: ' + JSON.stringify(getTotalArtistSearchList()));
+        getTotalArtistSearchList();
     });
 
     const handleSearch = (e) => {

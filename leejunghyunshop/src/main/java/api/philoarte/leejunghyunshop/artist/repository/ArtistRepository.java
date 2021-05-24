@@ -2,6 +2,8 @@ package api.philoarte.leejunghyunshop.artist.repository;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.QArtist;
+import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -18,6 +20,10 @@ import java.util.Optional;
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long>,
                                             QuerydslPredicateExecutor<Artist> {
+
+    QArtist searchArtist = QArtist.artist;
+    JPAQuery query = new JPAQuery("Artist");
+
 
     boolean existsByUsername(@Param("username")String username);
     Optional<Artist> findByUsername(String username);
