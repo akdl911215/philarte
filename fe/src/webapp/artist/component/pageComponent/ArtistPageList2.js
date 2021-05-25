@@ -1,64 +1,24 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import PageList from './PageList';
 import '../../style/ArtistPageList2.css';
-import { useParams } from 'react-router';
-import { useHistory } from 'react-router-dom';
+import { getArtistList } from 'webapp/artist/reducer/artist.reducer';
 // import ArtistSearch from 'webapp/artist/component/pageComponent/ArtistSearch';
 
-const ArtistPageList2 = ({ num }) => {
-    const history = useHistory();
-    const params = new URLSearchParams(window.location.search);
+const ArtistPageList2 = () => {
+    const dispatch = useDispatch();
+    // artist.pageResult
+    const pageResult = useSelector((state) => state.artist.pageResult);
+    const page = pageResult.page;
 
-    const [page, setPage] = useState(params.get('page') || 1);
-    const [type, setType] = useState(params.get('type') || '');
-    const [keyword, setKeyword] = useState(params.get('keyword') || '');
+    useEffect((e) => {
+        dispatch(getArtistList(page));
+    }, []);
 
-    const [pageResult, setPageReulst] = useState({ dtoList: [] });
-
-    const historyPush = () => {
-        let state = {};
-        let title = '';
-        let url = '';
-        history.pushState(state, title, url);
-        // pushstate 사용하기
-        // state = 상태 값을 나타내는 것으로 브라우저에서 앞/뒤로 갈 때, 넘겨줄 데이터
-        // title = 변경할 브라우저 제목(변경을 원하지 않으면 null)
-        // url = 변결할 브루우저 URL
-    };
-
-    const getTotalArtistList = () => {
-        console.log('--------------------');
-        console.log(page);
-        console.log(type);
-
-        const str = 'page=' + page + '&type=' + type + '&keyword=' + keyword;
-
-        console.log(str);
-        console.log('----------------------------------------------------------');
-
-        axios
-            .get('http://localhost:8080/page/list?' + str)
-            .then((res) => {
-                console.log('page :::: ' + page);
-                console.log('JSON.stringify(page) :::: ' + JSON.stringify(page));
-                console.log('type :::: ' + type);
-                console.log('JSON.stringify(type) :::: ' + JSON.stringify(type));
-                console.log('keyword :::: ' + keyword);
-                console.log('JSON.stringify(keyword) :::: ' + JSON.stringify(keyword));
-                setPageReulst(res.data);
-                console.log(res.data);
-            })
-            .catch((err) => console.log(err));
-    };
-
-    useEffect(() => {
-        getTotalArtistList();
-    }, [page]);
-
-    const movePage = (page) => {
-        setPage(page);
-    };
+    // const movePage = (page) => {
+    //     setPage(page);
+    // };
 
     return (
         <>
@@ -96,7 +56,7 @@ const ArtistPageList2 = ({ num }) => {
                     </tbody>
                 </table>
                 {/* <ul>{list}</ul> */}
-                <PageList {...pageResult} movePage={movePage} onClick={historyPush}></PageList>
+                <PageList {...pageResult}>{pageResult.dtoList}</PageList>
                 <br />
                 <br />
 

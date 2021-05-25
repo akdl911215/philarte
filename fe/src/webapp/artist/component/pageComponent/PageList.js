@@ -1,9 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../style/PageList.css';
+import { fetchPage } from '../../reducer/artistSlice.reducer';
+import { useDispatch, useSelector } from 'react-redux';
 
-const PageList = ({ pageList = [], prev, next, page, start, end, movePage }) => {
+const PageList = () => {
+    const { pageList, page, start, end, prev, next } = useSelector((state) => state.todo.pageResult);
+    const dispatch = useDispatch();
+    console.log('PageList....');
+    console.log(pageList);
+
+    const movePage = (page) => {
+        dispatch(fetchPage(page));
+    };
+
     const list = pageList.map((i) => (
-        <button key={i} onClick={() => movePage(i)} className="PageListBtn">
+        <button key={i} onCLick={() => movePage(i)}>
             {i}
         </button>
     ));

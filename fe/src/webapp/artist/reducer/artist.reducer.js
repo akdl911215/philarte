@@ -1,29 +1,37 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import ArtistService from '../service/artist.service';
+import { ArtistService } from 'webapp/artist/index';
 
-export const getArtistList = createAsyncThunk('artists/findAll', async () => {
-    alert('이건뜨나?');
-    alert('ArtistService.findAll :::::::::' + ArtistService.findAll);
-    const response = await ArtistService.findAll();
+const getArtistServerPage = async (page) => {
+    console.log('getARtistServerPage :: ' + page);
+    const response = await ArtistService.list();
     alert(`JSON.stringify(response) :::::::::: ${JSON.stringify(response)}`);
     return response.data;
-});
+};
 
-const isRejectedAction = (action) => action.type.endsWith('rejected');
+export const getArtistList = createAsyncThunk('artists/list', getArtistServerPage);
+
+// const isRejectedAction = (action) => action.type.endsWith('rejected');
 const artistSlice = createSlice({
     name: 'artists',
-    initialState: [],
+    initialState: {
+        pageResult: {
+            dtoList: [],
+            page: 1,
+            pageList: [],
+            start: 1,
+            end: 1,
+            prev: false,
+            next: false,
+        },
+    },
     reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(getArtistList.fulfilled, (state, { payload }) => {
-                alert(`리덕스 내부 회원 목록 조회 성공 ${payload}`);
-                return [...payload];
-            })
-            .addMatcher(isRejectedAction, () => {})
-            .addDefaultCase((state, action) => {});
+    extraReducers: {
+        [getArtistList.fulfilled]: (state, { meta, payload }) => {
+            console.log(payload);
+            state.pageResult = payload;
+        },
     },
 });
 const { action, reducer } = artistSlice;
 // export const { addCase } = actions;
-export default reducer;
+export default artistSlice.reducer;

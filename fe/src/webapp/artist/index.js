@@ -12,5 +12,8 @@ export { default as PageList } from 'webapp/artist/component/pageComponent/PageL
 // export { default as Pagination } from './component/pageComponent/Pagination';
 export { default as Posts } from 'webapp/artist/component/pageComponent/Posts';
 
+// reducer
+export { default as ArtistReducer } from 'webapp/artist/reducer/artist.reducer';
+
 // service
-export { default as artistService } from 'webapp/artist/service/artist.service';
+export { default as ArtistService } from 'webapp/artist/service/artist.service';
