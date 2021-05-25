@@ -13,12 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @Log4j2
@@ -40,15 +38,32 @@ public class PageController {
 //        model.addAttribute("result", service.getPageList(pageRequestDto));
 //    }
 
-    @GetMapping("/list/{page}")
-    public ResponseEntity<PageResultDto<ArtistDto, Artist>> list(PageRequestDto page) {
+    @GetMapping("/list")
+    public ResponseEntity<PageResultDto<ArtistDto, Artist>> list(
+            PageRequestDto page) {
         log.info("=======================================");
         log.info("=======================================");
         log.info("page................." + page);
-
+        page.getKeyword();
+        log.info("page.getKeyword() :::::::::: "+ page.getKeyword());
+        page.getType();
+        log.info("page.getType() ::::::::: " + page.getType());
+        page.getSize();
+        log.info("page.getSize() ::::::::::: " + page.getSize());
+        page.getPage();
+        log.info("page.getPage() ::::::::: " + page.getPage());
 //        return null;
         return new ResponseEntity<>(service.getPageList(page), HttpStatus.OK);
     }
+
+//    @GetMapping("/list/search")
+//    public String search(@RequestParam(value="{keyword}") String keyword, Model model){
+//        log.info("=======================================");
+//        log.info("=======================================");
+//        List<ArtistDto> artistDtoList = service.searchPosts(keyword);
+//        model.addAttribute("artistDtoList", artistDtoList);
+//        return null;
+//    }
 
 //    @PostMapping("/signup")
 //    @ApiOperation(value = "${ArtistController.signup}")

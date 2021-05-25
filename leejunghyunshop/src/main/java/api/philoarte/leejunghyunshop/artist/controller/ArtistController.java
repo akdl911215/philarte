@@ -64,11 +64,18 @@ public class ArtistController {
 //        model.addAttribute("result", service.getPageList(pageRequestDto));
 //    }
 
+//    @GetMapping("/fetchOne/{artistId}")
+//    public Optional<Artist> findById
+//            (@PathVariable("artistId") Long artistId) {
+//        System.out.println("회원정보 1개를 불러옵니다 ::::::::::");
+//        return service.findById(artistId);
+//    }
+
     @GetMapping("/fetchOne/{artistId}")
-    public Optional<Artist> findById
+    public ResponseEntity<Optional<Artist>> findById
             (@PathVariable("artistId") Long artistId) {
         System.out.println("회원정보 1개를 불러옵니다 ::::::::::");
-        return service.findById(artistId);
+        return ResponseEntity.ok(service.findById(artistId));
     }
 
     @PutMapping("/update/{artistId}")

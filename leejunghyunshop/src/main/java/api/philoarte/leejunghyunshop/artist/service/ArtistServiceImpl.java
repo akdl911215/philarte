@@ -40,6 +40,23 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     private final SecurityProvider provider;
     private final AuthenticationManager manager;
 
+
+//    @Override
+//    public List<ArtistDto> searchPosts(String keyword) {
+//        List<Artist> artistEntites = repository.findByUsernameContaining(keyword);
+//        List<ArtistDto> artistDtoList = new ArrayList<>();
+//
+//        if(artistEntites.isEmpty()) return artistDtoList;
+//
+//        for(Artist artist : artistEntites) {
+//            artistDtoList.add(this.entityDto(artist));
+//        }
+//
+//        return artistDtoList;
+//    }
+
+
+
     @Override
     public String signup(ArtistDto artistDto) {
 
@@ -56,7 +73,6 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             throw new SecurityRuntimeException("Artist Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
-
 
     @Override
     public ArtistDto signin(ArtistDto artistDto) {
@@ -98,10 +114,16 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         return Optional.ofNullable(repository.getOne(id));
     }
 
+//    @Override
+//    public Long delete(Artist artist) {
+//        repository.delete(artist);
+//        return repository.findById(artist.getArtistId()).orElse(null) == null ? 1L : 0L;
+//    }
+
     @Override
-    public Long delete(Artist artist) {
+    public String delete(Artist artist) {
         repository.delete(artist);
-        return repository.findById(artist.getArtistId()).orElse(null) == null ? 1L : 0L;
+        return repository.findById(artist.getArtistId()).orElse(null) == null ? "success" : "fail";
     }
 
     @Override
@@ -115,9 +137,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     }
 
     @Override
-    public Optional<Artist> findById(Long artistId) {
-        return repository.findById(artistId);
-    }
+    public Optional<Artist> findById(Long artistId) { return repository.findById(artistId); }
 
     @Override
     public List<Artist> findAll() {

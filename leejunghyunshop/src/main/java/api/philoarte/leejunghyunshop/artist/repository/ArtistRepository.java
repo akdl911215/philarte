@@ -3,7 +3,9 @@ package api.philoarte.leejunghyunshop.artist.repository;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.QArtist;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -14,6 +16,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +24,25 @@ import java.util.Optional;
 public interface ArtistRepository extends JpaRepository<Artist, Long>,
                                             QuerydslPredicateExecutor<Artist> {
 
-    QArtist searchArtist = QArtist.artist;
-    JPAQuery query = new JPAQuery("Artist");
+
+    // http://www.querydsl.com/static/querydsl/4.0.1/reference/ko-KR/html_single/
+    // https://suhwan.dev/2019/02/24/jpa-vs-hibernate-vs-spring-data-jpa/
+
+//    EntityManager em = null;
+//    JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+//    JPAQuery query = new JPAQuery(em);
+//
+//    QArtist searchArtist = QArtist.artist;
+//    BooleanBuilder builder = new BooleanBuilder();
+
+
+//    Artist artistMember = queryFactory.selectFrom(searchArtist)
+//            .where()
+
+//    List<Artist> findByUsernameContaining(String Keyword);
+
+
+
 
 
     boolean existsByUsername(@Param("username")String username);

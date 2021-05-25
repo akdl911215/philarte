@@ -10,6 +10,7 @@ public abstract class AbstractService<T> {
     public abstract List<T> findAll();
     public abstract Long count();
     public abstract Optional<T> getOne(Long id);
-    public abstract Long delete(T t);
+    public abstract String delete(T t);
+//    public abstract Long delete(T t);
     public abstract Boolean existsById(long id);
 }

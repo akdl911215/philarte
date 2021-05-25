@@ -12,6 +12,11 @@ import java.util.List;
 
 public interface ArtistService {
 
+//    public List<ArtistDto> searchPosts(String keyword);
+
+
+
+
     ArtistDto signin(ArtistDto artistDto);
 //    Optional<Artist> finByusername(String username);
     List<Artist> getAllData();
@@ -20,6 +25,8 @@ public interface ArtistService {
 //    Optional<Artist> findById(Long artistId);
     ArtistDto updateById(ArtistDto artistDto);
     PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
+
+
 
     Long register(ArtistDto artistDto);
     String signup(ArtistDto artistDto);
