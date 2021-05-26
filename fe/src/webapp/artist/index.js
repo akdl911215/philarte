@@ -7,10 +7,13 @@ export { default as ArtistUpdate } from 'webapp/artist/component/ArtistUpdate';
 export { default as Logout } from 'webapp/artist/component/Logout';
 export { default as MyPage } from 'webapp/artist/component/MyPage';
 export { default as ArtistPageList2 } from 'webapp/artist/component/pageComponent/ArtistPageList2';
-
+export { default as ArtistPage } from 'webapp/artist/component/pageComponent/ArtistPage';
 export { default as PageList } from 'webapp/artist/component/pageComponent/PageList';
-// export { default as Pagination } from './component/pageComponent/Pagination';
 export { default as Posts } from 'webapp/artist/component/pageComponent/Posts';
+export { default as ArtistPageSearch } from 'webapp/artist/component/pageComponent/ArtistPageSearch';
+
+// container
+export { default as AristPageContainer } from 'webapp/artist/container/AristPageContainer';
 
 // reducer
 export { default as ArtistReducer } from 'webapp/artist/reducer/artist.reducer';

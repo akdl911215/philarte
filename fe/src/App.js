@@ -10,7 +10,7 @@ import { ReviewList, ReviewModify, ReviewRead, ReviewRegister } from 'webapp/rev
 import { WorkList, WorkModify, WorkRead, WorkRegister } from 'webapp/work/index';
 import { HomeVideoBg } from 'webapp/common/index';
 
-import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate, Logout, MyPage, ArtistPageList2 } from 'webapp/artist/index';
+import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate, Logout, MyPage, ArtistPage, AristPageContainer } from 'webapp/artist/index';
 
 // import ArtistRead from 'webapp/artist/component/ArtistRead';
 // import ArtistUpdate from 'webapp/artist/component/ArtistUpdate';
@@ -56,17 +56,17 @@ const App = () => {
                         <Route exact path="/work/work-register" component={WorkRegister} />
 
                         {/*Artist*/}
-                        <Route exact path="/artist/artist-signin" component={Signin} />
-                        <Route exact path="/artist/artist-signup" component={Signup} />
-                        <Route exact path="/artist/artist-list" component={ArtistList} />
-                        <Route exact path="/artist/artist-read/:id" component={ArtistRead} />
-                        <Route exact path="/artist/artist-update/:id" component={ArtistUpdate} />
-                        <Route exact path="/artist/artist-page-list" component={ArtistPageList2} />
+                        <Route exact path="/artist/artist_signin" component={Signin} />
+                        <Route exact path="/artist/artist_signup" component={Signup} />
+                        <Route exact path="/artist/artist_list" component={ArtistList} />
+                        <Route exact path="/artist/artist_read/:id" component={ArtistRead} />
+                        <Route exact path="/artist/artist_update/:id" component={ArtistUpdate} />
+                        <Route exact path="/artist/artist_page_list" component={AristPageContainer} />
 
                         <Switch>
                             <privateRoute exact path="/" component={HomeVideoBg} />
-                            <Route exact path="/artist/artist-logout" component={Logout} />
-                            <Route exact path="/artist/artist-mypage" component={MyPage} />
+                            <Route exact path="/artist/artist_logout" component={Logout} />
+                            <Route exact path="/artist/artist_mypage" component={MyPage} />
                             <Redirect path="*" to="/" />
                         </Switch>
                     </Switch>

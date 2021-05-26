@@ -3,12 +3,12 @@ import { ArtistService } from 'webapp/artist/index';
 
 const getArtistServerPage = async (page) => {
     console.log('getARtistServerPage :: ' + page);
-    const response = await ArtistService.list();
-    alert(`JSON.stringify(response) :::::::::: ${JSON.stringify(response)}`);
+    const response = await ArtistService.list(page);
+    // alert(`JSON.stringify(response) :::::::::: ${JSON.stringify(response)}`);
     return response.data;
 };
 
-export const getArtistList = createAsyncThunk('artists/list', getArtistServerPage);
+export const fetchPage = createAsyncThunk('artists/list', getArtistServerPage);
 
 // const isRejectedAction = (action) => action.type.endsWith('rejected');
 const artistSlice = createSlice({
@@ -26,7 +26,7 @@ const artistSlice = createSlice({
     },
     reducers: {},
     extraReducers: {
-        [getArtistList.fulfilled]: (state, { meta, payload }) => {
+        [fetchPage.fulfilled]: (state, { meta, payload }) => {
             console.log(payload);
             state.pageResult = payload;
         },

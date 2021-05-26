@@ -1,11 +1,11 @@
-.PageListBtn {
+.ArtistPageBtn {
     display: rgb(228, 101, 101);
-    /* width: 100px; */
+    /* width: 10px; */
     height: 50px;
-    line-height: 40px;
-    border: 1px #3399dd solid;
+    /* line-height: 40px; */
+    border: 1px #43eeee solid;
     margin: 15px auto;
-    background-color: #66aaff;
+    background-color: #43eeee;
     text-align: center;
     cursor: pointer;
 
