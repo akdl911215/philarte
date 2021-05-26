@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop;
+package api.philoarte.leejunghyunshop.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
@@ -64,6 +64,8 @@ public class ArtistServiceTests {
                                         .builder()
                                         .page(1)
                                         .size(10)
+                                        .type("unepad")
+                                        .keyword("인물")
                                         .build();
 
         PageResultDto<ArtistDto, Artist> resultDto = sv.getPageList(pageRequestDto);
@@ -78,4 +80,6 @@ public class ArtistServiceTests {
         System.out.println("======================================");
         resultDto.getPageList().forEach(i -> System.out.println(i));
     }
+
+
 }

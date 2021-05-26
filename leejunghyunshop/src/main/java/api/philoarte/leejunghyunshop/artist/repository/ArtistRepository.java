@@ -3,6 +3,7 @@ package api.philoarte.leejunghyunshop.artist.repository;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.QArtist;
+import api.philoarte.leejunghyunshop.artist.repository.search.SearchBoardRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -22,26 +23,7 @@ import java.util.Optional;
 
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long>,
-                                            QuerydslPredicateExecutor<Artist> {
-
-
-    // http://www.querydsl.com/static/querydsl/4.0.1/reference/ko-KR/html_single/
-    // https://suhwan.dev/2019/02/24/jpa-vs-hibernate-vs-spring-data-jpa/
-
-//    EntityManager em = null;
-//    JPAQueryFactory queryFactory = new JPAQueryFactory(em);
-//    JPAQuery query = new JPAQuery(em);
-//
-//    QArtist searchArtist = QArtist.artist;
-//    BooleanBuilder builder = new BooleanBuilder();
-
-
-//    Artist artistMember = queryFactory.selectFrom(searchArtist)
-//            .where()
-
-//    List<Artist> findByUsernameContaining(String Keyword);
-
-
+                        QuerydslPredicateExecutor<Artist> {
 
 
 

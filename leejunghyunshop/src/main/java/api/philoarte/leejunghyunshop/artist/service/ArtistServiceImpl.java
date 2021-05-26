@@ -187,11 +187,8 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         if (type.contains("e")){
             conditionBuilder.or(qArtist.email.contains(keyword));
         }
-        if (type.contains("p")){
-            conditionBuilder.or(qArtist.phoneNumber.contains(keyword));
-        }
-        if (type.contains("a")){
-            conditionBuilder.or(qArtist.address.contains(keyword));
+        if (type.contains("s")){
+            conditionBuilder.or(qArtist.school.contains(keyword));
         }
         if (type.contains("d")){
             conditionBuilder.or(qArtist.department.contains(keyword));

@@ -52,6 +52,18 @@ public class PageController {
         log.info("page.getSize() ::::::::::: " + page.getSize());
         page.getPage();
         log.info("page.getPage() ::::::::: " + page.getPage());
+        page.getUsername();
+        log.info("page.getUsername() :::::::::: " + page.getUsername());
+        page.getName();
+        log.info("page.getName() ::::::: " + page.getName());
+        page.getEmail();
+        log.info("page.getEmail() ::::::: " + page.getEmail());
+        page.getAddress();
+        log.info("age.getAddress() :::::::: " + page.getAddress());
+        page.getSchool();
+        log.info("page.getSchool() ::::::::: " + page.getSchool());
+        page.getDepartment();
+        log.info("page.getDepartment() :::::::::: " + page.getDepartment());
 //        return null;
         return new ResponseEntity<>(service.getPageList(page), HttpStatus.OK);
     }

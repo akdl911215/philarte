@@ -19,6 +19,12 @@ public class PageRequestDto<Dto, EN> {
     private int size;
     private String type;
     private String keyword;
+    private String username;
+    private String name;
+    private String email;
+    private String address;
+    private String school;
+    private String department;
 
     public PageRequestDto(){
         this.page = 1;

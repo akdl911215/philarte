@@ -6,7 +6,7 @@ import '../../style/ArtistPage.css';
 
 const PageList = () => {
     // alert('시작4');
-    const { pageList, page, start, end, prev, next } = useSelector((state) => state.artists.pageResult);
+    const { pageList, page, start, end, prev, next, username, name, email, address, school, department } = useSelector((state) => state.artists.pageResult);
     const dispatch = useDispatch();
     console.log('PageList....');
     console.log(pageList);

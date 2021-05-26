@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop;
+package api.philoarte.leejunghyunshop.repository;
 
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
