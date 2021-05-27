@@ -21,7 +21,7 @@ import java.util.Optional;
 @Api(tags = "artists")
 @RequiredArgsConstructor
 @Log
-@RequestMapping("/artists")
+@RequestMapping(value = "/artists", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 public class ArtistController {
 
     private final ArtistServiceImpl service;
@@ -30,10 +30,10 @@ public class ArtistController {
     @PostMapping("/signup")
     @ApiOperation(value = "${ArtistController.signup}")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
-        @ApiResponse(code = 403, message = "Access Denied"),
-        @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
+            @ApiResponse(code = 403, message = "Access Denied"),
+            @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
     public ResponseEntity<String> signup
-            (@ApiParam("Signup Artist") @RequestBody ArtistDto artistDto) throws IOException{
+            (@ApiParam("Signup Artist") @RequestBody ArtistDto artistDto) throws IOException {
         return ResponseEntity.ok(service.signup(artistDto));
     }
 
@@ -41,7 +41,7 @@ public class ArtistController {
     @PostMapping("/signin")
     @ApiOperation(value = "${ArtistController.signin}")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Somthing went wrong"),
-        @ApiResponse(code = 422, message = "Invalid Artist-Username / Password supplied")})
+            @ApiResponse(code = 422, message = "Invalid Artist-Username / Password supplied")})
     public ResponseEntity<ArtistDto> signin
             (@ApiParam("Signin Artist") @RequestBody ArtistDto artistDto) throws IOException {
         log.info("==============================================");
@@ -82,11 +82,36 @@ public class ArtistController {
     public ResponseEntity<ArtistDto> updateById
             (@PathVariable("artistId") Long artistId,
              @RequestBody ArtistDto artist
-             ){
+            ) {
         System.out.println("회원정보 1개를 수정합니다 :::::::::::");
 
         artist.setArtistId(artistId);
         return ResponseEntity.ok(service.updateById(artist));
+    }
+
+    @PutMapping("/mypage/{artistId}")
+    public ResponseEntity<ArtistDto> updateMypage
+            (@RequestBody ArtistDto artistDto) {
+        artistDto.getUsername();
+
+//        log.info("artistId :::::::: " + artistId);
+
+        artistDto.getArtistId();
+        log.info("artistDto.getArtistId() :::::: " + artistDto.getArtistId());
+
+        Optional<Artist> dtoArtist = service.findById(artistDto.getArtistId());
+        log.info("dtoArtist ::::::: " + dtoArtist);
+
+        System.out.println("회원정보 1개를 수정합니다 :::::::::::");
+        log.info("artistDto ======= " + artistDto);
+//        artistDto.setArtistId(artistId);
+        log.info("artistDto.getArtistId() ::::::: " + artistDto.getArtistId());
+        artistDto.setUsername(artistDto.getUsername());
+        log.info("artistDto.getUsername() ::::::::::: " + artistDto.getUsername());
+        artistDto.setName(artistDto.getName());
+        log.info("artistDto.getName() ::::::: " + artistDto.getName());
+        return ResponseEntity.ok(service.updateMypage(artistDto));
+//        return null;
     }
 
     @DeleteMapping("/delete/{artistId}")
@@ -106,7 +131,6 @@ public class ArtistController {
         log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
         return ResponseEntity.ok(null);
     }
-
 
 
     @PostMapping("/{username}")

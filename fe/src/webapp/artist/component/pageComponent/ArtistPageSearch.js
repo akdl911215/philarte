@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { fetchPage } from 'webapp/artist/reducer/artist.reducer';
 import '../../style/ArtistPageSearch.css';
 import Select from 'react-select';
+import SearchOverlay from 'webapp/common/Header/SearchOverlay';
 
 const ArtistPageSearch = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,14 @@ const ArtistPageSearch = () => {
         []
     );
 
+    // const mapStateToProps = (state) => {
+    //     return {
+    //         searchSpace: (searchTerm) => dispatch(searchSpace(searchTerm)),
+    //     };
+    // };
+
+    // SearchBox = connect(mapStateToProps, mapDispatchToProps)(SearchBox);
+
     // https://thrillfighter.tistory.com/572
     // https://ichi.pro/ko/react-selectleul-sayonghamyeon-seontaeg-ganeunghan-menyuleul-swibge-mandeul-su-issseubnida-102933182537945
     return (
@@ -43,6 +52,10 @@ const ArtistPageSearch = () => {
                     <button>검색</button>
                 </div>
             </form>
+
+            {/* <div className="searchBox">
+                <Search size="large" onChange={handlChange} placeholder="Search Space Name Here" />
+            </div> */}
         </>
     );
 };

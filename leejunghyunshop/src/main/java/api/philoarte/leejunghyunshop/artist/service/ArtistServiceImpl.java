@@ -1,5 +1,6 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
+import api.philoarte.leejunghyunshop.art.domain.Art;
 import api.philoarte.leejunghyunshop.artist.domain.*;
 import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
@@ -80,14 +81,23 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             Artist entity = dtoEntity(artistDto);
             repository.signin(entity.getUsername(), entity.getPassword());
             ArtistDto entityDto = entityDto(entity);
+
+            Optional<Artist> comprehensiveInfomationArtist = repository.findByUsername(entity.getUsername());
+            entityDto(comprehensiveInfomationArtist.get());
+            entityDto = entityDto(comprehensiveInfomationArtist.get());
             String Token = provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles());
             entityDto.setToken(Token);
+
+            log.info("====================");
+            log.info(entityDto);
+            log.info("====================");
             log.info("Token; ::::::::: " + Token);
 //            entityDto.setToken(
 //                    (passwordEncoder.matches(entityDto.getPassword(), repository.findByUsername(entity.getUsername()).get().getPassword())
 //            ) ?
 //            provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles())
 //            : "WRONG_PASSWORD");
+
             return entityDto;
         } catch (Exception e){
             throw new SecurityRuntimeException("Invalid Artist-Username / Password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -149,6 +159,18 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         Artist entity = dtoEntity(artistDto);
         repository.save(entity);
         ArtistDto dtoEntity = entityDto(entity);
+        return dtoEntity;
+    }
+
+    @Override
+    public ArtistDto updateMypage(ArtistDto artistDto) {
+        log.info("====================");
+        log.info("진입했나? :::::::: " + artistDto);
+        log.info("====================");
+        Artist entity = dtoEntity(artistDto);
+        repository.save(entity);
+        ArtistDto dtoEntity = entityDto(entity);
+        log.info("dtoEntity :::::: " + dtoEntity);
         return dtoEntity;
     }
 

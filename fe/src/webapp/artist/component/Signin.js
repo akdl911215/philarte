@@ -1,43 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../style/ArtistSignin.css';
-import { Link, Router, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signinPage } from 'webapp/artist/reducer/artist.reducer';
 
-const Signin = ({ history }) => {
-    const [login, setLogin] = useState({
+const Signin = () => {
+    const [signin, setSignin] = useState({
         username: '',
         password: '',
     });
 
-    const { username, password } = login;
+    const artistsState = useSelector((state) => state.artists.artistsState);
+    console.log('state.artists.artistsState ::::::: ' + artistsState);
+    // const { username, password } = useSelector((state) => state.artists.artistsState);
 
-    const handleClick = (e) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const goSignin = (e) => {
         e.preventDefault();
-        console.log('login username ::::::::: ' + login.username);
-        console.log('login password ::::::::::: ' + login.password);
-
-        axios
-            .post(`http://localhost:8080/artists/signin`, {
-                username: login.username,
-                password: login.password,
-            })
-            .then((res) => {
-                alert(`로그인성공`);
-                console.log(res);
-                console.log(history);
-                console.log('username ::::::::::: ' + username);
-                console.log('password ::::::::::: ' + password);
-                setLogin(res.data);
-                localStorage.setItem('loginInfo', JSON.stringify(res.data));
-                history.push('/');
-            })
-            .catch((err) => console.log(err));
+        e.stopPropagation();
+        alert('dispatch 작동?');
+        dispatch(signinPage(signin));
+        history.push('/');
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setLogin({
-            ...login,
+        setSignin({
+            ...signin,
             [name]: value,
         });
     };
@@ -53,7 +43,7 @@ const Signin = ({ history }) => {
                 <h2>로그인(Login)</h2>
             </div>
 
-            <form action="/action_page.php" method="post">
+            <form>
                 <div className="imgcontainer">
                     <img src="https://i.pinimg.com/originals/32/99/86/329986c043a5829916d2eb0c3b7fed8c.png" alt="Avatar" className="avatar" />
                 </div>
@@ -61,14 +51,14 @@ const Signin = ({ history }) => {
                     <label htmlFor="username">
                         <b>ID</b>
                     </label>
-                    <input type="text" placeholder="Enter Username" name="username" value={login.username || ''} onChange={handleChange} />
+                    <input type="text" placeholder="Enter Username" name="username" value={signin.username || ''} onChange={handleChange} />
 
                     <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="Enter Password" name="password" value={login.password || ''} onChange={handleChange} />
+                    <input type="password" placeholder="Enter Password" name="password" value={signin.password || ''} onChange={handleChange} />
 
-                    <button type="submit" onClick={handleClick}>
+                    <button type="submit" onClick={(e) => goSignin(e)}>
                         Login
                     </button>
                 </div>

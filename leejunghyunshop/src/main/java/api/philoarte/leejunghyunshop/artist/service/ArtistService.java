@@ -24,6 +24,8 @@ public interface ArtistService {
     void deleteById(Long artistId);
 //    Optional<Artist> findById(Long artistId);
     ArtistDto updateById(ArtistDto artistDto);
+    ArtistDto updateMypage(ArtistDto artistDto);
+
     PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
 
 

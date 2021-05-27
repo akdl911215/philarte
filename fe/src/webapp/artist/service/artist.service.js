@@ -1,13 +1,18 @@
 import axios from 'axios';
 
 const list = (page) => {
-    // alert('list ::::::::');
     return axios.get('http://localhost:8080/page/list?page=' + page);
 };
 
-const signup = () => {
-    alert(`signup :::::::::`);
-    return axios.post(`http://localhost:8080/artists/signup`);
+const signin = (signin) => {
+    return axios.post(`http://localhost:8080/artists/signin`, {
+        username: signin.username,
+        password: signin.password,
+    });
 };
 
-export default { list };
+const mypage = (mypage) => {
+    return axios.put(`http://localhost:8080/artists/mypage` + mypage.artistId, mypage);
+};
+
+export default { list, signin, mypage };

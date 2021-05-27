@@ -41,5 +41,47 @@ public class ArtistDto {
     @ApiModelProperty(position = 10)
     private String token;
 
+    public void setArtistId(long artistId){
+        this.artistId = artistId;
+    }
+    public long getArtistId(){
+        return artistId;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public void setPhoneNumber(String phoneNumber){
+        this.phoneNumber = phoneNumber;
+    }
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+    public void setAddress(String address){
+        this.address = address;
+    }
+    public String getAddress(){
+        return address;
+    }
+    public void setSchool(String school){
+        this.school = school;
+    }
+    public String getSchool(){
+        return school;
+    }
+    public void setDepartment(String department){
+        this.department = department;
+    }
+    public String getDepartment(){
+        return department;
+    }
 
 }

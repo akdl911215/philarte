@@ -25,8 +25,8 @@ public class Artist extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "artist_id")
     private long artistId;
-
-    @Column(name = "username", unique = true, nullable = false)
+    // , nullable = false
+    @Column(name = "username", unique = true)
     private String username;
 
     //, columnDefinition="Number(10) default '12345678'"
