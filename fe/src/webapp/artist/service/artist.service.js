@@ -10,9 +10,18 @@ const signin = (signin) => {
         password: signin.password,
     });
 };
-
+//+ mypage.artistId, mypage
 const mypage = (mypage) => {
-    return axios.put(`http://localhost:8080/artists/mypage` + mypage.artistId, mypage);
+    return axios.put(`http://localhost:8080/artists/mypage`, {
+        artistId: mypage.artistId,
+        username: mypage.username,
+        password: mypage.password,
+        name: mypage.name,
+        phoneNumber: mypage.phoneNumber,
+        email: mypage.email,
+        address: mypage.email,
+        department: mypage.department,
+    });
 };
 
 export default { list, signin, mypage };

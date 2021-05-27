@@ -89,7 +89,7 @@ public class ArtistController {
         return ResponseEntity.ok(service.updateById(artist));
     }
 
-    @PutMapping("/mypage/{artistId}")
+    @PutMapping("/mypage")
     public ResponseEntity<ArtistDto> updateMypage
             (@RequestBody ArtistDto artistDto) {
         artistDto.getUsername();
@@ -110,8 +110,8 @@ public class ArtistController {
         log.info("artistDto.getUsername() ::::::::::: " + artistDto.getUsername());
         artistDto.setName(artistDto.getName());
         log.info("artistDto.getName() ::::::: " + artistDto.getName());
-        return ResponseEntity.ok(service.updateMypage(artistDto));
-//        return null;
+//        return ResponseEntity.ok(service.updateMypage(artistDto));
+        return null;
     }
 
     @DeleteMapping("/delete/{artistId}")

@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/artists/delete/{artistId}").permitAll()
                 .antMatchers("/artists/update/{artistId}").permitAll()
                 .antMatchers("/artists/**/**").permitAll()
+                .antMatchers("/artists/**").permitAll()
                 .antMatchers("/artists/fetchOne/{artistId}").permitAll()
                 .antMatchers("/sample/ex1").permitAll()
                 .antMatchers("/sample/ex2").permitAll()

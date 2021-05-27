@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocalArtist, artistCurrent } from '../reducer/artist.reducer';
+import { getLocalArtist } from '../reducer/artist.reducer';
 import { mypagePage } from 'webapp/artist/reducer/artist.reducer';
 import Signin from '../component/Signin';
 
@@ -9,16 +9,14 @@ const MyPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     // const currentArtist = useSelector((state) => state.artists.artistsState);
-    useEffect(() => {
-        dispatch(getLocalArtist());
-    }, []);
 
     // const artistObj = useSelector(artistCurrent);
     console.log('-------------------------------------');
     console.log('mypage current.................');
-
+    console.log(mypagePage.artist);
     console.log('-------------------------------------');
 
+    const artistsObj = useSelector((state) => Signin);
     const artistsState = useSelector((state) => state.artists.artistsState);
     console.log('state.artists.artistsState ::::::: ' + artistsState);
     console.log('JSON.stringify(artistsState) ::::::: ' + JSON.stringify(artistsState));
@@ -33,6 +31,12 @@ const MyPage = () => {
         school: '',
         department: '',
     });
+
+    useEffect(() => {
+        // alert('mypage dispathch');
+        dispatch(getLocalArtist());
+    }, []);
+
     console.log('=========================');
     console.log('mypage.artistId = ::::::: ' + mypage.artistId);
     console.log(artistsState.artistId);
@@ -48,8 +52,15 @@ const MyPage = () => {
     const goMypage = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        alert('dispatch 작동?');
-        dispatch(mypagePage(mypage));
+
+        // alert('dispatch 작동?');
+        console.log('mypage ::::::: ' + mypage);
+        console.log('mypagePage(mypage) ::::::: ' + mypagePage(mypage));
+        console.log('dispatch(mypagePage(mypage)) ::::::: ' + dispatch(mypagePage(mypage)));
+        const obj = { artistId: mypage.artistId, username: mypage.username, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
+        dispatch(mypagePage(obj));
+        console.log('obj :: ' + obj);
+
         // history.push('/');
     };
 
@@ -85,7 +96,7 @@ const MyPage = () => {
                     <label htmlFor="password">
                         <b>비밀번호</b>
                     </label>
-                    <input type="password" placeholder="password" name="password" value={mypage.password || ''} onChange={handleChange} />
+                    <input type="password" placeholder="password" name="password" value={mypage.password} onChange={(e) => handleChange(e)} />
 
                     <label htmlFor="name">
                         <b>이름</b>
@@ -95,27 +106,27 @@ const MyPage = () => {
                     <label htmlFor="phoneNumber">
                         <b>핸드폰번호</b>
                     </label>
-                    <input type="text" onChange={handleChange} placeholder="phoneNumber" name="phoneNumber" value={mypage.phoneNumber || ''} />
+                    <input type="text" onChange={(e) => handleChange(e)} placeholder="phoneNumber" name="phoneNumber" value={mypage.phoneNumber} />
 
                     <label htmlFor="email">
                         <b>E-mail</b>
                     </label>
-                    <input type="text" onChange={handleChange} placeholder="Enter Email" name="email" value={mypage.email || ''} />
+                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter Email" name="email" value={mypage.email} />
 
                     <label htmlFor="address">
                         <b>주소</b>
                     </label>
-                    <input type="text" onChange={handleChange} placeholder="Enter Addres" name="address" value={mypage.address || ''} />
+                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter Addres" name="address" value={mypage.address} />
 
                     <label htmlFor="school">
                         <b>학교</b>
                     </label>
-                    <input type="text" onChange={handleChange} placeholder="Enter School" name="school" value={mypage.school || ''} />
+                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter School" name="school" value={mypage.school} />
 
                     <label htmlFor="department">
                         <b>학과</b>
                     </label>
-                    <input type="text" onChange={handleChange} placeholder="Enter Department" name="department" value={mypage.department || ''} />
+                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter Department" name="department" value={mypage.department} />
 
                     <div className="clearfix">
                         <button type="button" className="cancelbtn">

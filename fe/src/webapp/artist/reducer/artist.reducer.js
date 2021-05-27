@@ -77,8 +77,11 @@ const artistSlice = createSlice({
             window.localStorage.setItem('artist', JSON.stringify(payload));
         },
         [mypagePage.fulfilled]: (state, { meta, payload }) => {
+            // alert('여긴오나 reducer?');
+            // alert(state.artistsState.artistId);
+            // state.artistsState.artistId = payload;
+            state.artistsState = payload;
             console.log('reducer payload ::::::::: ' + payload);
-            state.artistId = payload;
         },
     },
 });
