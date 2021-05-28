@@ -31,11 +31,18 @@ const getArtistDeleteSelect = async (deleteSelect) => {
     return response.data;
 };
 
+const getArtistLogoutSelect = async (logout) => {
+    console.log('getArtistLogoutSelect :: ' + logout);
+    const response = await ArtistService.logout(logout);
+    return response.data;
+};
+
 export const fetchPage = createAsyncThunk('artists/list', getArtistServerPage);
 export const signinPage = createAsyncThunk('artists/signin', getArtistSigninPage);
 export const signupPage = createAsyncThunk('artists/signup', getArtistSignupPage);
 export const mypagePage = createAsyncThunk('artists/mypage', getArtistMypagePage);
 export const deleteSelect = createAsyncThunk('artists/mypage', getArtistDeleteSelect);
+export const logoutSelect = createAsyncThunk('artists/logout', getArtistLogoutSelect);
 
 // const isRejectedAction = (action) => action.type.endsWith('rejected');
 const artistSlice = createSlice({
@@ -102,6 +109,11 @@ const artistSlice = createSlice({
         },
         [deleteSelect.fulfilled]: (state, { meta, payload }) => {
             state.artistsState = payload;
+            console.log('reducer payload ::::::::: ' + payload);
+        },
+        [logoutSelect.fulfilled]: (state, { meta, payload }) => {
+            console('state ::::: ', state);
+            state = payload;
             console.log('reducer payload ::::::::: ' + payload);
         },
     },

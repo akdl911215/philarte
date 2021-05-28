@@ -5,6 +5,7 @@ import { artistCurrent, getLocalArtist } from '../reducer/artist.reducer';
 import { mypagePage } from 'webapp/artist/reducer/artist.reducer';
 import Signin from '../component/Signin';
 import ArtistsDelete from './ArtistDelete';
+import Logout from './Logout';
 
 const MyPage = () => {
     const history = useHistory();
@@ -117,6 +118,9 @@ const MyPage = () => {
                             <Link to="/">홈으로</Link>
                         </button>
                     </div>
+                    <br />
+                    <br />
+                    <Logout />
                     <br />
                     <br />
                     <ArtistsDelete />

@@ -23,4 +23,8 @@ const deleteSelect = (deleteSelect) => {
     return axios.put('http://localhost:8080/artists/delete', deleteSelect);
 };
 
-export default { list, signin, signup, mypage, deleteSelect };
+const logout = (logout) => {
+    return axios.put('http://localhost:8080/artists/logout', logout);
+};
+
+export default { list, signin, signup, mypage, deleteSelect, logout };

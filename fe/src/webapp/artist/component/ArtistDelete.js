@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useS, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { deleteSelect, getLocalArtist } from 'webapp/artist/reducer/artist.reducer';
+import '../style/ArtistDelete.css';
+
 const ArtistsDelete = () => {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -26,7 +28,7 @@ const ArtistsDelete = () => {
     return (
         <>
             <button
-                className="buttonSelectList2"
+                className="deleteButtonSelectList"
                 onClick={(e) => {
                     deleteButton(e);
                 }}

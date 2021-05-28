@@ -114,6 +114,21 @@ public class ArtistController {
         service.deleteById(artistId);
     }
 
+    @PostMapping("/logout")
+    @ApiOperation(value = "${ArtistController.delete}")
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 403, message = "Access Denied"),
+            @ApiResponse(code = 422, message = "Username is alredy in use")})
+    public ResponseEntity<String> logout
+            (@RequestBody ArtistDto artistDto) {
+        System.out.println("로그아웃을 시작합니다 :::: ");
+        System.out.println("artistDto :::::::: " + artistDto);
+        Long artistId = artistDto.getArtistId();
+        log.info("ArtistId ::::: " + artistId);
+//        service.deleteById(artistId);
+        return ResponseEntity.ok("Success Mypage");
+    }
+
 //    @GetMapping("/all")
 //    public ResponseEntity<List<ArtistDto>> all() {
 //        log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
