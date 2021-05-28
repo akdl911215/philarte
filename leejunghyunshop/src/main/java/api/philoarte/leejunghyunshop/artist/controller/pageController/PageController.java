@@ -32,12 +32,6 @@ public class PageController {
         return "redirect:/page/list";
     }
 
-//    @GetMapping("/list")
-//    public void list(PageRequestDto pageRequestDto, Model model) {
-//        log.info("list................." + pageRequestDto);
-//        model.addAttribute("result", service.getPageList(pageRequestDto));
-//    }
-
     @GetMapping("/list")
     public ResponseEntity<PageResultDto<ArtistDto, Artist>> list(
             PageRequestDto page) {
@@ -68,22 +62,17 @@ public class PageController {
         return new ResponseEntity<>(service.getPageList(page), HttpStatus.OK);
     }
 
-//    @GetMapping("/list/search")
-//    public String search(@RequestParam(value="{keyword}") String keyword, Model model){
-//        log.info("=======================================");
-//        log.info("=======================================");
-//        List<ArtistDto> artistDtoList = service.searchPosts(keyword);
-//        model.addAttribute("artistDtoList", artistDtoList);
-//        return null;
-//    }
+    @PostMapping("/totalSearchBar")
+    public ResponseEntity<PageResultDto> totalSearchBar
+            (@RequestBody ArtistDto artistDto) throws IOException {
+        log.info("==============================================");
+        log.info("==============================================");
+        log.info("Artist totalSearchBar(서치바) start :::::::::: " + artistDto);
+        log.info("==============================================");
+        log.info("==============================================");
 
-//    @PostMapping("/signup")
-//    @ApiOperation(value = "${ArtistController.signup}")
-//    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
-//            @ApiResponse(code = 403, message = "Access Denied"),
-//            @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
-//    public ResponseEntity<String> signup
-//            (@ApiParam("Signup Artist") @RequestBody ArtistDto artistDto) throws IOException {
-//        return ResponseEntity.ok(service.signup(artistDto));
-//    }
+//        service.getPageList(artistDto);
+        //service.
+        return null;
+    }
 }

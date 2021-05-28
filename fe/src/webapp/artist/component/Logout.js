@@ -4,12 +4,7 @@ import { useHistory } from 'react-router';
 import { getLocalArtist, logoutSelect } from '../reducer/artist.reducer';
 
 const Logout = () => {
-    const dispatch = useDispatch();
     const history = useHistory();
-
-    useEffect(() => {
-        dispatch(getLocalArtist());
-    }, []);
 
     const logoutButton = (e) => {
         e.preventDefault();
@@ -17,6 +12,7 @@ const Logout = () => {
         localStorage.clear(e);
         history.push('/');
     };
+
     return (
         <>
             <button

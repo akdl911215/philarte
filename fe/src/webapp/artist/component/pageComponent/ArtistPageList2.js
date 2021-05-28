@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import PageList from './PageList';
 import '../../style/ArtistPageList2.css';
-import { getArtistList } from 'webapp/artist/reducer/artist.reducer';
 import { fetchPage } from '../../reducer/artist.reducer';
 
-// import ArtistSearch from 'webapp/artist/component/pageComponent/ArtistSearch';
-
 const ArtistPageList2 = () => {
-    // alert('시작3');
     const dispatch = useDispatch();
-    // artist.pageResult
     const pageResult = useSelector((state) => state.artists.pageResult);
     const page = pageResult.page;
 
@@ -22,10 +16,6 @@ const ArtistPageList2 = () => {
     useEffect((e) => {
         dispatch(fetchPage(page));
     }, []);
-
-    // const movePage = (page) => {
-    //     dispatch(page);
-    // };
 
     return (
         <>

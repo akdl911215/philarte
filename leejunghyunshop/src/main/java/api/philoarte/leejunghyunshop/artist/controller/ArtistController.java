@@ -81,10 +81,8 @@ public class ArtistController {
     @PutMapping("/update/{artistId}")
     public ResponseEntity<ArtistDto> updateById
             (@PathVariable("artistId") Long artistId,
-             @RequestBody ArtistDto artist
-            ) {
+             @RequestBody ArtistDto artist) {
         System.out.println("회원정보 1개를 수정합니다 :::::::::::");
-
         artist.setArtistId(artistId);
         return ResponseEntity.ok(service.updateById(artist));
     }
@@ -93,11 +91,8 @@ public class ArtistController {
     public ResponseEntity<String> updateMypage
             (@RequestBody ArtistDto artistDto) {
         System.out.println("회원정보 1개를 수정합니다 :::::::::::");
-        log.info("artistDto ======= " + artistDto);
         service.updateMypage(artistDto);
         return ResponseEntity.ok("Success Mypage");
-
-//        return null;
     }
 
     @DeleteMapping("/delete")
@@ -112,21 +107,6 @@ public class ArtistController {
         Long artistId = artistDto.getArtistId();
         log.info("ArtistId ::::: " + artistId);
         service.deleteById(artistId);
-    }
-
-    @PostMapping("/logout")
-    @ApiOperation(value = "${ArtistController.delete}")
-    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
-            @ApiResponse(code = 403, message = "Access Denied"),
-            @ApiResponse(code = 422, message = "Username is alredy in use")})
-    public ResponseEntity<String> logout
-            (@RequestBody ArtistDto artistDto) {
-        System.out.println("로그아웃을 시작합니다 :::: ");
-        System.out.println("artistDto :::::::: " + artistDto);
-        Long artistId = artistDto.getArtistId();
-        log.info("ArtistId ::::: " + artistId);
-//        service.deleteById(artistId);
-        return ResponseEntity.ok("Success Mypage");
     }
 
 //    @GetMapping("/all")
