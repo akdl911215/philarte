@@ -106,9 +106,11 @@ public class ArtistController {
             @ApiResponse(code = 403, message = "Access Denied"),
             @ApiResponse(code = 422, message = "Username is alredy in use")})
     public void deleteById
-            (@PathVariable("artistId") Long artistId) {
+            (@RequestBody ArtistDto artistDto) {
         System.out.println("삭제를 시작합니다 :::: ");
-        System.out.println("artistId :::::::: " + artistId);
+        System.out.println("artistDto :::::::: " + artistDto);
+        Long artistId = artistDto.getArtistId();
+        log.info("ArtistId ::::: " + artistId);
         service.deleteById(artistId);
     }
 
