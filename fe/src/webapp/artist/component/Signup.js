@@ -2,9 +2,13 @@ import React, { useCallback, useState } from 'react';
 import '../style/ArtistSignup.css';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { signupPage } from '../reducer/artist.reducer';
 
-const Signup = ({ history }) => {
-    const [inputs, setInputs] = useState({
+const Signup = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [signup, setSignup] = useState({
         username: '',
         password: '',
         name: '',
@@ -15,54 +19,25 @@ const Signup = ({ history }) => {
         department: '',
     });
 
-    const { username, password, name, phoneNumber, email, address, school, department } = inputs;
+    const { username, password, name, phoneNumber, email, address, school, department } = signup;
 
     const handleChange = useCallback(
         (e) => {
             const { name, value } = e.target;
-            setInputs({
-                ...inputs,
+            setSignup({
+                ...signup,
                 [name]: value,
             });
         },
-        [inputs]
+        [signup]
     );
 
-    // const dispatch = useDispatch();
-
-    const handleSubmit = useCallback(
-        (e) => {
-            alert(`회원가입에 성공하셨습니다.`);
-
-            e.preventDefault();
-            console.log(`회원가입 작동`);
-            // dispatch(inputs);
-            alert('ID : ' + username);
-            console.log('username ::::::::' + username);
-            console.log('email:::::::::::::::' + email);
-            console.log('department :::::::::::::: ' + department);
-
-            axios
-                .post(`http://localhost:8080/artists/signup`, {
-                    username: username,
-                    password: password,
-                    name: name,
-                    phoneNumber: phoneNumber,
-                    email: email,
-                    address: address,
-                    school: school,
-                    department: department,
-                })
-                .then((res) => {
-                    console.log(res);
-                    setInputs(res.data);
-                    history.push('/');
-                    // window.location = '/';
-                })
-                .catch((err) => console.log(err));
-        },
-        [username, password, name, phoneNumber, email, address, school, department]
-    );
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(signupPage(signup));
+        // history.push('/artists/artists_signin');
+    };
 
     const cancelButton = (e) => {
         e.preventDefault();
@@ -102,6 +77,11 @@ const Signup = ({ history }) => {
                     </label>
                     <input type="text" placeholder="Enter PhoneNumber" name="phoneNumber" value={phoneNumber} onChange={handleChange} />
 
+                    <label htmlFor="address">
+                        <b>주소</b>
+                    </label>
+                    <input type="text" placeholder="Enter Address" name="address" value={address} onChange={handleChange} />
+
                     <label htmlFor="school">
                         <b>학교</b>
                     </label>
@@ -123,7 +103,13 @@ const Signup = ({ history }) => {
                         <button type="button" className="cancelbtn" onClick={cancelButton}>
                             Cancel
                         </button>
-                        <button type="submit" className="signupbtn" onClick={handleSubmit}>
+                        <button
+                            type="submit"
+                            className="signupbtn"
+                            onClick={(e) => {
+                                handleSubmit(e);
+                            }}
+                        >
                             Sign Up
                         </button>
                     </div>

@@ -25,8 +25,8 @@ public class Artist extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "artist_id")
     private long artistId;
-    // , nullable = false
-    @Column(name = "username", unique = true)
+    //, unique = true , nullable = false
+    @Column(name = "username")
     private String username;
 
     //, columnDefinition="Number(10) default '12345678'"
@@ -66,6 +66,22 @@ public class Artist extends BaseEntity {
 
      public void changeDepartment(String department){
          this.department = department;
+     }
+
+     public void changePassword(String password){
+        this.password = password;
+     }
+
+     public void changePhoneNumber(String phoneNumber){
+        this.phoneNumber = phoneNumber;
+     }
+
+     public void changeEmail(String email){
+        this.email = email;
+     }
+
+     public void changeAddress(String address){
+        this.address = address;
      }
 
 //    public Artist(String username, String name, String email) {

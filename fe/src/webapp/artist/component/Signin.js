@@ -3,6 +3,7 @@ import '../style/ArtistSignin.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signinPage } from 'webapp/artist/reducer/artist.reducer';
+import { artistCurrent } from '../reducer/artist.reducer';
 
 const Signin = () => {
     const [signin, setSignin] = useState({

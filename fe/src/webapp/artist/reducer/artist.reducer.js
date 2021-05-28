@@ -13,15 +13,29 @@ const getArtistSigninPage = async (signin) => {
     return response.data;
 };
 
+const getArtistSignupPage = async (signup) => {
+    console.log('getArtistSignupPage :: ' + signup);
+    const response = await ArtistService.signup(signup);
+    return response.data;
+};
+
 const getArtistMypagePage = async (mypage) => {
     console.log('getArtistMypagePage :: ' + mypage);
     const response = await ArtistService.mypage(mypage);
     return response.data;
 };
 
+const getArtistDeleteSelect = async (deleteSelect) => {
+    console.log('getArtistDeleteSelect :: ' + deleteSelect);
+    const response = await ArtistService.deleteSelect(deleteSelect);
+    return response.data;
+};
+
 export const fetchPage = createAsyncThunk('artists/list', getArtistServerPage);
 export const signinPage = createAsyncThunk('artists/signin', getArtistSigninPage);
+export const signupPage = createAsyncThunk('artists/signup', getArtistSignupPage);
 export const mypagePage = createAsyncThunk('artists/mypage', getArtistMypagePage);
+export const deleteSelect = createAsyncThunk('artists/mypage', getArtistDeleteSelect);
 
 // const isRejectedAction = (action) => action.type.endsWith('rejected');
 const artistSlice = createSlice({
@@ -64,6 +78,8 @@ const artistSlice = createSlice({
 
             const artist = JSON.parse(window.localStorage.getItem('artist'));
             state.artistsState = artist;
+            // console.log('artist :::: ' + JSON.stringify(artist));
+            // console.log('state.artistsState :::: ' + JSON.stringify(state.artistsState));
         },
     },
     extraReducers: {
@@ -77,15 +93,20 @@ const artistSlice = createSlice({
             window.localStorage.setItem('artist', JSON.stringify(payload));
         },
         [mypagePage.fulfilled]: (state, { meta, payload }) => {
-            // alert('여긴오나 reducer?');
-            // alert(state.artistsState.artistId);
-            // state.artistsState.artistId = payload;
+            state.artistsState = payload;
+            console.log('reducer payload ::::::::: ' + payload);
+        },
+        [signupPage.fulfilled]: (state, { meta, payload }) => {
+            state.artistsState = payload;
+            console.log('reducer payload ::::::::: ' + payload);
+        },
+        [deleteSelect.fulfilled]: (state, { meta, payload }) => {
             state.artistsState = payload;
             console.log('reducer payload ::::::::: ' + payload);
         },
     },
 });
 const { action, reducer } = artistSlice;
-// export const artistCurrent = (state) => state.artists.artistsState; // 현재 artist state
+// export const artistCurrent = (state) => state.artistsState; // 현재 artist state
 export const { getLocalArtist } = artistSlice.actions;
 export default artistSlice.reducer;

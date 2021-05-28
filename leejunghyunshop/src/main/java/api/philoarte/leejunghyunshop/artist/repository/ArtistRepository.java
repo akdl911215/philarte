@@ -47,6 +47,12 @@ public interface ArtistRepository extends JpaRepository<Artist, Long>,
 //                  @Param("email") String email, @Param("phoneNumber") String phoneNumber, @Param("address") String address, @Param("school") String school,
 //                  @Param("department") String department);
 
+
+    // 마이페이지
+//    @Modifying
+//    @Query("update Artist a set a.address = :addr where a.artistId =:artistId" )
+//      void updateInfo(@Param("addr")String addr, @Param("pw") Long artistId);
+
 //    @Modifying
 //    @Query("Update FROM Artist a set a.password = :pw where a.artistId = :artistId")
 //    int updatePassword(@Param("artistId") Long artistId, @Param("pw") String pw);

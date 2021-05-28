@@ -1,30 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocalArtist } from '../reducer/artist.reducer';
+import { artistCurrent, getLocalArtist } from '../reducer/artist.reducer';
 import { mypagePage } from 'webapp/artist/reducer/artist.reducer';
 import Signin from '../component/Signin';
+import ArtistsDelete from './ArtistDelete';
 
 const MyPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    // const currentArtist = useSelector((state) => state.artists.artistsState);
-
-    // const artistObj = useSelector(artistCurrent);
-    console.log('-------------------------------------');
-    console.log('mypage current.................');
-    console.log(mypagePage.artist);
-    console.log('-------------------------------------');
-
-    const artistsObj = useSelector((state) => Signin);
+    const artistObj = useSelector(mypagePage);
     const artistsState = useSelector((state) => state.artists.artistsState);
-    console.log('state.artists.artistsState ::::::: ' + artistsState);
-    console.log('JSON.stringify(artistsState) ::::::: ' + JSON.stringify(artistsState));
 
     const [mypage, setMypage] = useState({
         artistId: artistsState.artistId,
         username: artistsState.usename,
         password: '',
+        name: '',
         phoneNumber: '',
         email: '',
         address: '',
@@ -33,35 +25,16 @@ const MyPage = () => {
     });
 
     useEffect(() => {
-        // alert('mypage dispathch');
         dispatch(getLocalArtist());
     }, []);
 
-    console.log('=========================');
-    console.log('mypage.artistId = ::::::: ' + mypage.artistId);
-    console.log(artistsState.artistId);
-    console.log(artistsState.username);
-
-    console.log(mypage.password);
-    console.log(mypage.phoneNumber);
-    console.log(mypage.email);
-    console.log(mypage.address);
-    console.log(mypage.school);
-    console.log(mypage.department);
-    console.log('=========================');
     const goMypage = (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        // alert('dispatch 작동?');
-        console.log('mypage ::::::: ' + mypage);
-        console.log('mypagePage(mypage) ::::::: ' + mypagePage(mypage));
-        console.log('dispatch(mypagePage(mypage)) ::::::: ' + dispatch(mypagePage(mypage)));
-        const obj = { artistId: mypage.artistId, username: mypage.username, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
+        const obj = { artistId: artistsState.artistId, username: artistsState.usename, password: mypage.password, name: artistsState.name, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
+        console.log('SEND BEFORE', obj);
         dispatch(mypagePage(obj));
-        console.log('obj :: ' + obj);
-
-        // history.push('/');
+        history.push('/');
     };
 
     const handleChange = useCallback(
@@ -75,7 +48,6 @@ const MyPage = () => {
         },
         [mypage]
     );
-
     return (
         <>
             <form>
@@ -83,62 +55,71 @@ const MyPage = () => {
                     <h1>마이 페이지</h1>
                     <hr />
 
-                    <label htmlFor="artistId">
-                        <b>아이디번호</b>
-                    </label>
-                    <td>{artistsState.artistId} </td>
+                    <form>
+                        <label htmlFor="artistId">
+                            <b>아이디번호</b>
+                        </label>
+                        <td>{artistsState.artistId} </td>
 
-                    <label htmlFor="username">
-                        <b>아이디</b>
-                    </label>
-                    <td>{artistsState.username} </td>
+                        <label htmlFor="username">
+                            <b>아이디</b>
+                        </label>
+                        <td>{artistsState.username} </td>
 
-                    <label htmlFor="password">
-                        <b>비밀번호</b>
-                    </label>
-                    <input type="password" placeholder="password" name="password" value={mypage.password} onChange={(e) => handleChange(e)} />
+                        <label htmlFor="password">
+                            <b>비밀번호</b>
+                        </label>
+                        <input type="password" placeholder="password" name="password" value={mypage.password} onChange={(e) => handleChange(e)} />
 
-                    <label htmlFor="name">
-                        <b>이름</b>
-                    </label>
-                    <td>{artistsState.name}</td>
+                        <label htmlFor="name">
+                            <b>이름</b>
+                        </label>
+                        <td>{artistsState.name}</td>
 
-                    <label htmlFor="phoneNumber">
-                        <b>핸드폰번호</b>
-                    </label>
-                    <input type="text" onChange={(e) => handleChange(e)} placeholder="phoneNumber" name="phoneNumber" value={mypage.phoneNumber} />
+                        <label htmlFor="phoneNumber">
+                            <b>핸드폰번호</b>
+                        </label>
+                        <input type="text" placeholder="phoneNumber" name="phoneNumber" value={mypage.phoneNumber} onChange={(e) => handleChange(e)} />
 
-                    <label htmlFor="email">
-                        <b>E-mail</b>
-                    </label>
-                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter Email" name="email" value={mypage.email} />
+                        <label htmlFor="email">
+                            <b>E-mail</b>
+                        </label>
+                        <input type="text" placeholder="Enter Email" name="email" value={mypage.email} onChange={(e) => handleChange(e)} />
 
-                    <label htmlFor="address">
-                        <b>주소</b>
-                    </label>
-                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter Addres" name="address" value={mypage.address} />
+                        <label htmlFor="address">
+                            <b>주소</b>
+                        </label>
+                        <input type="text" placeholder="Enter Addres" name="address" value={mypage.address} onChange={(e) => handleChange(e)} />
 
-                    <label htmlFor="school">
-                        <b>학교</b>
-                    </label>
-                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter School" name="school" value={mypage.school} />
+                        <label htmlFor="school">
+                            <b>학교</b>
+                        </label>
+                        <input type="text" placeholder="Enter School" name="school" value={mypage.school} onChange={(e) => handleChange(e)} />
 
-                    <label htmlFor="department">
-                        <b>학과</b>
-                    </label>
-                    <input type="text" onChange={(e) => handleChange(e)} placeholder="Enter Department" name="department" value={mypage.department} />
+                        <label htmlFor="department">
+                            <b>학과</b>
+                        </label>
+                        <input type="text" placeholder="Enter Department" name="department" value={mypage.department} onChange={(e) => handleChange(e)} />
+
+                        <button
+                            type="submit"
+                            className="updatebtn"
+                            onClick={(e) => {
+                                goMypage(e);
+                            }}
+                        >
+                            정보 수정
+                        </button>
+                    </form>
 
                     <div className="clearfix">
                         <button type="button" className="cancelbtn">
                             <Link to="/">홈으로</Link>
                         </button>
-                        <button type="submit" className="updatebtn" onClick={(e) => goMypage(e)}>
-                            정보 수정
-                        </button>
-                        {/* <button type="button" className="deletebtn" onClick={deleteButton}>
-                            회원 탈퇴
-                        </button> */}
                     </div>
+                    <br />
+                    <br />
+                    <ArtistsDelete />
                 </div>
             </form>
         </>

@@ -90,31 +90,17 @@ public class ArtistController {
     }
 
     @PutMapping("/mypage")
-    public ResponseEntity<ArtistDto> updateMypage
+    public ResponseEntity<String> updateMypage
             (@RequestBody ArtistDto artistDto) {
-        artistDto.getUsername();
-
-//        log.info("artistId :::::::: " + artistId);
-
-        artistDto.getArtistId();
-        log.info("artistDto.getArtistId() :::::: " + artistDto.getArtistId());
-
-        Optional<Artist> dtoArtist = service.findById(artistDto.getArtistId());
-        log.info("dtoArtist ::::::: " + dtoArtist);
-
         System.out.println("회원정보 1개를 수정합니다 :::::::::::");
         log.info("artistDto ======= " + artistDto);
-//        artistDto.setArtistId(artistId);
-        log.info("artistDto.getArtistId() ::::::: " + artistDto.getArtistId());
-        artistDto.setUsername(artistDto.getUsername());
-        log.info("artistDto.getUsername() ::::::::::: " + artistDto.getUsername());
-        artistDto.setName(artistDto.getName());
-        log.info("artistDto.getName() ::::::: " + artistDto.getName());
-//        return ResponseEntity.ok(service.updateMypage(artistDto));
-        return null;
+        service.updateMypage(artistDto);
+        return ResponseEntity.ok("Success Mypage");
+
+//        return null;
     }
 
-    @DeleteMapping("/delete/{artistId}")
+    @DeleteMapping("/delete")
     @ApiOperation(value = "${ArtistController.delete}")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 403, message = "Access Denied"),
@@ -126,24 +112,24 @@ public class ArtistController {
         service.deleteById(artistId);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<ArtistDto>> all() {
-        log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
-        return ResponseEntity.ok(null);
-    }
-
-
-    @PostMapping("/{username}")
-    public ResponseEntity<?> auth(@PathVariable String username) {
-        log.info("로그인한 사용자만 접근 가능한 URI");
-        return ResponseEntity.ok(null);
-    }
-
-    @PostMapping("/admin")
-    public ResponseEntity<?> admin() {
-        log.info("관리자만 접근 가능한 URI");
-        return ResponseEntity.ok(null);
-    }
+//    @GetMapping("/all")
+//    public ResponseEntity<List<ArtistDto>> all() {
+//        log.info("로그인 하지 않은 사용자도 접근 가능한 URI");
+//        return ResponseEntity.ok(null);
+//    }
+//
+//
+//    @PostMapping("/{username}")
+//    public ResponseEntity<?> auth(@PathVariable String username) {
+//        log.info("로그인한 사용자만 접근 가능한 URI");
+//        return ResponseEntity.ok(null);
+//    }
+//
+//    @PostMapping("/admin")
+//    public ResponseEntity<?> admin() {
+//        log.info("관리자만 접근 가능한 URI");
+//        return ResponseEntity.ok(null);
+//    }
 
 }
 

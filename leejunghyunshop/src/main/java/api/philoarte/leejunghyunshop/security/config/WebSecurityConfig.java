@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**/**").permitAll()
                 .antMatchers("/artists/delete/{artistId}").permitAll()
                 .antMatchers("/artists/update/{artistId}").permitAll()
+                .antMatchers("/artists/mypage/{artistId}").permitAll()
                 .antMatchers("/artists/**/**").permitAll()
                 .antMatchers("/artists/**").permitAll()
                 .antMatchers("/artists/fetchOne/{artistId}").permitAll()

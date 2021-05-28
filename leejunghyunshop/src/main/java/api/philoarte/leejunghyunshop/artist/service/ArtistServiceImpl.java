@@ -23,8 +23,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -157,21 +158,32 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     @Override
     public ArtistDto updateById(ArtistDto artistDto) {
         Artist entity = dtoEntity(artistDto);
+
         repository.save(entity);
         ArtistDto dtoEntity = entityDto(entity);
         return dtoEntity;
     }
 
+    @Transactional
     @Override
     public ArtistDto updateMypage(ArtistDto artistDto) {
-        log.info("====================");
-        log.info("진입했나? :::::::: " + artistDto);
-        log.info("====================");
-        Artist entity = dtoEntity(artistDto);
-        repository.save(entity);
-        ArtistDto dtoEntity = entityDto(entity);
-        log.info("dtoEntity :::::: " + dtoEntity);
-        return dtoEntity;
+            log.info("====================");
+            log.info("진입했나? :::::::: " + artistDto);
+            log.info("====================");
+
+            Artist artist = repository.getOne(artistDto.getArtistId());
+
+            artist.changePassword(artistDto.getPassword());
+            artist.changePhoneNumber(artistDto.getPhoneNumber());
+            artist.changeEmail(artistDto.getEmail());
+            artist.changeAddress(artistDto.getAddress());
+            artist.changeSchool(artistDto.getSchool());
+            artist.changeDepartment(artistDto.getDepartment());
+
+            repository.save(artist);
+            ArtistDto dtoEntity = entityDto(artist);
+            log.info("dtoEntity :::::: " + dtoEntity);
+            return dtoEntity;
     }
 
     @Override

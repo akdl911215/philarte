@@ -10,18 +10,17 @@ const signin = (signin) => {
         password: signin.password,
     });
 };
-//+ mypage.artistId, mypage
-const mypage = (mypage) => {
-    return axios.put(`http://localhost:8080/artists/mypage`, {
-        artistId: mypage.artistId,
-        username: mypage.username,
-        password: mypage.password,
-        name: mypage.name,
-        phoneNumber: mypage.phoneNumber,
-        email: mypage.email,
-        address: mypage.email,
-        department: mypage.department,
-    });
+
+const signup = (signup) => {
+    return axios.post(`http://localhost:8080/artists/signup`, signup);
 };
 
-export default { list, signin, mypage };
+const mypage = (artist) => {
+    return axios.put('http://localhost:8080/artists/mypage', artist);
+};
+
+const deleteSelect = (deleteSelect) => {
+    return axios.put('http://localhost:8080/artists/delete', deleteSelect);
+};
+
+export default { list, signin, signup, mypage, deleteSelect };

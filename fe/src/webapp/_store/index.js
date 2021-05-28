@@ -11,13 +11,11 @@ const persistConfig = {
     whitelist: ['artitst'],
 };
 
-//const rootReducer = combineReducers({ artists: artistsSlice });
+const rootReducer = combineReducers({ artists: artistsSlice });
 
 //const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default configureStore({
-    reducer: {
-        artists: artistsSlice,
-    },
+    reducer: rootReducer,
     middleware: [...getDefaultMiddleware(), logger],
 });
