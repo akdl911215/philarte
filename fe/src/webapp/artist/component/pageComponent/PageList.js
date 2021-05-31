@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../style/PageList.css';
 import { fetchPage } from '../../reducer/artist.reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../style/ArtistPage.css';
 
-const PageList = () => {
-    // alert('시작4');
-    const { pageList, page, start, end, prev, next, username, name, email, address, school, department } = useSelector((state) => state.artists.pageResult);
+const PageList = ({ pageList, page, start, end, prev, next }) => {
+    // type = '', keyword = '', size = ''
+    const pageResult = useSelector((state) => state.artists.pageResult);
+
+    console.log('------------------------', pageResult);
+
+    // const { pageList, page, start, end, prev, next } = useSelector((state) => state.artists.pageResult);
     const dispatch = useDispatch();
-    console.log('PageList....');
-    console.log(pageList);
-    console.log('page........... ::::: ' + page);
-    console.log('start :::::::: ' + start);
-    console.log('end ::::::::::: ' + end);
-    console.log('prev ::::::::: ' + prev);
-    console.log('next ::::::::::: ' + next);
-    // console.log('pageResult ::::::::::: ' + state.artists.pageResult);
+    // console.log('PageList....');
+    // console.log(pageList);
+    // console.log('page........... ::::: ' + page);
+    // console.log('start :::::::: ' + start);
+    // console.log('end ::::::::::: ' + end);
+    // console.log('prev ::::::::: ' + prev);
+    // console.log('next ::::::::::: ' + next);
+    // console.log('type ::::::::::: ', type);
+    // console.log('keyword ::::::::::: ', keyword);
 
     const movePage = (i) => {
-        alert('시작5');
+        console.log('movPage i :::::: ', i);
+        // const param = { type: type }; //keyword: keyword, page: page
+        console.log('param :: ', i);
         dispatch(fetchPage(i));
     };
 
-    console.log('pageList ::::::::: ' + pageList);
+    console.log('pageList ::::::::: ' + JSON.stringify(pageList));
 
     const list = pageList.map((i) => (
         <button key={i} classsName="PageListBtn" onClick={() => movePage(i)}>

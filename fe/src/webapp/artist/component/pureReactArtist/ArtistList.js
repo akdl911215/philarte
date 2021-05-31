@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArtistList } from '../reducer/artist.reducer';
+import { getArtistList } from '../../reducer/artist.reducer';
 import axios from 'axios';
-import '../style/ArtistList.css';
-import ArtistsDelete from 'webapp/artist/component/ArtistDelete';
+import 'webapp/artist/style/ArtistList.css';
 
 const ArtistList = () => {
     const history = useHistory();

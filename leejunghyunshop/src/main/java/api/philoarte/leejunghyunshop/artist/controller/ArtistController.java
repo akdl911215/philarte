@@ -3,11 +3,13 @@ package api.philoarte.leejunghyunshop.artist.controller;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
+import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,18 @@ import java.util.Optional;
 public class ArtistController {
 
     private final ArtistServiceImpl service;
-    private final ModelMapper modelMapper;
+
+    @GetMapping("/list/pages")
+    public ResponseEntity<PageResultDto<ArtistDto, Artist>> list(PageRequestDto page) {
+        log.info("=======================================");
+        log.info("=======================================");
+        log.info("page................." + page);
+//        log.info("model................." + model);
+//        model.addAttribute("result", service.getPageList(page));
+//        return null;
+        log.info("result" + service.getPageList(page));
+        return new ResponseEntity(service.getPageList(page), HttpStatus.OK);
+    }
 
     @PostMapping("/signup")
     @ApiOperation(value = "${ArtistController.signup}")

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchPage } from 'webapp/artist/reducer/artist.reducer';
+import { fetchPage, getArtistServerPage, getLocalArtist } from 'webapp/artist/reducer/artist.reducer';
 import '../../style/ArtistPage.css';
 
-const ArtistPage = () => {
+const ArtistPageReset = () => {
     // alert('시작2');
     const dispatch = useDispatch();
     const goReset = () => {
@@ -17,4 +17,4 @@ const ArtistPage = () => {
         </>
     );
 };
-export default ArtistPage;
+export default ArtistPageReset;

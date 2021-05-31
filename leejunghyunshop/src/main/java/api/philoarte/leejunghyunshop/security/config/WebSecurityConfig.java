@@ -48,6 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/page/list/{page}").permitAll()
                 .antMatchers("/page/list").permitAll()
                 .antMatchers("/page/list/search").permitAll()
+                .antMatchers("/page/**/**").permitAll()
+                .antMatchers("/page/**").permitAll()
                 .antMatchers("/h2-console/**/**").permitAll()
                 .antMatchers("/artists/delete/{artistId}").permitAll()
                 .antMatchers("/artists/update/{artistId}").permitAll()

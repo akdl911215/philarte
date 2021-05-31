@@ -3,7 +3,6 @@ import '../style/ArtistSignin.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signinPage } from 'webapp/artist/reducer/artist.reducer';
-import { artistCurrent } from '../reducer/artist.reducer';
 
 const Signin = () => {
     const [signin, setSignin] = useState({
@@ -12,17 +11,12 @@ const Signin = () => {
     });
 
     const artistsState = useSelector((state) => state.artists.artistsState);
-    console.log('state.artists.artistsState ::::::: ' + artistsState);
-    // const { username, password } = useSelector((state) => state.artists.artistsState);
 
     const history = useHistory();
     const dispatch = useDispatch();
     const goSignin = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // alert('dispatch 작동?');
-        console.log('signin :::::::::::: ' + signin);
-        console.log('(signinPage(signin)) :::::::::::: ' + signinPage(signin));
         dispatch(signinPage(signin));
         history.push('/');
     };

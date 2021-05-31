@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-const list = (page) => {
-    return axios.get('http://localhost:8080/page/list?page=' + page);
+// const list = (page) => {
+//     return axios.get('http://localhost:8080/artists/list/pages?page=' + page);
+// };
+
+const list = (cri) => {
+    const str = 'page=' + (!cri.page ? 1 : cri.page) + '&type=' + (cri.type ? cri.type : '') + '&keyword=' + (cri.keyword ? cri.keyword : '');
+
+    // const str = 'page=' + (!cri.page ? 1 : cri.page);
+    // console.log('str ::::::: ', str);
+    console.log('pagpageListe :::::::::: ', cri);
+    return axios.get('http://localhost:8080/artists/list/pages?' + str);
 };
 
 const signin = (signin) => {

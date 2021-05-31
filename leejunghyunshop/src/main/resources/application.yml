@@ -1,9 +1,10 @@
+로컬 DB:
 server:
   port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/root?zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://localhost:3306/root?allowPublicKeyRetrieval=true
     username: root
     password: 456123
 
@@ -19,7 +20,3 @@ spring:
 security:
   jwt:
     secret: secret-value
-
-UserController:
-  signup: Creates user and returns its JWT token
-  signin: Authenticates user and returns its JWT token

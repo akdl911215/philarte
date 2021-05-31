@@ -21,6 +21,33 @@ public class ArtistServiceTests {
     private PageRequestService pageRequestService;
 
     @Test
+    @Transactional
+    @Commit
+    public void testSearch(){
+
+        PageRequestDto pageRequestDTO = PageRequestDto.builder()
+                .page(1)
+                .size(10)
+                .type("un") // 검색 조건 t, c, w, tc, tcw ...
+                .keyword("ni") // 검색 키워드
+                .build();
+
+        PageResultDto<ArtistDto, Artist> resultDTO = sv.getPageList(pageRequestDTO);
+
+        System.out.println("PREV: " + resultDTO.isPrev());
+        System.out.println("NEXT: " + resultDTO.isNext());
+        System.out.println("TOTAL: " + resultDTO.getTotalPage());
+
+        System.out.println("-------------------------------------");
+        for (ArtistDto artistDto : resultDTO.getDtoList()){
+            System.out.println(artistDto);
+        }
+
+        System.out.println("--------------------------------------");
+        resultDTO.getPageList().forEach(i -> System.out.println(i));
+    }
+
+    @Test
     public void testRegister() {
         ArtistDto artistDto = ArtistDto.builder()
                 .artistId(1)

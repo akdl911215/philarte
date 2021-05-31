@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../style/ArtistUpdate.css';
+import 'webapp/artist/style/ArtistUpdate.css';
 
 const ArtistUpdate = () => {
     const [details, setDetails] = useState({});

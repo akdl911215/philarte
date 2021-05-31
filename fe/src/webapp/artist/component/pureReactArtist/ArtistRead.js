@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
-import '../style/ArtistRead.css';
+import 'webapp/artist/style/ArtistRead.css';
 
 const ArtistRead = () => {
     const [detail, setDetail] = useState({});

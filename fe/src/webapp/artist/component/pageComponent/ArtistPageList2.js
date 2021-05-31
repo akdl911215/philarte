@@ -2,20 +2,34 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PageList from './PageList';
 import '../../style/ArtistPageList2.css';
-import { fetchPage } from '../../reducer/artist.reducer';
+import { fetchPage, getArtistServerPage, getLocalArtist } from '../../reducer/artist.reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import ArtistPageSearch from 'webapp/artist/component/pageComponent/ArtistPageSearch';
 
 const ArtistPageList2 = () => {
     const dispatch = useDispatch();
+
     const pageResult = useSelector((state) => state.artists.pageResult);
+    // const type = useSelector((state) => state.artists.pageResult.type);
+    // const keyword = useSelector((state) => state.artists.pageResult.keyword);
+
     const page = pageResult.page;
 
-    console.log('pageResult :::::::: ' + pageResult);
-    console.log('pageResult :::::::: ' + JSON.stringify(pageResult));
-    console.log('pageResult.page::::::::::' + pageResult.page);
+    const artists = useSelector((state) => {
+        return state.artists.pageResult.dtoList;
+    });
 
-    useEffect((e) => {
-        dispatch(fetchPage(page));
+    console.log('pageResult::::::::::', pageResult);
+
+    useEffect(() => {
+        console.log('artistPageList page :: ', page);
+        // const param = { type: type }; //, keyword: keyword, page: page
+        dispatch(fetchPage(page)); //페이지에 1페이지 뿌려주는 역할
     }, []);
+
+    console.log('=========================');
+
+    console.log(pageResult);
 
     return (
         <>
@@ -36,7 +50,6 @@ const ArtistPageList2 = () => {
                             {pageResult.dtoList.map((artist, id) => {
                                 return (
                                     <>
-                                        {/* console.log('artist ::::::::::' + artist) */}
                                         <tr key={id}>
                                             <td>{artist.artistId}</td>
                                             <td>{artist.username}</td>
@@ -53,8 +66,10 @@ const ArtistPageList2 = () => {
                         </tbody>
                     </table>
                     <PageList {...pageResult} />
+
                     <br />
                     <br />
+                    <ArtistPageSearch {...pageResult} />
                 </table>
             </div>
         </>

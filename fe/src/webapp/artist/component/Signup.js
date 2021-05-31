@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import '../style/ArtistSignup.css';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { signupPage } from '../reducer/artist.reducer';
 
@@ -36,7 +35,7 @@ const Signup = () => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(signupPage(signup));
-        // history.push('/artists/artists_signin');
+        history.push('/artists/artists_signin');
     };
 
     const cancelButton = (e) => {

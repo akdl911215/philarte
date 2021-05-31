@@ -1,4 +1,3 @@
-import { domToReact } from 'html-react-parser';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -21,7 +20,7 @@ const ArtistPageList = () => {
         console.log('렌더링중..');
 
         fetchList();
-        // alert(fetchList());
+        alert(fetchList());
     }, []);
 
     return (

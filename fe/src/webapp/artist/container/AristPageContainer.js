@@ -1,8 +1,7 @@
 import React from 'react';
-import ArtistPage from '../component/pageComponent/ArtistPage';
+import ArtistPage from '../component/pageComponent/ArtistPageReset';
 import ArtistPageList2 from 'webapp/artist/component/pageComponent/ArtistPageList2';
 import '../style/PageList.css';
-import ArtistPageSearch from '../component/pageComponent/ArtistPageSearch';
 
 const ArtistPageContainer = () => {
     // alert('시작1');
@@ -13,7 +12,6 @@ const ArtistPageContainer = () => {
 
                 <ArtistPageList2 />
                 <ArtistPage />
-                <ArtistPageSearch />
             </div>
         </>
     );

@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ArtistService } from 'webapp/artist/index';
 
-const getArtistServerPage = async (page) => {
-    console.log('getARtistServerPage :: ' + page);
-    const response = await ArtistService.list(page);
+const getArtistServerPage = async (cri) => {
+    console.log('getARtistServerPage :: ' + cri);
+    const response = await ArtistService.list(cri);
+    console.log('response ::::::::: ', response.data);
     return response.data;
 };
 
@@ -45,6 +46,7 @@ export const deleteSelect = createAsyncThunk('artists/mypage', getArtistDeleteSe
 export const totalSearchBar = createAsyncThunk('page/totalSearchBar', getTotalSearchBar);
 
 // const isRejectedAction = (action) => action.type.endsWith('rejected');
+
 const artistSlice = createSlice({
     name: 'artists',
     initialState: {
@@ -56,12 +58,9 @@ const artistSlice = createSlice({
             end: 1,
             prev: false,
             next: false,
-            username: 'as',
-            name: 'as',
-            email: 'as',
-            address: 'as',
-            school: 'as',
-            department: 'as',
+            // size: '',
+            type: '',
+            keyword: '',
         },
         artistsState: {
             artistId: '',
@@ -74,6 +73,8 @@ const artistSlice = createSlice({
             school: '',
             department: '',
         },
+        // type: '',
+        // keyword: '',
     },
     reducers: {
         getLocalArtist: (state, action) => {
@@ -85,13 +86,17 @@ const artistSlice = createSlice({
 
             const artist = JSON.parse(window.localStorage.getItem('artist'));
             state.artistsState = artist;
-            // console.log('artist :::: ' + JSON.stringify(artist));
-            // console.log('state.artistsState :::: ' + JSON.stringify(state.artistsState));
+        },
+
+        changeSearch: (state, action) => {
+            state.type = action.payload.type;
+            state.keyword = action.payload.keyword;
         },
     },
     extraReducers: {
         [fetchPage.fulfilled]: (state, { meta, payload }) => {
-            console.log(payload);
+            console.log('payload fetchPage :::::::', payload);
+
             state.pageResult = payload;
         },
         [signinPage.fulfilled]: (state, { meta, payload }) => {
@@ -113,7 +118,7 @@ const artistSlice = createSlice({
         },
     },
 });
-const { action, reducer } = artistSlice;
+// const { action, reducer } = artistSlice;
 // export const artistCurrent = (state) => state.artistsState; // 현재 artist state
-export const { getLocalArtist } = artistSlice.actions;
+export const { getLocalArtist, changeSearch } = artistSlice.actions; //changeSearch
 export default artistSlice.reducer;

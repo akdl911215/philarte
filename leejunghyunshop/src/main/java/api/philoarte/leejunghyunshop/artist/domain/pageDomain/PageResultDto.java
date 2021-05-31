@@ -1,6 +1,7 @@
 package api.philoarte.leejunghyunshop.artist.domain.pageDomain;
 
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@ToString
 @Data
 public class PageResultDto<Dto, EN> {
     private List<Dto> dtoList;

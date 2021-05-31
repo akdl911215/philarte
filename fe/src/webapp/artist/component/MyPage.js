@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { artistCurrent, getLocalArtist } from '../reducer/artist.reducer';
 import { mypagePage } from 'webapp/artist/reducer/artist.reducer';
-import Signin from '../component/Signin';
 import ArtistsDelete from './ArtistDelete';
 import Logout from './Logout';
 
