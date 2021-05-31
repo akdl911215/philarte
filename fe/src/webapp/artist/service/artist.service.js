@@ -4,12 +4,12 @@ import axios from 'axios';
 //     return axios.get('http://localhost:8080/artists/list/pages?page=' + page);
 // };
 
-const list = (cri) => {
-    const str = 'page=' + (!cri.page ? 1 : cri.page) + '&type=' + (cri.type ? cri.type : '') + '&keyword=' + (cri.keyword ? cri.keyword : '');
+const list = (page) => {
+    const str = 'page=' + (!page.page ? 1 : page.page) + '&type=' + (page.type ? page.type : '') + '&keyword=' + (page.keyword ? page.keyword : '');
 
     // const str = 'page=' + (!cri.page ? 1 : cri.page);
     // console.log('str ::::::: ', str);
-    console.log('pagpageListe :::::::::: ', cri);
+    console.log('pagpageListe :::::::::: ', page);
     return axios.get('http://localhost:8080/artists/list/pages?' + str);
 };
 

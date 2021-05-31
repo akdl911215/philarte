@@ -59,8 +59,8 @@ const artistSlice = createSlice({
             prev: false,
             next: false,
             // size: '',
-            type: '',
-            keyword: '',
+            // type: '',
+            // keyword: '',
         },
         artistsState: {
             artistId: '',
@@ -73,8 +73,8 @@ const artistSlice = createSlice({
             school: '',
             department: '',
         },
-        // type: '',
-        // keyword: '',
+        type: '',
+        keyword: '',
     },
     reducers: {
         getLocalArtist: (state, action) => {

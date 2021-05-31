@@ -10,14 +10,26 @@ const ArtistPageList2 = () => {
     const dispatch = useDispatch();
 
     const pageResult = useSelector((state) => state.artists.pageResult);
-    // const type = useSelector((state) => state.artists.pageResult.type);
-    // const keyword = useSelector((state) => state.artists.pageResult.keyword);
-
-    const page = pageResult.page;
+    const type = useSelector((state) => state.artists.pageResult.type);
+    const keyword = useSelector((state) => state.artists.pageResult.keyword);
 
     const artists = useSelector((state) => {
-        return state.artists.pageResult.dtoList;
+        return state.artists.pageResult.dtoList; // 아티스트 목록을 store에서 조회 하여 사용 가능 하게함.
     });
+
+    const msg = useSelector((state) => {
+        return state.artists.msg;
+    });
+
+    console.log('==================================================');
+    console.log(pageResult);
+    console.log(type);
+    console.log(keyword);
+    console.log(artists);
+    console.log(msg);
+    console.log('==================================================');
+
+    const page = pageResult.page;
 
     console.log('pageResult::::::::::', pageResult);
 
@@ -65,7 +77,7 @@ const ArtistPageList2 = () => {
                             })}
                         </tbody>
                     </table>
-                    <PageList {...pageResult} />
+                    <PageList {...pageResult} type={type} keyword={keyword} />
 
                     <br />
                     <br />
