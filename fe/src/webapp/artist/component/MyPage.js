@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { artistCurrent, getLocalArtist } from '../reducer/artist.reducer';
-import { mypagePage } from 'webapp/artist/reducer/artist.reducer';
-import ArtistsDelete from './ArtistDelete';
-import Logout from './Logout';
+import { getLocalArtist, mypagePage } from 'webapp/artist/reducer/artist.reducer';
+import { ArtistDelete, Logout } from 'webapp/artist/index';
 
 const MyPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const artistObj = useSelector(mypagePage);
     const artistsState = useSelector((state) => state.artists.artistsState);
 
     const [mypage, setMypage] = useState({
@@ -32,8 +29,13 @@ const MyPage = () => {
         e.preventDefault();
         e.stopPropagation();
         const obj = { artistId: artistsState.artistId, username: artistsState.usename, password: mypage.password, name: artistsState.name, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
-        console.log('SEND BEFORE', obj);
         dispatch(mypagePage(obj));
+        history.push('/');
+    };
+
+    const goHome = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         history.push('/');
     };
 
@@ -113,8 +115,8 @@ const MyPage = () => {
                     </form>
 
                     <div className="clearfix">
-                        <button type="button" className="cancelbtn">
-                            <Link to="/">홈으로</Link>
+                        <button type="button" className="cancelbtn" onClick={(e) => goHome(e)}>
+                            홈으로
                         </button>
                     </div>
                     <br />
@@ -122,7 +124,7 @@ const MyPage = () => {
                     <Logout />
                     <br />
                     <br />
-                    <ArtistsDelete />
+                    <ArtistDelete />
                 </div>
             </form>
         </>

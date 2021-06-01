@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { getLocalArtist, logoutSelect } from '../reducer/artist.reducer';
 
 const Logout = () => {
     const history = useHistory();

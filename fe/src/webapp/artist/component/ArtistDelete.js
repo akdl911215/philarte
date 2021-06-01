@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { deleteSelect, getLocalArtist } from 'webapp/artist/reducer/artist.reducer';
-import '../style/ArtistDelete.css';
+import 'webapp/artist/style/ArtistDelete.css';
 
 const ArtistsDelete = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const artistsState = useSelector((state) => state.artists.artistsState);
 
-    console.log('===================');
-    console.log(artistsState.artistId);
-    console.log('===================');
     useEffect(() => {
         dispatch(getLocalArtist());
     }, []);

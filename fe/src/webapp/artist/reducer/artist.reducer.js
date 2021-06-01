@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ArtistService } from 'webapp/artist/index';
 
-const getArtistServerPage = async (cri) => {
-    console.log('getARtistServerPage :: ' + cri);
-    const response = await ArtistService.list(cri);
+const getArtistServerPage = async (page) => {
+    console.log('getARtistServerPage :: ' + page);
+    const response = await ArtistService.list(page);
     console.log('response ::::::::: ', response.data);
     return response.data;
 };
@@ -32,20 +32,11 @@ const getArtistDeleteSelect = async (deleteSelect) => {
     return response.data;
 };
 
-const getTotalSearchBar = async (totalSearchBar) => {
-    console.log('getTotalSearchBar :: ' + totalSearchBar);
-    const response = await ArtistService.totalSearchBar(totalSearchBar);
-    return response.data;
-};
-
 export const fetchPage = createAsyncThunk('artists/list', getArtistServerPage);
 export const signinPage = createAsyncThunk('artists/signin', getArtistSigninPage);
 export const signupPage = createAsyncThunk('artists/signup', getArtistSignupPage);
 export const mypagePage = createAsyncThunk('artists/mypage', getArtistMypagePage);
 export const deleteSelect = createAsyncThunk('artists/mypage', getArtistDeleteSelect);
-export const totalSearchBar = createAsyncThunk('page/totalSearchBar', getTotalSearchBar);
-
-// const isRejectedAction = (action) => action.type.endsWith('rejected');
 
 const artistSlice = createSlice({
     name: 'artists',
@@ -58,9 +49,6 @@ const artistSlice = createSlice({
             end: 1,
             prev: false,
             next: false,
-            // size: '',
-            // type: '',
-            // keyword: '',
         },
         artistsState: {
             artistId: '',
@@ -96,7 +84,6 @@ const artistSlice = createSlice({
     extraReducers: {
         [fetchPage.fulfilled]: (state, { meta, payload }) => {
             console.log('payload fetchPage :::::::', payload);
-
             state.pageResult = payload;
         },
         [signinPage.fulfilled]: (state, { meta, payload }) => {
@@ -119,6 +106,5 @@ const artistSlice = createSlice({
     },
 });
 // const { action, reducer } = artistSlice;
-// export const artistCurrent = (state) => state.artistsState; // 현재 artist state
-export const { getLocalArtist, changeSearch } = artistSlice.actions; //changeSearch
+export const { getLocalArtist, changeSearch } = artistSlice.actions;
 export default artistSlice.reducer;

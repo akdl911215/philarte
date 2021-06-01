@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../style/ArtistSignin.css';
+import 'webapp/artist/style/ArtistSignin.css';
 import { Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signinPage } from 'webapp/artist/reducer/artist.reducer';
 
 const Signin = () => {
@@ -9,8 +9,6 @@ const Signin = () => {
         username: '',
         password: '',
     });
-
-    const artistsState = useSelector((state) => state.artists.artistsState);
 
     const history = useHistory();
     const dispatch = useDispatch();

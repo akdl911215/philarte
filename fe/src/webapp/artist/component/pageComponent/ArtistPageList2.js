@@ -1,47 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PageList from './PageList';
-import '../../style/ArtistPageList2.css';
-import { fetchPage, getArtistServerPage, getLocalArtist } from '../../reducer/artist.reducer';
-import { configureStore } from '@reduxjs/toolkit';
-import ArtistPageSearch from 'webapp/artist/component/pageComponent/ArtistPageSearch';
+import { PageList } from 'webapp/artist/index';
+import 'webapp/artist/style/ArtistPageList2.css';
+import { fetchPage } from 'webapp/artist/reducer/artist.reducer';
 
 const ArtistPageList2 = () => {
     const dispatch = useDispatch();
-
     const pageResult = useSelector((state) => state.artists.pageResult);
-    const type = useSelector((state) => state.artists.pageResult.type);
-    const keyword = useSelector((state) => state.artists.pageResult.keyword);
-
-    const artists = useSelector((state) => {
-        return state.artists.pageResult.dtoList; // 아티스트 목록을 store에서 조회 하여 사용 가능 하게함.
-    });
-
-    const msg = useSelector((state) => {
-        return state.artists.msg;
-    });
-
-    console.log('==================================================');
-    console.log(pageResult);
-    console.log(type);
-    console.log(keyword);
-    console.log(artists);
-    console.log(msg);
-    console.log('==================================================');
-
+    const type = useSelector((state) => state.artists.type);
+    const keyword = useSelector((state) => state.artists.keyword);
     const page = pageResult.page;
 
-    console.log('pageResult::::::::::', pageResult);
-
     useEffect(() => {
-        console.log('artistPageList page :: ', page);
-        // const param = { type: type }; //, keyword: keyword, page: page
-        dispatch(fetchPage(page)); //페이지에 1페이지 뿌려주는 역할
+        const param = { type: type, keyword: keyword, page: page };
+        dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
     }, []);
-
-    console.log('=========================');
-
-    console.log(pageResult);
 
     return (
         <>
@@ -78,10 +51,6 @@ const ArtistPageList2 = () => {
                         </tbody>
                     </table>
                     <PageList {...pageResult} type={type} keyword={keyword} />
-
-                    <br />
-                    <br />
-                    <ArtistPageSearch {...pageResult} />
                 </table>
             </div>
         </>

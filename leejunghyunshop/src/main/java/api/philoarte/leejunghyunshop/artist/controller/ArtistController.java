@@ -29,7 +29,7 @@ public class ArtistController {
     private final ArtistServiceImpl service;
 
     @GetMapping("/list/pages")
-    public ResponseEntity<PageResultDto<ArtistDto, Artist>> list(PageRequestDto page) {
+    public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestDto page) {
         log.info("=======================================");
         log.info("=======================================");
         log.info("page................." + page);

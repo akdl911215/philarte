@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import '../style/ArtistSignup.css';
+import 'webapp/artist/style/ArtistSignup.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { signupPage } from '../reducer/artist.reducer';
+import { signupPage } from 'webapp/artist/reducer/artist.reducer';
 
 const Signup = () => {
     const history = useHistory();
