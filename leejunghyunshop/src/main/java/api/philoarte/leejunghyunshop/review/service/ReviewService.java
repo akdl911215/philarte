@@ -1,6 +1,7 @@
 package api.philoarte.leejunghyunshop.review.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.review.domain.Review;
 import api.philoarte.leejunghyunshop.review.domain.ReviewFile;
@@ -17,7 +18,7 @@ public interface ReviewService {
     ReviewDto get(Long reviewId);
     void modify(ReviewDto reviewDto);
     void removeWithReplies(Long reviewId);
-    PageResultDto<ReviewDto, Object[]> getList(PageResultDto pageResultDto);
+    PageResultDto<ReviewDto, Object[]> getList(PageRequestDto pageRequestDto);
 
     default Map<String, Object> dtoToEntity(ReviewDto reviewDto){
         Map<String, Object> entityMap = new HashMap<>();

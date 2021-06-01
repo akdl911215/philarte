@@ -34,7 +34,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long>, SearchRev
             " LEFT OUTER JOIN Reply rp ON rp.review = re " +
             " LEFT OUTER JOIN ReviewFile rf on rf.review =re "
             + " where re.reviewId = :reviewId group by rf ")
-    List<Object[]> getRevieWithReply(@Param("reviewId") Long reviewId);
+    List<Object[]> getReviewWithReply(@Param("reviewId") Long reviewId);
 
 
     // 리뷰 조회 쿼리

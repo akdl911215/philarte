@@ -1,4 +1,3 @@
-로컬 DB:
 server:
   port: 8080
 spring:
@@ -15,8 +14,22 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+
+philo:
+  arte:
+    upload:
+      path: c:\update
+
+shop:
+  legossol:
+    upload:
+      path: C:\update\funding
 
 security:
   jwt:
     secret: secret-value
+
+UserController:
+  signup: Creates user and returns its JWT token
+  signin: Authenticates user and returns its JWT token
