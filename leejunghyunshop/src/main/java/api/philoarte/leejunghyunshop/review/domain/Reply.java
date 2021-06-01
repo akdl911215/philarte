@@ -22,7 +22,6 @@ public class Reply extends BaseEntity {
     @Column(name = "replyer")
     private String replyer;
 
-
     private String uuid;
 
     @Column(name = "img_name")

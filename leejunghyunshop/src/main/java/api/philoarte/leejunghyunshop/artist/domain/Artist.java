@@ -84,12 +84,4 @@ public class Artist extends BaseEntity {
         this.address = address;
      }
 
-//    public Artist(String username, String name, String email) {
-//        super();
-//        this.username = username;
-//        this.name = name;
-//        this.email = email;
-//    }
-
-
 }
