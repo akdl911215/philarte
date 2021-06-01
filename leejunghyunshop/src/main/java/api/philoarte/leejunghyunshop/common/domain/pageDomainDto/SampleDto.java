@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.domain.pageDomain;
+package api.philoarte.leejunghyunshop.common.domain.pageDomainDto;
 
 import lombok.Builder;
 import lombok.Data;

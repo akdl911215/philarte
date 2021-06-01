@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.domain.pageDomain;
+package api.philoarte.leejunghyunshop.common.domain.pageDomainDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,8 +6,6 @@ import lombok.Data;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
-import java.util.List;
 
 
 @Builder

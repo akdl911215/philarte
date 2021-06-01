@@ -2,16 +2,14 @@ package api.philoarte.leejunghyunshop.artist.controller;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;

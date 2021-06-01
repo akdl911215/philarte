@@ -1,10 +1,9 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
-import api.philoarte.leejunghyunshop.art.domain.Art;
 import api.philoarte.leejunghyunshop.artist.domain.*;
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.common.service.AbstractService;
 import api.philoarte.leejunghyunshop.artist.service.pageService.PageRequestService;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
@@ -23,9 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -41,23 +38,6 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     private final PasswordEncoder passwordEncoder;
     private final SecurityProvider provider;
     private final AuthenticationManager manager;
-
-
-//    @Override
-//    public List<ArtistDto> searchPosts(String keyword) {
-//        List<Artist> artistEntites = repository.findByUsernameContaining(keyword);
-//        List<ArtistDto> artistDtoList = new ArrayList<>();
-//
-//        if(artistEntites.isEmpty()) return artistDtoList;
-//
-//        for(Artist artist : artistEntites) {
-//            artistDtoList.add(this.entityDto(artist));
-//        }
-//
-//        return artistDtoList;
-//    }
-
-
 
     @Override
     public String signup(ArtistDto artistDto) {
@@ -125,11 +105,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         return Optional.ofNullable(repository.getOne(id));
     }
 
-//    @Override
-//    public Long delete(Artist artist) {
-//        repository.delete(artist);
-//        return repository.findById(artist.getArtistId()).orElse(null) == null ? 1L : 0L;
-//    }
+
 
     @Override
     public String delete(Artist artist) {

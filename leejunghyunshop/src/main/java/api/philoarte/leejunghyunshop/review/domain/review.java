@@ -1,38 +1,39 @@
 package api.philoarte.leejunghyunshop.review.domain;
 
-import api.philoarte.leejunghyunshop.art.domain.Art;
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
-import api.philoarte.leejunghyunshop.item.domain.Item;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import api.philoarte.leejunghyunshop.common.domain.BaseEntity;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "reviews")
-public class Review {
+@ToString(exclude = {"artist, art"})
+public class Review extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long reviewId;
-    @Column(name = "content")
+
+    private String title;
+
     private String content;
-    @Column(name = "comment")
-    private String comment;
 
-    // @ManyToOne
-    // @JoinColumn(name = "funding_id")
-    // private Funding funding;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
-//    @ManyToOne
-//    @JoinColumn(name = "artist_id")
-//    private Artist artist;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "art_id")
-//    private Art art;
 
+    public void changeTitle(String title){
+        this.title =title;
+    }
+
+    public void changeContent(String content){
+        this.content=content;
+    }
 }

@@ -1,7 +1,6 @@
 package api.philoarte.leejunghyunshop.artist.controller.pageController;
 
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.SampleDto;
-import lombok.extern.java.Log;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.SampleDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

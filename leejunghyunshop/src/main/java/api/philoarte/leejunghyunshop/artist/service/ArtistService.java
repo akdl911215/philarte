@@ -2,10 +2,8 @@ package api.philoarte.leejunghyunshop.artist.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageRequestDto;
-import api.philoarte.leejunghyunshop.artist.domain.pageDomain.PageResultDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 
 import java.util.List;
 
@@ -14,21 +12,14 @@ public interface ArtistService {
 
 //    public List<ArtistDto> searchPosts(String keyword);
 
-
-
-
     ArtistDto signin(ArtistDto artistDto);
-//    Optional<Artist> finByusername(String username);
     List<Artist> getAllData();
     List<Artist> findAll();
     void deleteById(Long artistId);
-//    Optional<Artist> findById(Long artistId);
     ArtistDto updateById(ArtistDto artistDto);
     ArtistDto updateMypage(ArtistDto artistDto);
 
     PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
-
-
 
     Long register(ArtistDto artistDto);
     String signup(ArtistDto artistDto);
