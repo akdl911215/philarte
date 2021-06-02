@@ -50,7 +50,7 @@ public class ArtistServiceTests {
     @Test
     public void testRegister() {
         ArtistDto artistDto = ArtistDto.builder()
-                .artistId(1)
+                .artistId(1L)
                 .username("abcd")
                 .password("1234")
                 .name("Leejunghyun")
@@ -68,7 +68,6 @@ public class ArtistServiceTests {
     @Test
     public void signup() {
         ArtistDto artistDto = ArtistDto.builder()
-                .artistId(1)
                 .username("abcd")
                 .password("1234")
                 .name("Leejunghyun")

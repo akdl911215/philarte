@@ -44,7 +44,8 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     private final AuthenticationManager manager;
     private final ArtistFileRepository aritstFileRepository;
 
-    @Override
+    @Transactional
+    @Override // jpa save 사용시 insert가 아니고 update 뜨는 이유
     public String signup(ArtistDto artistDto) {
         log.info("ArtistServiceImpl 도착하니 1" );
         if(!repository.existsByUsername(artistDto.getUsername())){

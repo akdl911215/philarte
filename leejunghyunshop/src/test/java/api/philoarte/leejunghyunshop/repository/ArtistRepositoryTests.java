@@ -97,7 +97,7 @@ public class ArtistRepositoryTests {
     public void insertDummies(){
         IntStream.rangeClosed(1,300).forEach(i -> {
             Artist artist = Artist.builder()
-                    .artistId(i)
+                    .artistId((long) i)
                     .username("username " + i)
                     .password("password " + i)
                     .name("name " + i)

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityProvider provider;
+//    public AuthenticationManagerBuilder  authenticationManagerBuilder;
 
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -35,6 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();
+    }
+
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService());
+        auth.eraseCredentials(false);
     }
 
     @Override // 오버라이드 할때 열쇠있는걸로 오버라이드해야한다.
@@ -76,6 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        .defaultSuccessUrl("/");
         http.exceptionHandling().accessDeniedPage("/login");
         http.apply(new SecurityConfig(provider));
+
 
     }
 

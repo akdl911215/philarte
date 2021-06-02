@@ -24,7 +24,7 @@ public class Artist extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "artist_id")
-    private long artistId;
+    private Long artistId;
     //, unique = true , nullable = false
     @Column(name = "username")
     private String username;

@@ -35,6 +35,7 @@ public interface ArtistService {
         Artist artist = Artist.builder()
                         .artistId(artistDto.getArtistId())
                         .username(artistDto.getUsername())
+                        .password(artistDto.getPassword())
                         .name(artistDto.getName())
                         .email(artistDto.getEmail())
                         .phoneNumber(artistDto.getPhoneNumber())

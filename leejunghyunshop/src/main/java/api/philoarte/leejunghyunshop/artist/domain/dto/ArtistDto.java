@@ -1,26 +1,25 @@
 package api.philoarte.leejunghyunshop.artist.domain.dto;
 
 import api.philoarte.leejunghyunshop.artist.domain.Role;
-import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class ArtistDto {
+@Log4j2
+public class ArtistDto { // ArtistDto long > Long 바꾸면 null exception
     @ApiModelProperty(position = 0)
-    private long artistId;
+    private Long artistId;
     @ApiModelProperty(position = 1)
     private String username;
     @ApiModelProperty(position = 2)
@@ -54,7 +53,7 @@ public class ArtistDto {
         artistFileDtoList.add(artistFileDto);
     }
 
-    public void setArtistId(long artistId){
+    public void setArtistId(Long artistId){
         this.artistId = artistId;
     }
     public long getArtistId(){
