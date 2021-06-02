@@ -1,7 +1,7 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
-import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

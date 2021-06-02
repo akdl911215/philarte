@@ -1,11 +1,14 @@
 package api.philoarte.leejunghyunshop.artist.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.*;
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
+import api.philoarte.leejunghyunshop.artist.repository.picturesRepository.ArtistFileRepository;
+import api.philoarte.leejunghyunshop.artist.service.uploadService.ArtistFilerService;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.common.service.AbstractService;
-import api.philoarte.leejunghyunshop.artist.service.pageService.PageRequestService;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
 import com.querydsl.core.BooleanBuilder;
@@ -24,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -32,24 +36,47 @@ import java.util.function.Function;
 @Log4j2
 @RequiredArgsConstructor
 @Service
-public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService, PageRequestService {
+public class ArtistServiceImpl extends AbstractService<Artist> implements ArtistService {
 
     private final ArtistRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final SecurityProvider provider;
     private final AuthenticationManager manager;
+    private final ArtistFileRepository aritstFileRepository;
 
     @Override
     public String signup(ArtistDto artistDto) {
-
+        log.info("ArtistServiceImpl 도착하니 1" );
         if(!repository.existsByUsername(artistDto.getUsername())){
-            Artist entity = dtoEntity(artistDto);
-            repository.saveAndFlush(entity);
+            log.info("artistDto 여긴? " + artistDto);
+            Map<String, Object> entityMap = dtoToEntity(artistDto);
+            log.info("entityMap : " + entityMap);
+            Artist entity = (Artist) entityMap.get("artist");
+            log.info("entity : " + entity);
+            List<ArtistFile> artistFileList = (List<ArtistFile>) entityMap.get("fileList");
+            log.info("artistFileList : " + artistFileList);
+            repository.save(entity); // save 안될시 saveAndFlush 변경하자
+            log.info("ArtistServiceImpl 도착하니 2?");
+            log.info("entity : " + entity);
+
+            if (artistFileList != null && artistFileList.size() > 0) {
+                log.info("사진이 저장됩니다" , (artistFileList != null && artistFileList.size() > 0));
+                artistFileList.forEach(artistFile -> {
+                    aritstFileRepository.save(artistFile);
+                });
+            }
+
+            log.info("ArtistServiceImpl 도착하니 3 ?");
             ArtistDto entityDto = entityDto(entity);
+            log.info("entityDto : " + entityDto);
+            log.info("ArtistServiceImpl 도착하니 4?");
             entityDto.setPassword(passwordEncoder.encode(entityDto.getPassword()));
+            log.info("ArtistServiceImpl 도착하니 5 ?");
             List<Role> list = new ArrayList<>();
+            log.info("artistServiceImpl list : " + list);
             list.add(Role.USER_ROLES);
             entity.changeRoles(list);
+            log.info("entity 포함 list : " + list);
             return provider.createToken(entityDto.getUsername(), entity.getRoles());
         } else {
             throw new SecurityRuntimeException("Artist Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);

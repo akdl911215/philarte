@@ -102,12 +102,23 @@ public class ReviewServiceImpl implements ReviewService {
 
         System.out.println("============================");
         System.out.println(pageRequestDto.toString());
+        log.info("reviewRepository : ", reviewRepository);
+        log.info("reviewRepository.searchPage : ", reviewRepository.searchPage(
+                pageRequestDto.getType(),
+                pageRequestDto.getKeyword(),
+                pageRequestDto.getPageable(Sort.by("reviewId").descending())
+        ));
 
         Page<Object[]> result = reviewRepository.searchPage(
+
                 pageRequestDto.getType(),
                 pageRequestDto.getKeyword(),
                 pageRequestDto.getPageable(Sort.by("reviewId").descending())
         );
+
+        log.info("result : " , result);
+
+        log.info("찍히나요? ㅋ");
         return new PageResultDto<>(result, fn);
     }
 }

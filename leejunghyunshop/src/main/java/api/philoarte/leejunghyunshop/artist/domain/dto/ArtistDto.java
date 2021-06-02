@@ -1,15 +1,16 @@
-package api.philoarte.leejunghyunshop.artist.domain;
+package api.philoarte.leejunghyunshop.artist.domain.dto;
 
+import api.philoarte.leejunghyunshop.artist.domain.Role;
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -37,9 +38,21 @@ public class ArtistDto {
     @ApiModelProperty(position = 8)
     private String department;
     @ApiModelProperty(position = 9)
-    private List<Role> roles;
+    private ArrayList<ArtistFileDto> pictures;
     @ApiModelProperty(position = 10)
+    private List<Role> roles;
+    @ApiModelProperty(position = 11)
     private String token;
+
+    @Builder.Default
+    private ArrayList<MultipartFile> files = new ArrayList<>();
+
+    @Builder.Default
+    private List<ArtistFileDto> artistFileDtoList = new ArrayList<>();
+
+    public void addArtistFileDto(ArtistFileDto artistFileDto){
+        artistFileDtoList.add(artistFileDto);
+    }
 
     public void setArtistId(long artistId){
         this.artistId = artistId;

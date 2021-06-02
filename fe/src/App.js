@@ -44,10 +44,10 @@ const App = () => {
                         <Route exact path="/item/item-register" component={ItemRegister} />
 
                         {/*Review*/}
-                        <Route exact path="/review/review-list" component={ReviewList} />
-                        <Route exact path="/review/review-modify" component={ReviewModify} />
-                        <Route exact path="/review/review-read" component={ReviewRead} />
-                        <Route exact path="/review/review-register" component={ReviewRegister} />
+                        <Route exact path="/reviews/review_list" component={ReviewList} />
+                        <Route exact path="/reviews/review_modify/:reviewId" component={ReviewModify} />
+                        <Route exact path="/reviews/review_read/:reviewId" component={ReviewRead} />
+                        <Route exact path="/review/review_register" component={ReviewRegister} />
 
                         {/*Work*/}
                         <Route exact path="/work/work-list" component={WorkList} />

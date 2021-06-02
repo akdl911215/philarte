@@ -1,30 +1,43 @@
 package api.philoarte.leejunghyunshop.artist.controller;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
-import api.philoarte.leejunghyunshop.artist.domain.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
+import api.philoarte.leejunghyunshop.artist.service.uploadService.ArtistFileServiceImpl;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
+import com.amazonaws.services.xray.model.Http;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
+import net.coobird.thumbnailator.Thumbnails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Api(tags = "artists")
 @RequiredArgsConstructor
-@Log
+@Log4j2
 @RequestMapping(value = "/artists", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 public class ArtistController {
 
     private final ArtistServiceImpl service;
+    private final ArtistFileServiceImpl artistFileService;
+
+    @Value("${leejunghyunshop.philoarte.upload.path}")
+    private String uploadPath;
 
     @GetMapping("/list/pages")
     public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestDto page) {
@@ -39,13 +52,48 @@ public class ArtistController {
     }
 
     @PostMapping("/signup")
-    @ApiOperation(value = "${ArtistController.signup}")
+    @ApiOperation(value = "회원가입 등록", notes = "회원 정보를 등록 합니다")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
             @ApiResponse(code = 403, message = "Access Denied"),
             @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
-    public ResponseEntity<String> signup
-            (@ApiParam("Signup Artist") @RequestBody ArtistDto artistDto) throws IOException {
-        return ResponseEntity.ok(service.signup(artistDto));
+    public ResponseEntity<Map<String, String>> signup
+            (ArtistDto artistDto) throws IOException {
+
+        ArrayList<MultipartFile> files = artistDto.getFiles();
+        files.forEach(file -> {
+            log.info("file.getOriginalFilename() : "+ file.getOriginalFilename());
+
+            String uuid = UUID.randomUUID().toString();
+            String saveName = uploadPath + File.separator + uuid + "_" + file.getOriginalFilename();
+            String thumbnailSaveName = uploadPath + File.separator + uuid + "s_" + file.getOriginalFilename();
+            log.info("saveName : "+ saveName);
+            log.info("thumbnailSaveName : "+ thumbnailSaveName);
+
+            try {
+                FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(saveName, Boolean.parseBoolean(thumbnailSaveName)));
+                Thumbnails.of(new File(saveName)).size(100, 100).outputFormat("jpg").toFile(thumbnailSaveName);
+
+                ArtistFileDto fileDto = ArtistFileDto.builder()
+                        .uuid(uuid)
+                        .imgName(file.getOriginalFilename())
+                        .path(uploadPath)
+                        .build();
+
+                artistDto.addArtistFileDto(fileDto);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        log.info("회원가입이 되었습니다. 축!! :: "+ artistDto);
+        service.signup(artistDto);
+
+
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("Result", "Success");
+        log.info("resultMap : "+ resultMap);
+
+        return new ResponseEntity(resultMap, HttpStatus.OK);
     }
 
 

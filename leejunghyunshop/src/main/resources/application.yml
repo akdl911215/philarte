@@ -16,6 +16,11 @@ spring:
     hibernate:
       ddl-auto: update
 
+leejunghyunshop:
+  philoarte:
+    upload:
+      path: C:\update\artists
+
 philo:
   arte:
     upload:

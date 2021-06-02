@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const list = (page) => {
+    console.log('page :: ', page);
     const str = 'page=' + (!page.page ? 1 : page.page) + '&type=' + (page.type ? page.type : '') + '&keyword=' + (page.keyword ? page.keyword : '');
     return axios.get('http://localhost:8080/artists/list/pages?' + str);
 };
