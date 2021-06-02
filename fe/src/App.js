@@ -11,6 +11,7 @@ import { WorkList, WorkModify, WorkRead, WorkRegister } from 'webapp/work/index'
 import { HomeVideoBg } from 'webapp/common/index';
 
 import { ArtistList, Signup, Signin, ArtistRead, ArtistUpdate, Logout, MyPage, ArtistPage, AristPageContainer } from 'webapp/artist/index';
+import Sidebar1 from 'webapp/_test/Sidebar1';
 
 // import ArtistRead from 'webapp/artist/component/ArtistRead';
 // import ArtistUpdate from 'webapp/artist/component/ArtistUpdate';
@@ -62,6 +63,8 @@ const App = () => {
                         <Route exact path="/artist/artist_read/:id" component={ArtistRead} />
                         <Route exact path="/artist/artist_update/:id" component={ArtistUpdate} />
                         <Route exact path="/artist/artist_page_list" component={AristPageContainer} />
+
+                        <Route exact path="/test/sidebar1" component={Sidebar1} />
 
                         <Switch>
                             <privateRoute exact path="/" component={HomeVideoBg} />

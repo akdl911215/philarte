@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocalArtist, mypagePage } from 'webapp/artist/reducer/artist.reducer';
+import { getLocalArtist, mypagePage, signupPage } from 'webapp/artist/reducer/artist.reducer';
 import { ArtistDelete, Logout } from 'webapp/artist/index';
 
 const MyPage = () => {
@@ -50,6 +50,7 @@ const MyPage = () => {
         },
         [mypage]
     );
+
     return (
         <>
             <form>

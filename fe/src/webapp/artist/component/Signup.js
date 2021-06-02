@@ -43,6 +43,40 @@ const Signup = () => {
         window.location = 'http://localhost:3000/artist/artist-signin';
     };
 
+    const [files, setFiles] = useState([]);
+
+    const register = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(files);
+        console.log(signup);
+
+        // formData : file을 업로드
+        const formData = new FormData();
+
+        for (let i = 0; i < files.length; i++) {
+            console.log(files);
+            formData.append('files[' + i + ']', files[i]);
+        }
+
+        formData.append('artistId', signup.artistId);
+        formData.append('username', signup.username);
+        console.log('formData : ', formData);
+
+        await dispatch(signupPage(formData));
+        console.log('dispatch formData : ', formData);
+
+        // history.push('/');
+    };
+
+    const clickUpdate = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const fileObject = e.target;
+        console.dir(fileObject.files);
+        setFiles(fileObject.files);
+    };
+
     return (
         <>
             <form action="/action_page.php" className="ArtistSignupHead">
@@ -50,7 +84,7 @@ const Signup = () => {
                     <h1>회원가입(Sign Up)</h1>
                     <p>Please fill in this form to create an account.</p>
                     <hr />
-
+                    <input type="file" name="file" id="reviewFileDtoList" className="md-textarea" rows="7" multiple={true} onChange={(e) => clickUpdate(e)}></input>
                     <label htmlFor="username">
                         <b>아이디</b>
                     </label>
@@ -99,7 +133,7 @@ const Signup = () => {
                     </p>
 
                     <div class="clearfix">
-                        <button type="button" className="cancelbtn" onClick={cancelButton}>
+                        <button type="button" className="cancelbtn" onClick={(e) => cancelButton(e)}>
                             Cancel
                         </button>
                         <button
@@ -107,6 +141,7 @@ const Signup = () => {
                             className="signupbtn"
                             onClick={(e) => {
                                 handleSubmit(e);
+                                register(e);
                             }}
                         >
                             Sign Up

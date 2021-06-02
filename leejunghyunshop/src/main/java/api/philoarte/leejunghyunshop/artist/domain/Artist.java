@@ -1,14 +1,10 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
-
 import api.philoarte.leejunghyunshop.common.domain.BaseEntity;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @EntityListeners(value = {AuditingEntityListener.class})
@@ -24,7 +20,7 @@ public class Artist extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "artist_id")
-    private Long artistId;
+    private long artistId;
     //, unique = true , nullable = false
     @Column(name = "username")
     private String username;

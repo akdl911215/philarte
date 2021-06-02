@@ -39,10 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new ModelMapper();
     }
 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
-        auth.eraseCredentials(false);
-    }
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService());
+//        auth.eraseCredentials(false);
+//    }
 
     @Override // 오버라이드 할때 열쇠있는걸로 오버라이드해야한다.
     protected void configure(HttpSecurity http) throws Exception {

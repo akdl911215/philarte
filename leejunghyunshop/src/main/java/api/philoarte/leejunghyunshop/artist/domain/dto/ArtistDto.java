@@ -19,7 +19,7 @@ import java.util.List;
 @Log4j2
 public class ArtistDto { // ArtistDto long > Long 바꾸면 null exception
     @ApiModelProperty(position = 0)
-    private Long artistId;
+    private long artistId;
     @ApiModelProperty(position = 1)
     private String username;
     @ApiModelProperty(position = 2)
