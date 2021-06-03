@@ -35,6 +35,10 @@ const MyPage = () => {
         address: '',
         school: '',
         department: '',
+        uuid: artistsState.uuid,
+        imgName: artistsState.imgName,
+        files: artistsState.files,
+        token: artistsState.token,
     });
     console.log('mypage ::::::::::: ', mypage);
 
@@ -46,7 +50,22 @@ const MyPage = () => {
         let mypageResult = window.confirm('Mypage를 수정하시겠습니까?');
         e.preventDefault();
         e.stopPropagation();
-        const obj = { files: files.files, artistId: artistsState.artistId, username: artistsState.usename, password: mypage.password, name: artistsState.name, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
+        const obj = {
+            uuid: artistsState.uuid,
+            imgName: artistsState.imgName,
+            files: artistsState.files,
+            token: artistsState.token,
+            files: artistsState.files,
+            artistId: artistsState.artistId,
+            username: artistsState.usename,
+            password: mypage.password,
+            name: artistsState.name,
+            phoneNumber: mypage.phoneNumber,
+            email: mypage.email,
+            address: mypage.address,
+            school: mypage.school,
+            department: mypage.department,
+        };
         console.log('obj ::::::::: ', obj);
 
         const formData = new FormData();

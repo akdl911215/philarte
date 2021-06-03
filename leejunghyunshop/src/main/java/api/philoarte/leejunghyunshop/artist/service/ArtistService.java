@@ -28,7 +28,7 @@ public interface ArtistService {
     PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
 
     Long register(ArtistDto artistDto);
-    String signup(ArtistDto artistDto);
+    Map<String, String> signup(ArtistDto artistDto);
 
     default Map<String, Object> dtoToEntity(ArtistDto artistDto){
         Map<String, Object> entityMap = new HashMap<>();

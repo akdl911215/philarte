@@ -94,16 +94,13 @@ public class ArtistController {
         });
 
         log.info("회원가입이 되었습니다. 축!! :: "+ artistDto);
+//        log.info("controller service.signup(artistDto) :: " + service.signup(artistDto));
 //        service.signup(artistDto);
 
 
         Map<String, String> resultMap = new HashMap<>();
-        resultMap.put("Result", (service.signup(artistDto)));
+        return new ResponseEntity(service.signup(artistDto), HttpStatus.OK);
 
-        log.info("resultMap : "+ resultMap);
-
-        return new ResponseEntity(resultMap, HttpStatus.OK);
-//        return null;
     }
 
 

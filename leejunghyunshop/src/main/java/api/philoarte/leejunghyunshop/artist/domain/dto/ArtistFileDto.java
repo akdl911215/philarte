@@ -16,4 +16,8 @@ public class ArtistFileDto {
     private String imgName;
     private String path;
     private Artist artist;
+
+    public String uuid(){
+        return uuid;
+    }
 }

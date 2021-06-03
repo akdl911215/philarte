@@ -25,10 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 
@@ -46,7 +43,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Transactional
     @Override // jpa save 사용시 insert가 아니고 update 뜨는 이유
-    public String signup(ArtistDto artistDto) {
+    public Map<String, String> signup(ArtistDto artistDto) {
         log.info("ArtistServiceImpl 도착하니 1" );
         log.info("artistDto 값은 ? :::: " + artistDto);
         if(!repository.existsByUsername(artistDto.getUsername())){
@@ -77,12 +74,24 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             log.info("ArtistServiceImpl 도착하니 4?");
             entityDto.setPassword(passwordEncoder.encode(entityDto.getPassword()));
             log.info("ArtistServiceImpl 도착하니 5 ?");
+            log.info("entityDto 이다 :::::: " + entityDto);
             List<Role> list = new ArrayList<>();
             log.info("artistServiceImpl list : " + list);
             list.add(Role.USER_ROLES);
             entity.changeRoles(list);
             log.info("entity 포함 list : " + list);
-            return provider.createToken(entityDto.getUsername(), entity.getRoles());
+            Map<String, String> resultMap = new HashMap<>();
+            resultMap.put("JwtToken", provider.createToken(entityDto.getUsername(), entity.getRoles()));
+
+            entityDto.getArtistFileDtoList().forEach(file -> {
+                resultMap.put("uuid", file.getUuid());
+                resultMap.put("imgName", file.getImgName());
+            });
+
+           log.info("resultMap return : " + resultMap);
+
+            return resultMap;
+
         } else {
             throw new SecurityRuntimeException("Artist Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }

@@ -64,6 +64,9 @@ const artistSlice = createSlice({
             department: '',
             files: [],
             artistFileDtoList: [],
+            uuid: {},
+            imgName: {},
+            token: '',
         },
         type: '',
         keyword: '',
@@ -78,8 +81,15 @@ const artistSlice = createSlice({
             }
 
             const artist = JSON.parse(window.localStorage.getItem('artist'));
-            const artistFileDtoList = artist.artistsState;
             state.artistsState = artist;
+            // state.artistsState = action.payload.uuid;
+            // state.imgName = action.payload.imgName;
+            console.log('============Local===========');
+            console.log(state.artistsState);
+            console.log(state.uuid);
+            console.log(state.imgName);
+            console.log(state);
+            console.log('=======================');
         },
 
         changeSearch: (state, action) => {

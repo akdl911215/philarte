@@ -16,7 +16,7 @@ const Signin = () => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(signinPage(signin));
-        history.push('/');
+        // history.push('/');
     };
 
     const handleChange = (e) => {
