@@ -53,16 +53,18 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             log.info("artistDto 여긴? " + artistDto);
             Map<String, Object> entityMap = dtoToEntity(artistDto);
             log.info("entityMap : " + entityMap);
+
             Artist entity = (Artist) entityMap.get("artist");
             log.info("entity : " + entity);
-            List<ArtistFile> artistFileList = (List<ArtistFile>) entityMap.get("fileList");
-            log.info("artistFileList : " + artistFileList);
             repository.saveAndFlush(entity); // save 안될시 saveAndFlush 변경하자
             log.info("ArtistServiceImpl 도착하니 2?");
             log.info("entity : " + entity);
 
+            List<ArtistFile> artistFileList = (List<ArtistFile>) entityMap.get("fileList");
+            log.info("artistFileList : " + artistFileList);
+
             if (artistFileList != null && artistFileList.size() > 0) {
-                log.info("사진이 저장됩니다" , (artistFileList != null && artistFileList.size() > 0));
+                log.info("사진이 저장됩니다 " + (artistFileList != null && artistFileList.size() > 0));
                 artistFileList.forEach(artistFile -> {
                     aritstFileRepository.save(artistFile);
                 });
@@ -70,6 +72,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
             log.info("ArtistServiceImpl 도착하니 3 ?");
             ArtistDto entityDto = entityDto(entity);
+            entityDto.setArtistFileDtoList(artistDto.getArtistFileDtoList());
             log.info("entityDto : " + entityDto);
             log.info("ArtistServiceImpl 도착하니 4?");
             entityDto.setPassword(passwordEncoder.encode(entityDto.getPassword()));

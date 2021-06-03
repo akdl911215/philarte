@@ -63,9 +63,11 @@ const artistSlice = createSlice({
             school: '',
             department: '',
             files: [],
+            artistFileDtoList: [],
         },
         type: '',
         keyword: '',
+        params: {},
     },
     reducers: {
         getLocalArtist: (state, action) => {
@@ -76,6 +78,7 @@ const artistSlice = createSlice({
             }
 
             const artist = JSON.parse(window.localStorage.getItem('artist'));
+            const artistFileDtoList = artist.artistsState;
             state.artistsState = artist;
         },
 
@@ -100,7 +103,10 @@ const artistSlice = createSlice({
         },
         [signupPage.fulfilled]: (state, action) => {
             state.artistsState = action.payload;
-            console.log('reducer payload ::::::::: ', action);
+            console.log('state 은? :: ', state);
+            console.log('reducer action ::::::::: ', action);
+            console.log('reducer action.payload ::::::::: ', action.payload);
+            console.log('reducer payload ::::::::: ', signupPage);
         },
         [deleteSelect.fulfilled]: (state, { meta, payload }) => {
             state.artistsState = payload;
@@ -109,5 +115,7 @@ const artistSlice = createSlice({
     },
 });
 // const { action, reducer } = artistSlice;
+export const currentArtist2 = (state) => state.artists.artistsState;
+export const currentArtist = (state) => state.artists.params;
 export const { getLocalArtist, changeSearch } = artistSlice.actions;
 export default artistSlice.reducer;

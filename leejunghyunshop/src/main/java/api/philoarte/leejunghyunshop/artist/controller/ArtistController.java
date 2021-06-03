@@ -8,6 +8,7 @@ import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistServiceImpl;
 import com.amazonaws.services.xray.model.Http;
+import com.sun.prism.shader.AlphaOne_LinearGradient_AlphaTest_Loader;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -60,17 +61,22 @@ public class ArtistController {
             (ArtistDto artistDto) throws IOException {
         log.info("Controller 시작");
         log.info("회원가입을 시작해볼까요 ??? ㅋㅋ");
+        log.info("artistDto :::::::::: " + artistDto);
+        log.info("artistDto.getFiles() :::: " + artistDto.getFiles());
         ArrayList<MultipartFile> files = artistDto.getFiles();
+        log.info("files ::::::::: " + files);
         files.forEach(file -> {
             log.info("file.getOriginalFilename() : "+ file.getOriginalFilename());
 
             String uuid = UUID.randomUUID().toString();
+            log.info("uuid :::::::: " + uuid);
             String saveName = uploadPath + File.separator + uuid + "_" + file.getOriginalFilename();
             String thumbnailSaveName = uploadPath + File.separator + uuid + "s_" + file.getOriginalFilename();
             log.info("saveName : "+ saveName);
             log.info("thumbnailSaveName : "+ thumbnailSaveName);
 
             try {
+                log.info("try 안에있어요");
                 FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(saveName, Boolean.parseBoolean(thumbnailSaveName)));
                 Thumbnails.of(new File(saveName)).size(100, 100).outputFormat("jpg").toFile(thumbnailSaveName);
 
@@ -81,6 +87,7 @@ public class ArtistController {
                         .build();
 
                 artistDto.addArtistFileDto(fileDto);
+                log.info("artistDto ::::: " + artistDto);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -92,6 +99,7 @@ public class ArtistController {
 
         Map<String, String> resultMap = new HashMap<>();
         resultMap.put("Result", (service.signup(artistDto)));
+
         log.info("resultMap : "+ resultMap);
 
         return new ResponseEntity(resultMap, HttpStatus.OK);

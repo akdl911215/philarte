@@ -18,15 +18,11 @@ const signin = (signin) => {
 const signup = (param) => {
     alert('안올껄?');
     console.log('sevice param : ', param);
-    return axios
-        .post(`${SERVER}/artists/signup`, param, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-        .then((response) => {
-            return response.data;
-        });
+    return axios.post(`${SERVER}/artists/signup`, param, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
 };
 
 const mypage = (artist) => {

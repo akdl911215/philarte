@@ -1,15 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocalArtist, mypagePage, signupPage } from 'webapp/artist/reducer/artist.reducer';
+import { getLocalArtist, mypagePage, signupPage, currentArtist, currentArtist2 } from 'webapp/artist/reducer/artist.reducer';
 import { ArtistDelete, Logout } from 'webapp/artist/index';
 
 const MyPage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+
     const artistsState = useSelector((state) => state.artists.artistsState);
+    const artistsState2 = useSelector((state) => state.initialState);
+    const artistsState3 = useSelector(currentArtist);
+    const artistsState4 = useSelector(currentArtist2);
+    console.log('======================================');
+    console.log(artistsState);
+    console.log(artistsState2);
+    console.log(artistsState3);
+    console.log(artistsState4);
+    console.log('======================================');
 
     const [files, setFiles] = useState([]);
+    console.log('files ::::::: ', files);
+
+    const artistFiles = artistsState.artistFileDtoList;
+    console.log('artistFiles ::::::::: ', artistFiles);
+
     const [mypage, setMypage] = useState({
         artistId: artistsState.artistId,
         username: artistsState.usename,
@@ -21,6 +36,7 @@ const MyPage = () => {
         school: '',
         department: '',
     });
+    console.log('mypage ::::::::::: ', mypage);
 
     useEffect(() => {
         dispatch(getLocalArtist());
@@ -31,6 +47,7 @@ const MyPage = () => {
         e.preventDefault();
         e.stopPropagation();
         const obj = { files: files.files, artistId: artistsState.artistId, username: artistsState.usename, password: mypage.password, name: artistsState.name, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
+        console.log('obj ::::::::: ', obj);
 
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
@@ -91,7 +108,17 @@ const MyPage = () => {
                             <b>대표이미지</b>
                         </label>
                         <td>
-                            <div className="display-flex">{}</div>
+                            <div className="display-flex">
+                                {files.map((file) => {
+                                    return (
+                                        <>
+                                            <div key={file.uuid}>
+                                                <img src={'http://localhost:8080/artist_files/display?imgName=' + file.uuid + 's_' + file.imgName}></img>
+                                            </div>
+                                        </>
+                                    );
+                                })}
+                            </div>
                         </td>
 
                         <label htmlFor="artistId">

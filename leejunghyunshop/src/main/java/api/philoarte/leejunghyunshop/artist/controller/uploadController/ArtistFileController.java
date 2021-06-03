@@ -42,7 +42,9 @@ public class ArtistFileController {
         System.out.println("files :: " + files);
         for (MultipartFile file : files) {
             System.out.println("file :: " + file);
-            if (!file.getContentType().startsWith("image")){ // contentType 확장자 유무 확인
+
+            // 이미지 파일만 업로드 가능
+            if (!file.getContentType().startsWith("image")){
                 log.info("찍힘? 2");
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
