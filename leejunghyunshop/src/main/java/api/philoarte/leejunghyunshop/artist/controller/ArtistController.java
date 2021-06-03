@@ -58,7 +58,8 @@ public class ArtistController {
             @ApiResponse(code = 422, message = "Artist - Username is alredy in use")})
     public ResponseEntity<Map<String, String>> signup
             (ArtistDto artistDto) throws IOException {
-
+        log.info("Controller 시작");
+        log.info("회원가입을 시작해볼까요 ??? ㅋㅋ");
         ArrayList<MultipartFile> files = artistDto.getFiles();
         files.forEach(file -> {
             log.info("file.getOriginalFilename() : "+ file.getOriginalFilename());
@@ -86,14 +87,15 @@ public class ArtistController {
         });
 
         log.info("회원가입이 되었습니다. 축!! :: "+ artistDto);
-        service.signup(artistDto);
+//        service.signup(artistDto);
 
 
         Map<String, String> resultMap = new HashMap<>();
-        resultMap.put("Result", "Success");
+        resultMap.put("Result", (service.signup(artistDto)));
         log.info("resultMap : "+ resultMap);
 
         return new ResponseEntity(resultMap, HttpStatus.OK);
+//        return null;
     }
 
 

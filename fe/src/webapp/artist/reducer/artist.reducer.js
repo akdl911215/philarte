@@ -14,9 +14,11 @@ const getArtistSigninPage = async (signin) => {
     return response.data;
 };
 
-const getArtistSignupPage = async (signup) => {
-    console.log('getArtistSignupPage :: ' + signup);
-    const response = await ArtistService.signup(signup);
+const getArtistSignupPage = async (param) => {
+    console.log('getArtistSignupPage :: ' + param);
+    const response = await ArtistService.signup(param);
+    console.log('response :::: ', response);
+    console.log('response.data :::: ', response.data);
     return response.data;
 };
 
@@ -60,6 +62,7 @@ const artistSlice = createSlice({
             address: '',
             school: '',
             department: '',
+            files: [],
         },
         type: '',
         keyword: '',
@@ -95,9 +98,9 @@ const artistSlice = createSlice({
             state.artistsState = payload;
             console.log('reducer payload ::::::::: ' + payload);
         },
-        [signupPage.fulfilled]: (state, { meta, payload }) => {
-            state.artistsState = payload;
-            console.log('reducer payload ::::::::: ' + payload);
+        [signupPage.fulfilled]: (state, action) => {
+            state.artistsState = action.payload;
+            console.log('reducer payload ::::::::: ', action);
         },
         [deleteSelect.fulfilled]: (state, { meta, payload }) => {
             state.artistsState = payload;

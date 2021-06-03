@@ -15,16 +15,30 @@ const signin = (signin) => {
     });
 };
 
-const signup = (signup) => {
-    return axios.post(`${SERVER}/artists/signup`, signup, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    });
+const signup = (param) => {
+    alert('안올껄?');
+    console.log('sevice param : ', param);
+    return axios
+        .post(`${SERVER}/artists/signup`, param, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((response) => {
+            return response.data;
+        });
 };
 
 const mypage = (artist) => {
-    return axios.put(`${SERVER}/artists/mypage`, artist);
+    return axios
+        .put(`${SERVER}/artists/mypage`, artist, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((response) => {
+            return response.data;
+        });
 };
 
 const deleteSelect = (deleteSelect) => {

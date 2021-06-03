@@ -9,6 +9,7 @@ const MyPage = () => {
     const dispatch = useDispatch();
     const artistsState = useSelector((state) => state.artists.artistsState);
 
+    const [files, setFiles] = useState([]);
     const [mypage, setMypage] = useState({
         artistId: artistsState.artistId,
         username: artistsState.usename,
@@ -25,12 +26,33 @@ const MyPage = () => {
         dispatch(getLocalArtist());
     }, []);
 
-    const goMypage = (e) => {
+    const goMypage = async (e) => {
+        let mypageResult = window.confirm('Mypage를 수정하시겠습니까?');
         e.preventDefault();
         e.stopPropagation();
-        const obj = { artistId: artistsState.artistId, username: artistsState.usename, password: mypage.password, name: artistsState.name, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
-        dispatch(mypagePage(obj));
-        history.push('/');
+        const obj = { files: files.files, artistId: artistsState.artistId, username: artistsState.usename, password: mypage.password, name: artistsState.name, phoneNumber: mypage.phoneNumber, email: mypage.email, address: mypage.address, school: mypage.school, department: mypage.department };
+
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            console.log('for files :::::::::', files);
+            formData.append('files[' + i + ']', files[i]);
+        }
+        formData.append('username', mypage.username);
+        formData.append('password', mypage.password);
+        formData.append('name', mypage.name);
+        formData.append('email', mypage.email);
+        formData.append('phoneNumber', mypage.phoneNumber);
+        formData.append('address', mypage.address);
+        formData.append('school', mypage.school);
+        formData.append('department', mypage.department);
+        console.log('formData : ', formData);
+
+        if (mypageResult) {
+            alert('수정 완료');
+            await dispatch(mypagePage(obj));
+        }
+
+        // history.push('/');
     };
 
     const goHome = (e) => {
@@ -51,6 +73,12 @@ const MyPage = () => {
         [mypage]
     );
 
+    const handleChangeFile = (e) => {
+        const fileObj = e.target;
+        console.dir(fileObj.files);
+        setFiles(fileObj.files);
+    };
+
     return (
         <>
             <form>
@@ -59,6 +87,13 @@ const MyPage = () => {
                     <hr />
 
                     <form>
+                        <label htmlFor="artistFile">
+                            <b>대표이미지</b>
+                        </label>
+                        <td>
+                            <div className="display-flex">{}</div>
+                        </td>
+
                         <label htmlFor="artistId">
                             <b>아이디번호</b>
                         </label>

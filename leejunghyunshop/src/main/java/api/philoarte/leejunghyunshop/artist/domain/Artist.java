@@ -5,9 +5,10 @@ import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
-@EntityListeners(value = {AuditingEntityListener.class})
+//@EntityListeners(value = {AuditingEntityListener.class})
 @Entity
 @Table(name = "artists")
 @Getter
@@ -19,10 +20,10 @@ public class Artist extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "artist_id")
-    private long artistId;
+    @Column(name = "artist_id", unique = true , nullable = false) // , unique = true , nullable = false
+    private Long artistId;
     //, unique = true , nullable = false
-    @Column(name = "username")
+    @Column(name = "username", unique = true , nullable = false)
     private String username;
 
     //, columnDefinition="Number(10) default '12345678'"
@@ -31,16 +32,16 @@ public class Artist extends BaseEntity {
     private String password;
 
 //    @Embedded
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     @Column(name = "school")

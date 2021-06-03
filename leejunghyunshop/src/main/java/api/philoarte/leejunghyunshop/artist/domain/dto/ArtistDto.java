@@ -18,29 +18,29 @@ import java.util.List;
 @Builder
 @Log4j2
 public class ArtistDto { // ArtistDto long > Long 바꾸면 null exception
-    @ApiModelProperty(position = 0)
-    private long artistId;
-    @ApiModelProperty(position = 1)
+//    @ApiModelProperty(position = 0)
+    private Long artistId;
+//    @ApiModelProperty(position = 1)
     private String username;
-    @ApiModelProperty(position = 2)
+//    @ApiModelProperty(position = 2)
     private String password;
-    @ApiModelProperty(position = 3)
+//    @ApiModelProperty(position = 3)
     private String name;
-    @ApiModelProperty(position = 4)
+//    @ApiModelProperty(position = 4)
     private String email;
-    @ApiModelProperty(position = 5)
+//    @ApiModelProperty(position = 5)
     private String phoneNumber;
-    @ApiModelProperty(position = 6)
+//    @ApiModelProperty(position = 6)
     private String address;
-    @ApiModelProperty(position = 7)
+//    @ApiModelProperty(position = 7)
     private String school;
-    @ApiModelProperty(position = 8)
+//    @ApiModelProperty(position = 8)
     private String department;
-    @ApiModelProperty(position = 9)
+//    @ApiModelProperty(position = 9)
     private ArrayList<ArtistFileDto> pictures;
-    @ApiModelProperty(position = 10)
+//    @ApiModelProperty(position = 10)
     private List<Role> roles;
-    @ApiModelProperty(position = 11)
+//    @ApiModelProperty(position = 11)
     private String token;
 
     @Builder.Default
@@ -56,7 +56,7 @@ public class ArtistDto { // ArtistDto long > Long 바꾸면 null exception
     public void setArtistId(Long artistId){
         this.artistId = artistId;
     }
-    public long getArtistId(){
+    public Long getArtistId(){
         return artistId;
     }
     public void setName(String name){

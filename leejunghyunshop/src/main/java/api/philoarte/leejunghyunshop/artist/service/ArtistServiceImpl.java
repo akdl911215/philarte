@@ -48,6 +48,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     @Override // jpa save 사용시 insert가 아니고 update 뜨는 이유
     public String signup(ArtistDto artistDto) {
         log.info("ArtistServiceImpl 도착하니 1" );
+        log.info("artistDto 값은 ? :::: " + artistDto);
         if(!repository.existsByUsername(artistDto.getUsername())){
             log.info("artistDto 여긴? " + artistDto);
             Map<String, Object> entityMap = dtoToEntity(artistDto);
@@ -56,7 +57,7 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             log.info("entity : " + entity);
             List<ArtistFile> artistFileList = (List<ArtistFile>) entityMap.get("fileList");
             log.info("artistFileList : " + artistFileList);
-            repository.save(entity); // save 안될시 saveAndFlush 변경하자
+            repository.saveAndFlush(entity); // save 안될시 saveAndFlush 변경하자
             log.info("ArtistServiceImpl 도착하니 2?");
             log.info("entity : " + entity);
 

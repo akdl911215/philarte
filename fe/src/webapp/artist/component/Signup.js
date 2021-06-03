@@ -31,11 +31,64 @@ const Signup = () => {
         [signup]
     );
 
-    const handleSubmit = (e) => {
+    const [files, setFiles] = useState([]);
+
+    const clickUpdate = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        dispatch(signupPage(signup));
-        history.push('/artists/artists_signin');
+        const fileObject = e.target;
+
+        console.log('============================');
+        console.log(fileObject.files); // .log : 매개변수로 전달된 값을 출력
+        console.dir(fileObject.files); // .dir : js 객체의 속성 출력
+        console.log('============================');
+        setFiles(fileObject.files);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        console.log('files :::: ', files);
+        console.log('signup :::: ', signup);
+
+        // formData : file을 업로드
+        const formData = new FormData();
+        console.log('formData) ::: ', formData);
+
+        for (let i = 0; i < files.length; i++) {
+            console.log('for files :::::::::', files);
+            formData.append('files[' + i + ']', files[i]);
+        }
+
+        formData.append('username', signup.username);
+        formData.append('password', signup.password);
+        formData.append('name', signup.name);
+        formData.append('email', signup.email);
+        formData.append('phoneNumber', signup.phoneNumber);
+        formData.append('address', signup.address);
+        formData.append('school', signup.school);
+        formData.append('department', signup.department);
+        console.log('formData : ', formData);
+        console.log('==============================');
+
+        console.log(signup.username);
+        console.log(signup.password);
+        console.log(signup.name);
+        console.log(signup.email);
+        console.log(signup.phoneNumber);
+        console.log(signup.address);
+        console.log(signup.school);
+        console.log(signup.department);
+        console.log('==============================');
+
+        // const param = { formData: formData, username: username, password: password, name: name, email: email, phoneNumber: phoneNumber, address: address, school: school, department: department };
+
+        // await dispatch(signupPage(signup));
+        await dispatch(signupPage(formData));
+        console.log('dispatch formData : ', formData);
+        // console.log('dispatch signup : ', signup);
+        // history.push('/artists/artists_signin');
     };
 
     const cancelButton = (e) => {
@@ -43,39 +96,12 @@ const Signup = () => {
         window.location = 'http://localhost:3000/artist/artist-signin';
     };
 
-    const [files, setFiles] = useState([]);
+    // const register = async (e) => {
+    //     e.preventDefault();
+    //     e.stopPropagation();
 
-    const register = async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(files);
-        console.log(signup);
-
-        // formData : file을 업로드
-        const formData = new FormData();
-
-        for (let i = 0; i < files.length; i++) {
-            console.log(files);
-            formData.append('files[' + i + ']', files[i]);
-        }
-
-        formData.append('artistId', signup.artistId);
-        formData.append('username', signup.username);
-        console.log('formData : ', formData);
-
-        await dispatch(signupPage(formData));
-        console.log('dispatch formData : ', formData);
-
-        // history.push('/');
-    };
-
-    const clickUpdate = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const fileObject = e.target;
-        console.dir(fileObject.files);
-        setFiles(fileObject.files);
-    };
+    //     // history.push('/');
+    // };
 
     return (
         <>
@@ -141,7 +167,7 @@ const Signup = () => {
                             className="signupbtn"
                             onClick={(e) => {
                                 handleSubmit(e);
-                                register(e);
+                                // register(e);
                             }}
                         >
                             Sign Up
