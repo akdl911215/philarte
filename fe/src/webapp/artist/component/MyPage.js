@@ -9,14 +9,18 @@ const MyPage = () => {
     const dispatch = useDispatch();
 
     const artistsState = useSelector((state) => state.artists.artistsState);
-    const artistsState2 = useSelector((state) => state.initialState);
-    const artistsState3 = useSelector(currentArtist);
-    const artistsState4 = useSelector(currentArtist2);
+    const artistsFileDtoList = useSelector((state) => state.artists.artistsState.artistFileDtoList);
+    const artistsFileDtoList2 = useSelector((state) => state.artists.artistsState.files);
+    const artistsFileDtoList3 = useSelector((state) => state.artists.artistsState.imgName);
+    const artistsFileDtoList4 = useSelector((state) => state.artists.artistsState.uuid);
+    console.log('artistsFileDtoList :::: ', artistsFileDtoList);
+    console.log('artistsFileDtoList2 :::: ', artistsFileDtoList2);
+    console.log('artistsFileDtoList3 :::: ', artistsFileDtoList3);
+    console.log('artistsFileDtoList4 :::: ', artistsFileDtoList4);
+
     console.log('======================================');
-    console.log(artistsState);
-    console.log(artistsState2);
-    console.log(artistsState3);
-    console.log(artistsState4);
+    // console.log('mypage.uuid ::: ', mypage.uuid);
+    console.log('artistsState.uuid ::: ', artistsState.uuid);
     console.log('======================================');
 
     const [files, setFiles] = useState([]);
@@ -39,6 +43,8 @@ const MyPage = () => {
         imgName: artistsState.imgName,
         files: artistsState.files,
         token: artistsState.token,
+        uuid: artistsState.uuid,
+        imgName: artistsState.imgName,
     });
     console.log('mypage ::::::::::: ', mypage);
 
@@ -65,6 +71,8 @@ const MyPage = () => {
             address: mypage.address,
             school: mypage.school,
             department: mypage.department,
+            uuid: artistsState.uuid,
+            imgName: artistsState.artistsState,
         };
         console.log('obj ::::::::: ', obj);
 
@@ -73,14 +81,17 @@ const MyPage = () => {
             console.log('for files :::::::::', files);
             formData.append('files[' + i + ']', files[i]);
         }
-        formData.append('username', mypage.username);
+        formData.append('username', artistsState.username);
+        formData.append('artistId', artistsState.artistId);
         formData.append('password', mypage.password);
-        formData.append('name', mypage.name);
+        formData.append('name', artistsState.name);
         formData.append('email', mypage.email);
         formData.append('phoneNumber', mypage.phoneNumber);
         formData.append('address', mypage.address);
         formData.append('school', mypage.school);
         formData.append('department', mypage.department);
+        formData.append('uuid', artistsState.uuid);
+        formData.append('imgName', artistsState.imgName);
         console.log('formData : ', formData);
 
         if (mypageResult) {
@@ -132,7 +143,7 @@ const MyPage = () => {
                                     return (
                                         <>
                                             <div key={file.uuid}>
-                                                <img src={'http://localhost:8080/artist_files/display?imgName=' + file.uuid + 's_' + file.imgName}></img>
+                                                <img src={'http://localhost:8080/artist_files/display?imgName=' + artistsFileDtoList4 + 's_' + artistsFileDtoList3} />
                                             </div>
                                         </>
                                     );

@@ -100,15 +100,43 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     @Override
     public ArtistDto signin(ArtistDto artistDto) {
         try {
+            log.info("들어오지? artistDto :::::: " + artistDto);
             Artist entity = dtoEntity(artistDto);
             repository.signin(entity.getUsername(), entity.getPassword());
+
             ArtistDto entityDto = entityDto(entity);
+            log.info("여기까지는 온다 entityDto :::: " + entityDto);
+
 
             Optional<Artist> comprehensiveInfomationArtist = repository.findByUsername(entity.getUsername());
+            log.info("comprehensiveInfomationArtist :::: " + comprehensiveInfomationArtist);
+
+            Long artistFileId = comprehensiveInfomationArtist.get().getArtistId();
+            log.info("펑? artistFileId ::: " + artistFileId);
+
+
             entityDto(comprehensiveInfomationArtist.get());
+            log.info("entityDto(comprehensiveInfomationArtist.get()) :::: " + entityDto(comprehensiveInfomationArtist.get()));
             entityDto = entityDto(comprehensiveInfomationArtist.get());
+            log.info("entityDto :::: " + entityDto );
+
             String Token = provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles());
+            log.info("Token :::: " + Token);
             entityDto.setToken(Token);
+            log.info("entityDto:::: " + entityDto);
+
+
+            Optional<ArtistFile> fileListResult = aritstFileRepository.findById(artistFileId);
+            log.info("과연 ??? fileListResult " + fileListResult);
+
+            String uuid = fileListResult.get().getUuid();
+            String imgName = fileListResult.get().getImgName();
+            log.info("uuid ::: " + uuid);
+            log.info("imgName ::: " + imgName);
+
+            entityDto.setUuid(uuid);
+            entityDto.setImgName(imgName);
+            log.info("entityDto 값은 ? :::::::: " + entityDto);
 
             log.info("====================");
             log.info(entityDto);

@@ -115,8 +115,9 @@ public class ArtistController {
         log.info("Artist Signin(로그인) start :::::::::: " + artistDto);
         log.info("==============================================");
         log.info("==============================================");
-        service.signin(artistDto);
+//        service.signin(artistDto);
         return ResponseEntity.ok(service.signin(artistDto));
+//        return null;
     }
 
     @GetMapping("/findAll")

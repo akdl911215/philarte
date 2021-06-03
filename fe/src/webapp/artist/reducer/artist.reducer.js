@@ -82,13 +82,8 @@ const artistSlice = createSlice({
 
             const artist = JSON.parse(window.localStorage.getItem('artist'));
             state.artistsState = artist;
-            // state.artistsState = action.payload.uuid;
-            // state.imgName = action.payload.imgName;
             console.log('============Local===========');
             console.log(state.artistsState);
-            console.log(state.uuid);
-            console.log(state.imgName);
-            console.log(state);
             console.log('=======================');
         },
 
