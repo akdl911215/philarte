@@ -125,9 +125,15 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
             entityDto.setToken(Token);
             log.info("entityDto:::: " + entityDto);
 
+            Long artistFileIdSetting = entityDto.getArtistId();
+            log.info("entityDto.getArtistId() :::::: " + entityDto.getArtistId());
+            log.info("artistFileIdSetting :::::: " + artistFileIdSetting);
 
-            Optional<ArtistFile> fileListResult = aritstFileRepository.findById(artistFileId);
+
+            Optional<ArtistFile> fileListResult = aritstFileRepository.findById(artistFileIdSetting);
             log.info("과연 ??? fileListResult " + fileListResult);
+//            fileListResult.get().getArtistFileId();
+//            log.info("fileListResult.get().getArtistFileId() ::::::: " + fileListResult.get().getArtistFileId());
 
             String uuid = fileListResult.get().getUuid();
             String imgName = fileListResult.get().getImgName();

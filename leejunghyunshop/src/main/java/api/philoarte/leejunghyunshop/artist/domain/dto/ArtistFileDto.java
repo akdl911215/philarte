@@ -4,6 +4,9 @@ import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Component
 @ToString
 @Getter
@@ -23,5 +26,23 @@ public class ArtistFileDto {
 
     public String getImgName() {
         return imgName;
+    }
+
+    public String getImageURL(){
+        try {
+            return URLEncoder.encode(path + "/" + uuid + "_" + imgName,"UTF-8" );
+        }catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public String getTumbnailURL(){
+        try {
+            return URLEncoder.encode(path + "/s_" + uuid + "_" + imgName, "UTF-8" );
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

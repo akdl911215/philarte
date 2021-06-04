@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageList } from 'webapp/artist/index';
 import 'webapp/artist/style/ArtistPageList2.css';
-import { fetchPage } from 'webapp/artist/reducer/artist.reducer';
+import { fetchPage, getLocalArtist } from 'webapp/artist/reducer/artist.reducer';
 
 const ArtistPageList2 = () => {
     const dispatch = useDispatch();
@@ -11,9 +11,15 @@ const ArtistPageList2 = () => {
     const keyword = useSelector((state) => state.artists.keyword);
     const page = pageResult.page;
 
+    const artistsFilesimgName = useSelector((state) => state.artists.artistsState.imgName);
+    const artistsFilesUuid = useSelector((state) => state.artists.artistsState.uuid);
+    console.log('artistsFilesimgName :::: ', artistsFilesimgName);
+    console.log('artistsFilesUuid :::: ', artistsFilesUuid);
+
     useEffect(() => {
         const param = { type: type, keyword: keyword, page: page };
         dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
+        dispatch(getLocalArtist());
     }, []);
 
     return (
@@ -22,6 +28,7 @@ const ArtistPageList2 = () => {
                 <table className="table table-striped table-bordered">
                     <table>
                         <thead style={{ textAlign: 'center' }}>
+                            <th>대표이미지</th>
                             <th>유저넘버 </th>
                             <th>아이디 </th>
                             <th>비밀번호 </th>
@@ -36,6 +43,11 @@ const ArtistPageList2 = () => {
                                 return (
                                     <>
                                         <tr key={id}>
+                                            <td>
+                                                <div>
+                                                    <img src={'http://localhost:8080/artist_files/display?imgName=' + `${artistsFilesUuid}` + 's_' + `${artistsFilesimgName}`} />
+                                                </div>
+                                            </td>
                                             <td>{artist.artistId}</td>
                                             <td>{artist.username}</td>
                                             <td>{artist.password}</td>

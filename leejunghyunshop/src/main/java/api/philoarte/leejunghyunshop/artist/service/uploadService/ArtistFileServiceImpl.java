@@ -71,10 +71,10 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
                                                 .imgName(ofName)
                                                 .build();
 
-                ArtistFileDto artistFileDtoResult = ArtistFileDto.builder()
-                                                    .uuid(uuid)
-                                                    .imgName(ofName)
-                                                    .build();
+//                ArtistFileDto artistFileDtoResult = ArtistFileDto.builder()
+//                                                    .uuid(uuid)
+//                                                    .imgName(ofName)
+//                                                    .build();
                 log.info("ArtistFileServiceImpl Try 끝부분");
                 ArtistFileResultList.add(artistFileDto);
                 log.info(ArtistFileResultList);
