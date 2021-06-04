@@ -48,7 +48,7 @@ public class ArtistController {
 //        log.info("model................." + model);
 //        model.addAttribute("result", service.getPageList(page));
 //        return null;
-        log.info("result" + service.getPageList(page));
+//        log.info("result" + service.getPageList(page));
         return new ResponseEntity(service.getPageList(page), HttpStatus.OK);
     }
 

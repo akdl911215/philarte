@@ -30,6 +30,30 @@ public interface ArtistService {
     Long register(ArtistDto artistDto);
     Map<String, String> signup(ArtistDto artistDto);
 
+    default ArtistFileDto EntityToDtoArtistFile(ArtistFile artistFile) {
+
+        ArtistFileDto artistFileDto = ArtistFileDto.builder()
+                                        .artistFileId(artistFile.getArtistFileId())
+                                        .uuid(artistFile.getUuid())
+                                        .imgName(artistFile.getImgName())
+                                        .path(artistFile.getPath())
+                                        .build();
+
+        return artistFileDto;
+    }
+
+    default ArtistFile dtoToEntityArtistFile(ArtistFileDto artistFileDto) {
+
+        ArtistFile artistFile = ArtistFile.builder()
+                                .artistFileId(artistFileDto.getArtistFileId())
+                                .uuid(artistFileDto.getUuid())
+                                .imgName(artistFileDto.getImgName())
+                                .path(artistFileDto.getPath())
+                                .build();
+
+        return artistFile;
+    }
+
     default Map<String, Object> dtoToEntity(ArtistDto artistDto){
         Map<String, Object> entityMap = new HashMap<>();
         Artist artist = Artist.builder()
@@ -42,6 +66,7 @@ public interface ArtistService {
                         .address(artistDto.getAddress())
                         .school(artistDto.getSchool())
                         .department(artistDto.getDepartment())
+
                         .build();
         entityMap.put("artist", artist);
 
@@ -76,7 +101,7 @@ public interface ArtistService {
 
         if(artistFiles != null && artistFiles.size() > 0) {
             System.out.println("size : " +artistFiles.size());
-            List<ArtistFileDto> reviewFileDtoList = artistFiles.stream().map(artistFile -> {
+            List<ArtistFileDto> artistFileDtoList = artistFiles.stream().map(artistFile -> {
 
                 if(artistFile == null) {
                     return null;

@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageList } from 'webapp/artist/index';
 import 'webapp/artist/style/ArtistPageList2.css';
-import { fetchPage, getLocalArtist } from 'webapp/artist/reducer/artist.reducer';
+import { fetchPage, getLocalArtist, fetchFilePage } from 'webapp/artist/reducer/artist.reducer';
 
 const ArtistPageList2 = () => {
     const dispatch = useDispatch();
     const pageResult = useSelector((state) => state.artists.pageResult);
     const type = useSelector((state) => state.artists.type);
     const keyword = useSelector((state) => state.artists.keyword);
+    const pageFileDto = useSelector((state) => state.artists.pageFileDto);
+    console.log('pageFileDto ::::::::: ', pageFileDto);
     const page = pageResult.page;
 
     const artistsFilesimgName = useSelector((state) => state.artists.artistsState.imgName);
@@ -17,8 +19,10 @@ const ArtistPageList2 = () => {
     console.log('artistsFilesUuid :::: ', artistsFilesUuid);
 
     useEffect(() => {
-        const param = { type: type, keyword: keyword, page: page };
-        dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
+        const param = { type: type, keyword: keyword, page: page }; // , pageFileDto: pageFileDto
+        const paramAddFile = { type: type, keyword: keyword, page: page, pageFileDto: pageFileDto };
+        // dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
+        dispatch(fetchFilePage(paramAddFile)); //페이지에 1페이지 뿌려주는 역할
         dispatch(getLocalArtist());
     }, []);
 
@@ -38,6 +42,7 @@ const ArtistPageList2 = () => {
                             <th>학교 </th>
                             <th>학과 </th>
                         </thead>
+
                         <tbody style={{ textAlign: 'center' }}>
                             {pageResult.dtoList.map((artist, id) => {
                                 return (
@@ -48,6 +53,15 @@ const ArtistPageList2 = () => {
                                                     <img src={'http://localhost:8080/artist_files/display?imgName=' + `${artistsFilesUuid}` + 's_' + `${artistsFilesimgName}`} />
                                                 </div>
                                             </td>
+                                        </tr>
+                                    </>
+                                );
+                            })}
+
+                            {pageResult.dtoList.map((artist, id) => {
+                                return (
+                                    <>
+                                        <tr key={id}>
                                             <td>{artist.artistId}</td>
                                             <td>{artist.username}</td>
                                             <td>{artist.password}</td>

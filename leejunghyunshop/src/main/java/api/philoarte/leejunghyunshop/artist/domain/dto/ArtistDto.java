@@ -39,9 +39,9 @@ public class ArtistDto { // ArtistDto long > Long 바꾸면 null exception
 
     private String uuid;
     private String imgName;
-
+    private List<ArtistFileDto> fileDto;
 //    @ApiModelProperty(position = 9)
-    private ArrayList<ArtistFileDto> pictures;
+//    private ArrayList<ArtistFileDto> pictures;
 //    @ApiModelProperty(position = 10)
     private List<Role> roles;
 //    @ApiModelProperty(position = 11)

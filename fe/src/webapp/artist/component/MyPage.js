@@ -152,6 +152,8 @@ const MyPage = () => {
         setFiles(fileObj.files);
     };
 
+    const removeImgBtn = (e) => {};
+
     return (
         <>
             <form>
@@ -164,16 +166,15 @@ const MyPage = () => {
                             <b>대표이미지</b>
                         </label>
                         <td>
-                            {/* <div className="display-flex" style={{ marginBottom: '50px' }}>
-                                <div style={{ backgroundColor: '#efefef' }}></div>
-                                <div>
-                                    <input type="file" name="imgFile" id="imgFile" onChange={(e) => handleUploadFile(e)} />
-                                </div>
-                            </div> */}
-                            {/* <img src={`http://localhost:8080/artist_files/display?imgName=` + { artistsFilesimgName() } + `s_` + { artistsFilesUuid() }} /> */}
-
+                            {/* <div className="display-flex" style={{ marginBottom: '50px' }}></div> */}
                             <div>
                                 <img src={'http://localhost:8080/artist_files/display?imgName=' + `${artistsFilesUuid}` + 's_' + `${artistsFilesimgName}`} />
+                                <br />
+                                <br />
+                                <br />
+
+                                <button>upload</button>
+                                <button onClick={(e) => removeImgBtn(e)}>remove</button>
                             </div>
                         </td>
 

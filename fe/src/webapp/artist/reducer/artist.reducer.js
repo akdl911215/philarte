@@ -8,6 +8,13 @@ const getArtistServerPage = async (page) => {
     return response.data;
 };
 
+const getArtistServerFilePage = async (filePage) => {
+    console.log('getARtistServerPage :: ' + filePage);
+    const response = await ArtistService.imgList(filePage);
+    console.log('response ::::::::: ', response.data);
+    return response.data;
+};
+
 const getArtistSigninPage = async (signin) => {
     console.log('getArtistSigninPage :: ' + signin);
     const response = await ArtistService.signin(signin);
@@ -35,6 +42,7 @@ const getArtistDeleteSelect = async (deleteSelect) => {
 };
 
 export const fetchPage = createAsyncThunk('artists/list', getArtistServerPage);
+export const fetchFilePage = createAsyncThunk('artists/fileList', getArtistServerFilePage);
 export const signinPage = createAsyncThunk('artists/signin', getArtistSigninPage);
 export const signupPage = createAsyncThunk('artists/signup', getArtistSignupPage);
 export const mypagePage = createAsyncThunk('artists/mypage', getArtistMypagePage);
@@ -67,10 +75,12 @@ const artistSlice = createSlice({
             uuid: '',
             imgName: '',
             token: '',
+            pageFileDto: '',
         },
         type: '',
         keyword: '',
         params: {},
+        // pageFileDto: {},
     },
     reducers: {
         getLocalArtist: (state, action) => {
@@ -91,11 +101,18 @@ const artistSlice = createSlice({
             state.type = action.payload.type;
             state.keyword = action.payload.keyword;
         },
+
+        getArtistImgList: (state, action) => {},
     },
     extraReducers: {
         [fetchPage.fulfilled]: (state, { meta, payload }) => {
             console.log('payload fetchPage :::::::', payload);
             state.pageResult = payload;
+        },
+        [fetchFilePage.fulfilled]: (state, { meta, payload }) => {
+            console.log('payload fetchPage :::::::', payload);
+            state.artistsState = payload;
+            console.log('state.artistsStates ::::::: ', state.artistsStates);
         },
         [signinPage.fulfilled]: (state, { meta, payload }) => {
             console.log('payload ::::::::::: ' + payload);

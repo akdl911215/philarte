@@ -20,6 +20,10 @@ public class ArtistFileDto {
     private String path;
     private Artist artist;
 
+    public Long getArtistFileId() { return artistFileId; }
+
+    public String getPath() { return path; }
+
     public String getUuid(){
         return uuid;
     }

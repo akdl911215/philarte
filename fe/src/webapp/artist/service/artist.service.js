@@ -8,6 +8,16 @@ const list = (page) => {
     return axios.get(`${SERVER}/artists/list/pages?` + str);
 };
 
+const imgList = (imgList) => {
+    console.log('imgList :: ', imgList);
+    // const str = 'page=' + (!imgList.page ? 1 : imgList.page) + '&type=' + (imgList.type ? imgList.type : '') + '&keyword=' + (imgList.keyword ? imgList.keyword : '') + '&pageFileDto=' + (imgList.pageFileDto ? imgList.pageFileDto : '');
+    return axios.post(`${SERVER}/artist_files/imgList/pages`, {
+        page: imgList.page,
+        type: imgList.type,
+        pageFileDto: imgList.pageFileDto,
+    });
+};
+
 const signin = (signin) => {
     return axios.post(`${SERVER}/artists/signin`, {
         username: signin.username,
@@ -45,4 +55,8 @@ const totalSearchBar = (totalSearchBar) => {
     return axios.put(`${SERVER}/page/totalSearchBar`, totalSearchBar);
 };
 
-export default { list, signin, signup, mypage, totalSearchBar, deleteSelect };
+const imgDel = (imgDel) => {
+    return axios.put(`${SERVER}/page/imgDel`, imgDel);
+};
+
+export default { list, signin, signup, mypage, totalSearchBar, deleteSelect, imgDel, imgList };

@@ -1,7 +1,10 @@
 package api.philoarte.leejunghyunshop.artist.controller.uploadController;
 
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
 import api.philoarte.leejunghyunshop.artist.service.uploadService.ArtistFileServiceImpl;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
+import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.review.domain.dto.ReviewFileDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,6 +38,18 @@ public class ArtistFileController {
 
     @Value("${leejunghyunshop.philoarte.upload.path}")
     private String uploadPath;
+
+    @RequestMapping("/imgList/pages")
+    public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestDto page) {
+        log.info("=======================================");
+        log.info("=======================================");
+        log.info("imgList page................." + page);
+//        log.info("model................." + model);
+//        model.addAttribute("result", service.getPageList(page));
+//        return null;
+        log.info("result" + service.getPageList(page));
+        return new ResponseEntity(service.getPageList(page), HttpStatus.OK);
+    }
 
     @PostMapping("/uploadAjax")
     public ResponseEntity<List<ArtistFileDto>> uploadFile(List<MultipartFile> files) {
