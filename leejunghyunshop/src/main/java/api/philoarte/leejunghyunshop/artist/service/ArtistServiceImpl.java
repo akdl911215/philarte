@@ -301,12 +301,12 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 //        log.info("artistDto :::: " + artistDto);
 //
 //        aritstFileRepository.findAll().get(artistDto.getImgName());
-
+//
 //        Map<String, Object> totalResultMap = new HashMap<>();
 //        totalResultMap.put("result", result);
 //        totalResultMap.put("imgResultList", imgResultList);
 //        log.info("totalResultMap :::::: " + totalResultMap);
-
+//
 //        Map<String, String> resultMap = new HashMap<>();
 //        resultMap.put("JwtToken", provider.createToken(entityDto.getUsername(), entity.getRoles()));
 //

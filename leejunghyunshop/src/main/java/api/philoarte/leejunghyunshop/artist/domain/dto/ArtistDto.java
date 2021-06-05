@@ -100,4 +100,5 @@ public class ArtistDto { // ArtistDto long > Long 바꾸면 null exception
         return department;
     }
 
+
 }

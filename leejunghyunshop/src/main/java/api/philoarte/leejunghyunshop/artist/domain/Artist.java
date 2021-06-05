@@ -22,7 +22,7 @@ public class Artist extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "artist_id", unique = true , nullable = false) // , unique = true , nullable = false
     private Long artistId;
-    //, unique = true , nullable = false
+
     @Column(name = "username", unique = true , nullable = false)
     private String username;
 

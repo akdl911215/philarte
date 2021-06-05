@@ -49,6 +49,7 @@ public class ArtistFileController {
 //        return null;
         log.info("result" + service.getPageList(page));
         return new ResponseEntity(service.getPageList(page), HttpStatus.OK);
+//        return null;
     }
 
     @PostMapping("/uploadAjax")
