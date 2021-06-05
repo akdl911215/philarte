@@ -2,6 +2,7 @@ package api.philoarte.leejunghyunshop.artist.controller.uploadController;
 
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.PageRequestFileDto;
 import api.philoarte.leejunghyunshop.artist.service.uploadService.ArtistFileServiceImpl;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
@@ -40,7 +41,7 @@ public class ArtistFileController {
     private String uploadPath;
 
     @RequestMapping("/imgList/pages")
-    public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestDto page) {
+    public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestFileDto page) {
         log.info("=======================================");
         log.info("=======================================");
         log.info("imgList page................." + page);

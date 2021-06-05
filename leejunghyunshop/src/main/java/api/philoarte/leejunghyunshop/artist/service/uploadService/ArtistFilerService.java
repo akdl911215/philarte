@@ -4,6 +4,7 @@ import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistFile;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.PageRequestFileDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.common.util.ModelMapperUtils;
@@ -16,7 +17,7 @@ public interface ArtistFilerService {
 
     ArrayList<ArtistFileDto> saveFile(List<MultipartFile> uploadFiles);
     void artistFileDelete(Long artistFileId);
-    PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto);
+    PageResultDto<ArtistDto, Artist> getPageList(PageRequestFileDto requestDto);
 
     default ArtistFile dtoToEntity(ArtistDto artistDto){
         ArtistFile artistFile = ModelMapperUtils.getModelMapper().map(artistDto, ArtistFile.class);
@@ -39,6 +40,29 @@ public interface ArtistFilerService {
 //                            .build();
 //        return picture;
 //    }
+
+
+    default ArtistFile dtoEntityFileToEntityFile(ArtistFileDto artistFileDto){
+        ArtistFile entityFile = ArtistFile.builder()
+                .artistFileId(artistFileDto.getArtistFileId())
+                .imgName(artistFileDto.getImgName())
+                .uuid(artistFileDto.getUuid())
+                .build();
+
+        return entityFile;
+
+    }
+
+//    default ArtistFileDto EntityFileToDtoEntityFile(Artist artist) {
+//
+//        ArtistFileDto entityFileDto = ArtistFileDto.builder()
+//                .artistFileId(artist.getArtistId())
+//                .imgName(artist.)
+//                .build();
+//        return entityDto;
+//
+//    }
+
 
     default Artist dtoEntity(ArtistDto artistDto){
         Artist entity = Artist.builder()

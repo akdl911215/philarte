@@ -5,6 +5,7 @@ import api.philoarte.leejunghyunshop.artist.domain.ArtistFile;
 import api.philoarte.leejunghyunshop.artist.domain.QArtist;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
+import api.philoarte.leejunghyunshop.artist.domain.dto.PageRequestFileDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import api.philoarte.leejunghyunshop.artist.repository.picturesRepository.ArtistFileRepository;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
@@ -149,14 +150,15 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
     }
 
     @Override
-    public PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto) {
+    public PageResultDto<ArtistDto, Artist> getPageList(PageRequestFileDto requestDto) {
         log.info("Artist Page Image List 를 불러옵니다");
         log.info("requestDto :::: " + requestDto);
 
         Pageable pageable = requestDto.getPageable(Sort.by("artistId").descending());
         log.info("pageable ::: " + pageable);
-        BooleanBuilder booleanBuilder = getSearch(requestDto);
-        Page<Artist> result = artistRepository.findAll(booleanBuilder, pageable);
+//        BooleanBuilder booleanBuilder = getSearch(requestDto);
+//        Page<Artist> result = artistRepository.findAll(booleanBuilder, pageable);
+
 
         Function<Artist, ArtistDto> fn = (entity -> entityDto(entity));
         log.info("fn :::: " + fn);
@@ -164,8 +166,21 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
         List<ArtistFile> imageList = aritstFileRepository.findAll();
         log.info("imageList ::: " + imageList);
 
+
+        Artist artist = imageList.get(0).getArtist();
+        log.info("artist ::: " + artist);
+
+
+
+
 //        List<ArtistFileDto> fileDtoList2 = artistDto
 
+        for (int i = 0; i < imageList.size(); i++){
+            imageList.get(i).getArtist();
+            System.out.println("들어갑니다? " + imageList.get(i).getArtist());
+            Artist artist2 = imageList.get(i).getArtist();
+
+        }
 
         log.info("0 :::::::: " + imageList);
 
@@ -184,6 +199,7 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
         while(it.hasNext()){
             Object str = it.next();
             System.out.println("iterator 출력 : " + str);
+//            artistDto.set
         }
 
 
@@ -223,8 +239,8 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
 //            resultMap.put("imgName", file.getImgName());
 //        });
 
-        log.info("return result :::::: " + result);
-        return new PageResultDto<>(result, fn);
-//    return null;
+//        log.info("return result :::::: " + result);
+//        return new PageResultDto<>(result, fn);
+    return null;
     }
 }
