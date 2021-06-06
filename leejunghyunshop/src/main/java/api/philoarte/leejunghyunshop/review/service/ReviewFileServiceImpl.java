@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.jdo.annotations.Transactional;
+import javax.transaction.Transactional;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;

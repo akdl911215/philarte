@@ -104,9 +104,10 @@ const artistSlice = createSlice({
 
         getArtistImgList: (state, action) => {
             const artistsImge = JSON.stringify(window.localStorage.getItem('artistsImge'));
-            state.artistsState = artistsImge;
+            state.artistsState.dtoList = artistsImge;
             console.log('============Local Image===========');
-            console.log(state.artistsState);
+            console.log(state.artistsState.dtoList);
+
             console.log('=======================');
         },
     },

@@ -1,6 +1,7 @@
 package api.philoarte.leejunghyunshop.artist.service.fileService;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
+import api.philoarte.leejunghyunshop.artist.domain.ArtistFile;
 import api.philoarte.leejunghyunshop.artist.domain.QArtist;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
@@ -29,6 +30,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -146,6 +148,9 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
         log.info("드디어 들어가나요?");
         log.info("requestDto :::::::: " + requestDto);
 
+//        ArtistFileDto artistFileDto =
+
+
 
         BooleanBuilder booleanBuilder = getSearch(requestDto); // 검색 조건 처리
         log.info("booleanBuilder ::: " + booleanBuilder);
@@ -154,7 +159,21 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
         Function<Artist, ArtistDto> fn = (entity -> entityDto(entity));
         log.info("fn :::: " + fn);
 
+
+//        Optional<ArtistDto> artistDto = aritstFileRepository.findById(artistFileIdSetting);
+//        Optional<ArtistFile> fileListResult = aritstFileRepository.findById(artistFileIdSetting);
+//        fileListResult.get().getArtistFileId();
+//        String uuid = fileListResult.get().getUuid();
+//        String imgName = fileListResult.get().getImgName();
+
         log.info("return result :::::: " + result);
         return new PageResultDto<>(result, fn);
+    }
+
+    public Long getUuidImgName (Long artistFileId) {
+        // 전체값을 리덕스로 던져준 상태
+        // uuid, img네임 리턴받기
+        
+        return 0L;
     }
 }

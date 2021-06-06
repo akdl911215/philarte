@@ -100,5 +100,20 @@ public interface ArtistFilerService {
 
     }
 
+    default ArtistDto entityDto2(Artist artist) {
+        ArtistDto entityDto = ArtistDto.builder()
+                .artistId(artist.getArtistId())
+                .username(artist.getUsername())
+                .password(artist.getPassword())
+                .name(artist.getName())
+                .email(artist.getEmail())
+                .phoneNumber(artist.getPhoneNumber())
+                .address(artist.getAddress())
+                .school(artist.getSchool())
+                .department(artist.getDepartment())
+                .build();
 
+        return entityDto;
+
+    }
 }

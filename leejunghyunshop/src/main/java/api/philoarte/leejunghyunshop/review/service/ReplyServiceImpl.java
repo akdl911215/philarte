@@ -7,7 +7,8 @@ import api.philoarte.leejunghyunshop.review.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.jdo.annotations.Transactional;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 

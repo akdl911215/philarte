@@ -10,6 +10,12 @@ const ArtistPageList2 = () => {
     const type = useSelector((state) => state.artists.type);
     const keyword = useSelector((state) => state.artists.keyword);
     const pageFileDto = useSelector((state) => state.artists.pageFileDto);
+    const artistsState = useSelector((state) => state.artistsState);
+    const artistDtoList = useSelector((state) => state.artists.dtoList);
+    const artistsPageFileDtoList = useSelector((state) => state.artists.pageFileDto.dtoList);
+    console.log('artistsPageFileDtoList ::: ', artistsPageFileDtoList);
+    console.log('artistDtoList :::: ', artistDtoList);
+    console.log('artistsState :::: ', artistsState);
     console.log('pageFileDto ::::::::: ', pageFileDto);
     const page = pageResult.page;
 
@@ -22,11 +28,12 @@ const ArtistPageList2 = () => {
         const param = { type: type, keyword: keyword, page: page }; // , pageFileDto: pageFileDto
         const paramAddFile = { pageFileDto: pageFileDto }; //type: type, keyword: keyword, page: page,
         dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
-        // dispatch(fetchFilePage(paramAddFile)); //페이지에 1페이지 뿌려주는 역할
+        dispatch(fetchFilePage(paramAddFile)); //페이지에 1페이지 뿌려주는 역할
         dispatch(getLocalArtist());
-        // dispatch(getArtistImgList());
+        dispatch(getArtistImgList());
     }, []);
 
+    //<img src={'http://localhost:8080/artist_files/display?imgName=' + `${artistsFilesUuid}` + 's_' + `${artistsFilesimgName}`} />
     return (
         <>
             <div>
@@ -45,19 +52,19 @@ const ArtistPageList2 = () => {
                         </thead>
 
                         <tbody style={{ textAlign: 'center' }}>
-                            {pageResult.dtoList.map((artist, id) => {
+                            {/* {pageFileDto.dtoList.map((artist, id) => {
                                 return (
                                     <>
                                         <tr key={id}>
                                             <td>
-                                                <div>
-                                                    <img src={'http://localhost:8080/artist_files/display?imgName=' + `${artistsFilesUuid}` + 's_' + `${artistsFilesimgName}`} />
+                                                <div key={artist.uuid}>
+                                                    <img src={'http://localhost:8080/artist_files/display?imgName=' + artist.uuid + 's_' + artist.imgName} />
                                                 </div>
                                             </td>
                                         </tr>
                                     </>
                                 );
-                            })}
+                            })} */}
 
                             {pageResult.dtoList.map((artist, id) => {
                                 return (
