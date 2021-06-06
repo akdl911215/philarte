@@ -45,10 +45,7 @@ public class ArtistFileController {
         log.info("=======================================");
         log.info("=======================================");
         log.info("imgList page................." + page);
-//        log.info("model................." + model);
-//        model.addAttribute("result", service.getPageList(page));
-//        return null;
-//        log.info("result" + service.getPageFileList(page));
+
         return new ResponseEntity(service.getPageFileList(page), HttpStatus.OK);
 //        return null;
     }

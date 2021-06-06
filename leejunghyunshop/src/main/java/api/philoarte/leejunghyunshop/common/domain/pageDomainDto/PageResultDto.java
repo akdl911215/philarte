@@ -1,5 +1,6 @@
 package api.philoarte.leejunghyunshop.common.domain.pageDomainDto;
 
+import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,8 @@ public class PageResultDto<Dto, EN> {
     private boolean prev, next;
 
     private List<Integer> pageList;
+
+    private List<ArtistFileDto> pageFileDto;
 
     public PageResultDto(Page<EN> result, Function<EN, Dto> fn){
         dtoList = result.stream().map(fn).collect(Collectors.toList());

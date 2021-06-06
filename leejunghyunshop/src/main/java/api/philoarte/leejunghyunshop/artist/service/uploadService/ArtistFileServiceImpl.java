@@ -153,15 +153,9 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
     public PageResultDto<ArtistDto, Artist> getPageFileList(PageRequestDto requestDto) { // PageRequestFileDto로하면 안됨? 왜지?
         log.info("Artist Page Image List 를 불러옵니다");
         log.info("requestDto :::: " + requestDto);
-
         Pageable pageable = requestDto.getPageable(Sort.by("artistId").descending());
         log.info("pageable ::: " + pageable);
 
-//        List<ArtistFile> resultTotalFileList = aritstFileRepository.findAll();
-//        log.info("resultTotalFileList :::::::: " + resultTotalFileList);
-
-
-        // 들어가짐 하나씩 다시 바까가며 확인하기
         requestDto.setPageFileDto(aritstFileRepository.findAll());
         log.info("드디어 들어가나요?");
         log.info("requestDto :::::::: " + requestDto);
@@ -174,106 +168,8 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
         Function<Artist, ArtistDto> fn = (entity -> entityDto(entity));
         log.info("fn :::: " + fn);
 
-//        List<ArtistFileDto> artistFileDto = (List<ArtistFileDto>) EntityToDtoArtistFile((ArtistFile) resultTotalFileList);
-//        log.info("artistFileDto :::::::: "  + artistFileDto);
-
-//        requestFileDto.setPageFileDto();
-//        BooleanBuilder booleanBuilder = getSearch(requestDto);
-//        Page<Artist> result = artistRepository.findAll(booleanBuilder, pageable);
-
-//        BooleanBuilder booleanBuilder = getSearch(requestFileDto); // 검색 조건 처리
-//        log.info("booleanBuilder ::: " + booleanBuilder);
-//        Page<Artist> result = artistRepository.findAll(booleanBuilder, pageable); //Querydsl 사용
-//        log.info("result ::: " + result);
-
-
-//        List<ArtistFile> imageList = aritstFileRepository.findAll();
-//        log.info("imageList ::: " + imageList);
-
-
-
-//        ArtistFileDto artistFileDto = dtoEntityFileToEntityFile(imageList);
-
-        // 리스트값 추출
-//        for (int i = 0; i < imageList.size(); i++){
-//            imageList.get(i).getArtist();
-//            System.out.println("들어갑니다? " + imageList.get(i).getArtist());
-//
-//
-//        }
-
-//        ArtistFileDto artistFileDto = dtoToEntityArtistFile(imageList);
-
-
-//        Artist artist = imageList.get(0).getArtist();
-//        log.info("artist ::: " + artist);
-
-
-
-
-//        List<ArtistFileDto> fileDtoList2 = artistDto
-
-
-
-//        log.info("0 :::::::: " + imageList);
-//
-//        long imgListId = imageList.get(0).getArtistFileId();
-
-//        List<ArtistDto> entityDto = entityDto(imageList);
-
-//        Page result = (Page) imageList;
-//        log.info("result :::::::::: " + result);
-//        log.info("이제 될까?");
-//
-//        ArtistDto artistDto = new ArtistDto();
-//        log.info("artistDto :::: " + artistDto);
-
-//        Iterator it = imageList.listIterator();
-//        while(it.hasNext()){
-//            Object str = it.next();
-//            System.out.println("iterator 출력 : " + str);
-////            artistDto.set
-//        }
-
-
-
-//        artistDto.setArtistFileDtoList();
-//
-//        artistDto.setFileDto(artistDto.getFileDto());
-//        log.info("되자! artistDto ::: " + artistDto);
-//
-//        List<ArtistFileDto> fileDtoList = artistDto.getFileDto();
-//        log.info("fileDtoList :::: " + fileDtoList);
-//        artistDto.setFileDto(artistDto.getFileDto());
-//        log.info("artistDto :::: " + artistDto);
-//        artistDto.setArtistFileDtoList(artistDto.getArtistFileDtoList());
-//        artistDto.setArtistFileDtoList(artistDto.getFileDto());
-//        log.info("artistDto ::::: 확인중 ::: " + artistDto);
-//        artistDto.setFileDto(imageList);
-
-//        aritstFileRepository.findAll().get().getArtistFileId(ArtistFileDto.);
-//        ArtistDto artistDto = new ArtistDto();
-//        List<ArtistFileDto> fileDtoList = artistDto.getFileDto();
-//        log.info("fileDtoList :::: " + fileDtoList);
-//        log.info("artistDto :::: " + artistDto);
-//
-//        aritstFileRepository.findAll().get(artistDto.getImgName());
-
-//        Map<String, Object> totalResultMap = new HashMap<>();
-//        totalResultMap.put("result", result);
-//        totalResultMap.put("imgResultList", imgResultList);
-//        log.info("totalResultMap :::::: " + totalResultMap);
-
-//        Map<String, String> resultMap = new HashMap<>();
-//        resultMap.put("JwtToken", provider.createToken(entityDto.getUsername(), entity.getRoles()));
-//
-//        entityDto.getArtistFileDtoList().forEach(file -> {
-//            resultMap.put("uuid", file.getUuid());
-//            resultMap.put("imgName", file.getImgName());
-//        });
-
-//        log.info("return result :::::: " + result);
-//        return new PageResultDto<>(result, fn);
-    return null;
+        log.info("return result :::::: " + result);
+        return new PageResultDto<>(result, fn);
+//    return null;
     }
 }
