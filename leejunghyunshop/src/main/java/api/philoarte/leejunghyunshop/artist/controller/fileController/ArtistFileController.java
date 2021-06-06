@@ -1,15 +1,12 @@
-package api.philoarte.leejunghyunshop.artist.controller.uploadController;
+package api.philoarte.leejunghyunshop.artist.controller.fileController;
 
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
-import api.philoarte.leejunghyunshop.artist.domain.dto.PageRequestFileDto;
-import api.philoarte.leejunghyunshop.artist.service.uploadService.ArtistFileServiceImpl;
+import api.philoarte.leejunghyunshop.artist.service.fileService.ArtistFileServiceImpl;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
-import api.philoarte.leejunghyunshop.review.domain.dto.ReviewFileDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,14 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -42,24 +35,18 @@ public class ArtistFileController {
 
     @RequestMapping("/imgList/pages")
     public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestDto page) {
-        log.info("=======================================");
-        log.info("=======================================");
         log.info("imgList page................." + page);
 
         return new ResponseEntity(service.getPageFileList(page), HttpStatus.OK);
-//        return null;
     }
 
     @PostMapping("/uploadAjax")
     public ResponseEntity<List<ArtistFileDto>> uploadFile(List<MultipartFile> files) {
-        log.info("찍힘? 1");
-        System.out.println("files :: " + files);
+        log.info("uploadAjax 시작");
         for (MultipartFile file : files) {
-            System.out.println("file :: " + file);
 
             // 이미지 파일만 업로드 가능
             if (!file.getContentType().startsWith("image")){
-                log.info("찍힘? 2");
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
         }
@@ -69,6 +56,7 @@ public class ArtistFileController {
     @GetMapping("/display")
     public ResponseEntity<byte[]> getFile(String imgName) {
         ResponseEntity<byte[]> result = null;
+        log.info("display 시작");
 
         try {
             String srcFileName = URLDecoder.decode(imgName, "UTF-8");

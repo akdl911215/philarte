@@ -1,7 +1,6 @@
 package api.philoarte.leejunghyunshop.artist.domain.dto;
 
-import api.philoarte.leejunghyunshop.artist.domain.Role;
-import io.swagger.annotations.ApiModelProperty;
+import api.philoarte.leejunghyunshop.artist.domain.role.Role;
 import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;

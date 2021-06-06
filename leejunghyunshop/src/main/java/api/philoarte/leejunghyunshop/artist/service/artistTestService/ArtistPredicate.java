@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.service.pageService;
+package api.philoarte.leejunghyunshop.artist.service.artistTestService;
 
 import api.philoarte.leejunghyunshop.artist.domain.QArtist;
 import com.querydsl.core.BooleanBuilder;

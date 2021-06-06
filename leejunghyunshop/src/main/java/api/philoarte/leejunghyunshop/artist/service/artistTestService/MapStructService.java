@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.service;
+package api.philoarte.leejunghyunshop.artist.service.artistTestService;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;

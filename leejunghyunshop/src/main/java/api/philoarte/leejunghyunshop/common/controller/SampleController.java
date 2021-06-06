@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.controller.pageController;
+package api.philoarte.leejunghyunshop.common.controller;
 
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.SampleDto;
 import lombok.extern.log4j.Log4j2;

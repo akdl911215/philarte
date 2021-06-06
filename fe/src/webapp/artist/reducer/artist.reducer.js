@@ -75,12 +75,12 @@ const artistSlice = createSlice({
             uuid: '',
             imgName: '',
             token: '',
-            pageFileDto: '',
+            pageFileDto: [],
         },
         type: '',
         keyword: '',
         params: {},
-        // pageFileDto: {},
+        pageFileDto: [],
     },
     reducers: {
         getLocalArtist: (state, action) => {
@@ -102,7 +102,13 @@ const artistSlice = createSlice({
             state.keyword = action.payload.keyword;
         },
 
-        getArtistImgList: (state, action) => {},
+        getArtistImgList: (state, action) => {
+            const artistsImge = JSON.stringify(window.localStorage.getItem('artistsImge'));
+            state.artistsState = artistsImge;
+            console.log('============Local Image===========');
+            console.log(state.artistsState);
+            console.log('=======================');
+        },
     },
     extraReducers: {
         [fetchPage.fulfilled]: (state, { meta, payload }) => {
@@ -111,8 +117,9 @@ const artistSlice = createSlice({
         },
         [fetchFilePage.fulfilled]: (state, { meta, payload }) => {
             console.log('payload fetchPage :::::::', payload);
-            state.artistsState = payload;
-            console.log('state.artistsStates ::::::: ', state.artistsStates);
+            state.pageFileDto = payload;
+            console.log('state.pageFileDto ::::::: ', state.pageFileDto);
+            window.localStorage.setItem('artistsImge', JSON.stringify(payload));
         },
         [signinPage.fulfilled]: (state, { meta, payload }) => {
             console.log('payload ::::::::::: ' + payload);
@@ -139,5 +146,5 @@ const artistSlice = createSlice({
 // const { action, reducer } = artistSlice;
 export const currentArtist2 = (state) => state.artists.artistsState;
 export const currentArtist = (state) => state.artists.params;
-export const { getLocalArtist, changeSearch } = artistSlice.actions;
+export const { getLocalArtist, changeSearch, getArtistImgList } = artistSlice.actions;
 export default artistSlice.reducer;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageList } from 'webapp/artist/index';
 import 'webapp/artist/style/ArtistPageList2.css';
-import { fetchPage, getLocalArtist, fetchFilePage } from 'webapp/artist/reducer/artist.reducer';
+import { fetchPage, getLocalArtist, fetchFilePage, getArtistImgList } from 'webapp/artist/reducer/artist.reducer';
 
 const ArtistPageList2 = () => {
     const dispatch = useDispatch();
@@ -20,10 +20,11 @@ const ArtistPageList2 = () => {
 
     useEffect(() => {
         const param = { type: type, keyword: keyword, page: page }; // , pageFileDto: pageFileDto
-        const paramAddFile = { type: type, keyword: keyword, page: page, pageFileDto: pageFileDto };
-        // dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
-        dispatch(fetchFilePage(paramAddFile)); //페이지에 1페이지 뿌려주는 역할
+        const paramAddFile = { pageFileDto: pageFileDto }; //type: type, keyword: keyword, page: page,
+        dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
+        // dispatch(fetchFilePage(paramAddFile)); //페이지에 1페이지 뿌려주는 역할
         dispatch(getLocalArtist());
+        // dispatch(getArtistImgList());
     }, []);
 
     return (

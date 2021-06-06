@@ -1,10 +1,9 @@
-package api.philoarte.leejunghyunshop.artist.service.uploadService;
+package api.philoarte.leejunghyunshop.artist.service.fileService;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import api.philoarte.leejunghyunshop.artist.domain.ArtistFile;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
-import api.philoarte.leejunghyunshop.artist.domain.dto.PageRequestFileDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.common.util.ModelMapperUtils;
@@ -17,7 +16,6 @@ public interface ArtistFilerService {
 
     ArrayList<ArtistFileDto> saveFile(List<MultipartFile> uploadFiles);
     void artistFileDelete(Long artistFileId);
-//    PageResultDto<ArtistDto, Artist> getPageFileList(PageRequestFileDto requestDto);
     PageResultDto<ArtistDto, Artist> getPageFileList(PageRequestDto requestDto);
 
     default ArtistFileDto EntityToDtoArtistFile(ArtistFile artistFile) {
@@ -56,17 +54,6 @@ public interface ArtistFilerService {
         return artistFileDto;
     }
 
-//    default ArtistFile dtoToEntityPictures(ArtistFileDto picturesDto) {
-//        ArtistFile picture = ArtistFile.builder()
-//                            .pnum(picturesDto.getPnum())
-//                            .fname(picturesDto.getFname())
-//                            .uuid(picturesDto.getUuid())
-//                            .first(picturesDto.isFirst())
-//                            .build();
-//        return picture;
-//    }
-
-
     default ArtistFile dtoEntityFileToEntityFile(ArtistFileDto artistFileDto){
         ArtistFile entityFile = ArtistFile.builder()
                 .artistFileId(artistFileDto.getArtistFileId())
@@ -77,16 +64,6 @@ public interface ArtistFilerService {
         return entityFile;
 
     }
-
-//    default ArtistFileDto EntityFileToDtoEntityFile(Artist artist) {
-//
-//        ArtistFileDto entityFileDto = ArtistFileDto.builder()
-//                .artistFileId(artist.getArtistId())
-//                .imgName(artist.)
-//                .build();
-//        return entityDto;
-//
-//    }
 
 
     default Artist dtoEntity(ArtistDto artistDto){

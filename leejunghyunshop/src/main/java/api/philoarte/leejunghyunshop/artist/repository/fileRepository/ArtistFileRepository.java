@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.repository.picturesRepository;
+package api.philoarte.leejunghyunshop.artist.repository.fileRepository;
 
 import api.philoarte.leejunghyunshop.artist.domain.ArtistFile;
 import org.springframework.data.jpa.repository.JpaRepository;

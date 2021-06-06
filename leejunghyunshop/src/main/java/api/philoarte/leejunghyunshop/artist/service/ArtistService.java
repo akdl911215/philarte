@@ -15,9 +15,6 @@ import java.util.stream.Collectors;
 
 public interface ArtistService {
 
-//    public List<ArtistDto> searchPosts(String keyword);
-
-//    Long artistPicturesRegister(ArtistDto artistDto);
     ArtistDto signin(ArtistDto artistDto);
     List<Artist> getAllData();
     List<Artist> findAll();

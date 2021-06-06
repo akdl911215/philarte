@@ -5,7 +5,7 @@ import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
 import api.philoarte.leejunghyunshop.artist.service.ArtistService;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
-import api.philoarte.leejunghyunshop.artist.service.pageService.PageRequestService;
+import api.philoarte.leejunghyunshop.artist.service.artistTestService.PageRequestService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

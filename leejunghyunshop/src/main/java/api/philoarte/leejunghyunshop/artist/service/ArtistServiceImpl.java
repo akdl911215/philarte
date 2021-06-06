@@ -2,16 +2,14 @@ package api.philoarte.leejunghyunshop.artist.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.*;
 import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistDto;
-import api.philoarte.leejunghyunshop.artist.domain.dto.ArtistFileDto;
-import api.philoarte.leejunghyunshop.artist.repository.picturesRepository.ArtistFileRepository;
-import api.philoarte.leejunghyunshop.artist.service.uploadService.ArtistFilerService;
+import api.philoarte.leejunghyunshop.artist.domain.role.Role;
+import api.philoarte.leejunghyunshop.artist.repository.fileRepository.ArtistFileRepository;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageRequestDto;
 import api.philoarte.leejunghyunshop.artist.repository.ArtistRepository;
 import api.philoarte.leejunghyunshop.common.domain.pageDomainDto.PageResultDto;
 import api.philoarte.leejunghyunshop.common.service.AbstractService;
 import api.philoarte.leejunghyunshop.security.domain.SecurityProvider;
 import api.philoarte.leejunghyunshop.security.exception.SecurityRuntimeException;
-import com.mysql.cj.log.Log;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
@@ -46,21 +44,14 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
     @Transactional
     @Override // jpa save 사용시 insert가 아니고 update 뜨는 이유
     public Map<String, String> signup(ArtistDto artistDto) {
-        log.info("ArtistServiceImpl 도착하니 1" );
-        log.info("artistDto 값은 ? :::: " + artistDto);
+        log.info("Signup ServiceImpl 시작" );
         if(!repository.existsByUsername(artistDto.getUsername())){
-            log.info("artistDto 여긴? " + artistDto);
             Map<String, Object> entityMap = dtoToEntity(artistDto);
-            log.info("entityMap : " + entityMap);
 
             Artist entity = (Artist) entityMap.get("artist");
-            log.info("entity : " + entity);
             repository.saveAndFlush(entity); // save 안될시 saveAndFlush 변경하자
-            log.info("ArtistServiceImpl 도착하니 2?");
-            log.info("entity : " + entity);
 
             List<ArtistFile> artistFileList = (List<ArtistFile>) entityMap.get("fileList");
-            log.info("artistFileList : " + artistFileList);
 
             if (artistFileList != null && artistFileList.size() > 0) {
                 log.info("사진이 저장됩니다 " + (artistFileList != null && artistFileList.size() > 0));
@@ -69,19 +60,13 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
                 });
             }
 
-            log.info("ArtistServiceImpl 도착하니 3 ?");
             ArtistDto entityDto = entityDto(entity);
             entityDto.setArtistFileDtoList(artistDto.getArtistFileDtoList());
             log.info("entityDto : " + entityDto);
-            log.info("ArtistServiceImpl 도착하니 4?");
             entityDto.setPassword(passwordEncoder.encode(entityDto.getPassword()));
-            log.info("ArtistServiceImpl 도착하니 5 ?");
-            log.info("entityDto 이다 :::::: " + entityDto);
             List<Role> list = new ArrayList<>();
-            log.info("artistServiceImpl list : " + list);
             list.add(Role.USER_ROLES);
             entity.changeRoles(list);
-            log.info("entity 포함 list : " + list);
             Map<String, String> resultMap = new HashMap<>();
             resultMap.put("JwtToken", provider.createToken(entityDto.getUsername(), entity.getRoles()));
 
@@ -101,42 +86,24 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public ArtistDto signin(ArtistDto artistDto) {
+        log.info("Signin 시작");
         try {
-            log.info("들어오지? artistDto :::::: " + artistDto);
             Artist entity = dtoEntity(artistDto);
             repository.signin(entity.getUsername(), entity.getPassword());
             ArtistDto entityDto = entityDto(entity);
-            log.info("여기까지는 온다 entityDto :::: " + entityDto);
             Optional<Artist> comprehensiveInfomationArtist = repository.findByUsername(entity.getUsername());
-            log.info("comprehensiveInfomationArtist :::: " + comprehensiveInfomationArtist);
             Long artistFileId = comprehensiveInfomationArtist.get().getArtistId();
-            log.info("펑? artistFileId ::: " + artistFileId);
             entityDto(comprehensiveInfomationArtist.get());
-            log.info("entityDto(comprehensiveInfomationArtist.get()) :::: " + entityDto(comprehensiveInfomationArtist.get()));
             entityDto = entityDto(comprehensiveInfomationArtist.get());
-            log.info("entityDto :::: " + entityDto );
             String Token = provider.createToken(entity.getUsername(), repository.findByUsername(entity.getUsername()).get().getRoles());
-            log.info("Token :::: " + Token);
             entityDto.setToken(Token);
-            log.info("entityDto:::: " + entityDto);
             Long artistFileIdSetting = entityDto.getArtistId();
-            log.info("entityDto.getArtistId() :::::: " + entityDto.getArtistId());
-            log.info("artistFileIdSetting :::::: " + artistFileIdSetting);
             Optional<ArtistFile> fileListResult = aritstFileRepository.findById(artistFileIdSetting);
-            log.info("과연 ??? fileListResult " + fileListResult);
             fileListResult.get().getArtistFileId();
-            log.info("fileListResult.get().getArtistFileId() ::::::: " + fileListResult.get().getArtistFileId());
             String uuid = fileListResult.get().getUuid();
             String imgName = fileListResult.get().getImgName();
-            log.info("uuid ::: " + uuid);
-            log.info("imgName ::: " + imgName);
             entityDto.setUuid(uuid);
             entityDto.setImgName(imgName);
-            log.info("entityDto 값은 ? :::::::: " + entityDto);
-            log.info("====================");
-            log.info(entityDto);
-            log.info("====================");
-            log.info("Token; ::::::::: " + Token);
 //            entityDto.setToken(
 //                    (passwordEncoder.matches(entityDto.getPassword(), repository.findByUsername(entity.getUsername()).get().getPassword())
 //            ) ?
@@ -279,50 +246,12 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
         log.info("Artist Page List 를 불러옵니다");
         Pageable pageable = requestDto.getPageable(Sort.by("artistId").descending());
         log.info("pageable  ::::: " + pageable);
-//        List<ArtistFileDto> artistFileDto = requestDto.getPageFileDto();
-
-//        requestDto.setPageFileDto(aritstFileRepository.findAll());
-//        log.info("드디어 들어가나요?");
-//        log.info("requestDto :::::::: " + requestDto);
-
         BooleanBuilder booleanBuilder = getSearch(requestDto); // 검색 조건 처리
         log.info("booleanBuilder ::: " + booleanBuilder);
         Page<Artist> result = repository.findAll(booleanBuilder, pageable); //Querydsl 사용
         log.info("result ::: " + result);
         Function<Artist, ArtistDto> fn = (entity -> entityDto(entity));
         log.info("fn :::: " + fn);
-
-
-//        // 레파지토리에서 데이터를 umgResultList에 담음
-//        List<ArtistFile> imgResultList = aritstFileRepository.findAll();
-//        log.info("imgResultList :: " + imgResultList);
-//
-//        // artistDto 선언
-//        ArtistDto artistDto = new ArtistDto();
-//        List<ArtistFileDto> fileDtoList = artistDto.getFileDto();
-//
-//        artistDto.setFileDto(artistDto.getArtistFileDtoList());
-//        log.info("artistDto.setFileDto(artistDto.getArtistFileDtoList()) :: " + artistDto);
-
-//        log.info("fileDtoList :::: " + fileDtoList);
-//        artistDto.setFileDto();
-//        log.info("artistDto :::: " + artistDto);
-//
-//        aritstFileRepository.findAll().get(artistDto.getImgName());
-//
-//        Map<String, Object> totalResultMap = new HashMap<>();
-//        totalResultMap.put("result", result);
-//        totalResultMap.put("imgResultList", imgResultList);
-//        log.info("totalResultMap :::::: " + totalResultMap);
-//
-//        Map<String, String> resultMap = new HashMap<>();
-//        resultMap.put("JwtToken", provider.createToken(entityDto.getUsername(), entity.getRoles()));
-//
-//        entityDto.getArtistFileDtoList().forEach(file -> {
-//            resultMap.put("uuid", file.getUuid());
-//            resultMap.put("imgName", file.getImgName());
-//        });
-
         log.info("return result :::::: " + result);
         return new PageResultDto<>(result, fn);
     }

@@ -1,11 +1,10 @@
 package api.philoarte.leejunghyunshop.artist.domain;
 
+import api.philoarte.leejunghyunshop.artist.domain.role.Role;
 import api.philoarte.leejunghyunshop.common.domain.BaseEntity;
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 //@EntityListeners(value = {AuditingEntityListener.class})

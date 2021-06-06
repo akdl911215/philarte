@@ -1,4 +1,4 @@
-package api.philoarte.leejunghyunshop.artist.service;
+package api.philoarte.leejunghyunshop.security.service;
 
 import api.philoarte.leejunghyunshop.artist.domain.Artist;
 import com.fasterxml.jackson.annotation.JsonIgnore;
