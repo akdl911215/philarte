@@ -21,7 +21,7 @@ public class PageRequestDto<Dto, EN> {
     private String type;
     private String keyword;
 
-//    private List<ArtistFileDto> pageFileDto;
+    private List<ArtistFileDto> pageFileDto;
 
 
     public PageRequestDto(){

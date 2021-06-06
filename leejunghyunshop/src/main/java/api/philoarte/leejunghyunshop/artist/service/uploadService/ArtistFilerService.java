@@ -17,7 +17,32 @@ public interface ArtistFilerService {
 
     ArrayList<ArtistFileDto> saveFile(List<MultipartFile> uploadFiles);
     void artistFileDelete(Long artistFileId);
-    PageResultDto<ArtistDto, Artist> getPageList(PageRequestFileDto requestDto);
+//    PageResultDto<ArtistDto, Artist> getPageFileList(PageRequestFileDto requestDto);
+    PageResultDto<ArtistDto, Artist> getPageFileList(PageRequestDto requestDto);
+
+    default ArtistFileDto EntityToDtoArtistFile(ArtistFile artistFile) {
+
+        ArtistFileDto artistFileDto = ArtistFileDto.builder()
+                .artistFileId(artistFile.getArtistFileId())
+                .uuid(artistFile.getUuid())
+                .imgName(artistFile.getImgName())
+                .path(artistFile.getPath())
+                .build();
+
+        return artistFileDto;
+    }
+
+    default ArtistFile dtoToEntityArtistFile(ArtistFileDto artistFileDto) {
+
+        ArtistFile artistFile = ArtistFile.builder()
+                .artistFileId(artistFileDto.getArtistFileId())
+                .uuid(artistFileDto.getUuid())
+                .imgName(artistFileDto.getImgName())
+                .path(artistFileDto.getPath())
+                .build();
+
+        return artistFile;
+    }
 
     default ArtistFile dtoToEntity(ArtistDto artistDto){
         ArtistFile artistFile = ModelMapperUtils.getModelMapper().map(artistDto, ArtistFile.class);
@@ -97,4 +122,6 @@ public interface ArtistFilerService {
         return entityDto;
 
     }
+
+
 }

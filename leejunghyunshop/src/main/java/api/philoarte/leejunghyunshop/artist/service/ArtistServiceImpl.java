@@ -275,8 +275,10 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 
     @Override
     public PageResultDto<ArtistDto, Artist> getPageList(PageRequestDto requestDto) {
+        log.info("requestDto ::: " + requestDto);
         log.info("Artist Page List 를 불러옵니다");
         Pageable pageable = requestDto.getPageable(Sort.by("artistId").descending());
+        log.info("pageable  ::::: " + pageable);
 //        List<ArtistFileDto> artistFileDto = requestDto.getPageFileDto();
 
 //        requestDto.setPageFileDto(aritstFileRepository.findAll());
@@ -284,18 +286,24 @@ public class ArtistServiceImpl extends AbstractService<Artist> implements Artist
 //        log.info("requestDto :::::::: " + requestDto);
 
         BooleanBuilder booleanBuilder = getSearch(requestDto); // 검색 조건 처리
+        log.info("booleanBuilder ::: " + booleanBuilder);
         Page<Artist> result = repository.findAll(booleanBuilder, pageable); //Querydsl 사용
         log.info("result ::: " + result);
         Function<Artist, ArtistDto> fn = (entity -> entityDto(entity));
+        log.info("fn :::: " + fn);
 
 
-
+//        // 레파지토리에서 데이터를 umgResultList에 담음
 //        List<ArtistFile> imgResultList = aritstFileRepository.findAll();
 //        log.info("imgResultList :: " + imgResultList);
-//        imgResultList.set();
 //
+//        // artistDto 선언
 //        ArtistDto artistDto = new ArtistDto();
 //        List<ArtistFileDto> fileDtoList = artistDto.getFileDto();
+//
+//        artistDto.setFileDto(artistDto.getArtistFileDtoList());
+//        log.info("artistDto.setFileDto(artistDto.getArtistFileDtoList()) :: " + artistDto);
+
 //        log.info("fileDtoList :::: " + fileDtoList);
 //        artistDto.setFileDto();
 //        log.info("artistDto :::: " + artistDto);

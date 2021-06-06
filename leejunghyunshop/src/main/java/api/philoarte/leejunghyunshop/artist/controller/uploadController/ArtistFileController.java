@@ -41,15 +41,15 @@ public class ArtistFileController {
     private String uploadPath;
 
     @RequestMapping("/imgList/pages")
-    public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestFileDto page) {
+    public ResponseEntity<PageResultDto<ArtistDto, Object[]>> list(PageRequestDto page) {
         log.info("=======================================");
         log.info("=======================================");
         log.info("imgList page................." + page);
 //        log.info("model................." + model);
 //        model.addAttribute("result", service.getPageList(page));
 //        return null;
-        log.info("result" + service.getPageList(page));
-        return new ResponseEntity(service.getPageList(page), HttpStatus.OK);
+//        log.info("result" + service.getPageFileList(page));
+        return new ResponseEntity(service.getPageFileList(page), HttpStatus.OK);
 //        return null;
     }
 
