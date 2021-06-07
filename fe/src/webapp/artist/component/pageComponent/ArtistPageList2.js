@@ -27,7 +27,7 @@ const ArtistPageList2 = () => {
     useEffect(() => {
         const param = { type: type, keyword: keyword, page: page }; // , pageFileDto: pageFileDto
         const paramAddFile = { pageFileDto: pageFileDto }; //type: type, keyword: keyword, page: page,
-        dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
+        // dispatch(fetchPage(param)); //페이지에 1페이지 뿌려주는 역할
         dispatch(fetchFilePage(paramAddFile)); //페이지에 1페이지 뿌려주는 역할
         dispatch(getLocalArtist());
         dispatch(getArtistImgList());

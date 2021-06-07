@@ -10,12 +10,8 @@ const list = (page) => {
 
 const imgList = (imgList) => {
     console.log('imgList :: ', imgList);
-    // const str = 'page=' + (!imgList.page ? 1 : imgList.page) + '&type=' + (imgList.type ? imgList.type : '') + '&keyword=' + (imgList.keyword ? imgList.keyword : '') + '&pageFileDto=' + (imgList.pageFileDto ? imgList.pageFileDto : '');
-    return axios.post(`${SERVER}/artist_files/imgList/pages`, {
-        page: imgList.page,
-        type: imgList.type,
-        pageFileDto: imgList.pageFileDto,
-    });
+    const str = 'page=' + (!imgList.page ? 1 : imgList.page) + '&type=' + (imgList.type ? imgList.type : '') + '&keyword=' + (imgList.keyword ? imgList.keyword : '') + '&pageFileDto=' + (imgList.pageFileDto ? imgList.pageFileDto : '');
+    return axios.get(`${SERVER}/artist_files/imgList/pages` + str);
 };
 // , {
 //     page: imgList.page,

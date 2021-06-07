@@ -173,7 +173,7 @@ public class ArtistFileServiceImpl implements ArtistFilerService {
     public Long getUuidImgName (Long artistFileId) {
         // 전체값을 리덕스로 던져준 상태
         // uuid, img네임 리턴받기
-        
+        // query짜서 하기
         return 0L;
     }
 }

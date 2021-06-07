@@ -23,5 +23,5 @@ public interface ArtistFileRepository extends JpaRepository<ArtistFile, Long> {
 //    ArtistFile getOne(Long aLong);
 
     @Query("SELECT af FROM ArtistFile af WHERE af.uuid = :uuid AND af.imgName = :imgName")
-    void getUuidImgName(@Param("artistFileId") Long artistFileId);
+    Long getUuidImgName(@Param("artistFileId") Long artistFileId);
 }
